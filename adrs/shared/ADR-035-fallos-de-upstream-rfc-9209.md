@@ -4,6 +4,10 @@
 
 Aceptada (2026-09-22). La clasificación se implementa primero en NestJS; `Proxy-Status` y el
 equivalente en Java quedan para una entrega posterior, como dice la decisión.
+**Enmendada (2026-09-23):** cada fallo deja una sola línea de log, la del filtro de errores, y lo
+que se relanza de `forwardError` sale clasificado. La prueba en vivo del perfil de UTP mostró dos
+líneas de error por cada fallo, y al revisar esa ruta apareció el 500 de un error de
+`forwardError` relanzado.
 **Scope:** `shared` (Java + NestJS)
 **Completa:** ADR-031, capa `infrastructure`: responde su pregunta abierta 1 -qué tipos hay
 dentro de la capa- para el caso de una llamada saliente. **Respeta:** ADR-029, sin reintentos; y
@@ -110,13 +114,31 @@ DNS, que pasan de 502 a 504.
 
 ### El log lleva la clasificación como campos
 
-La línea de error del cliente y la del filtro llevan un objeto `upstream` con el nombre del
-upstream, el `type`, la `category`, la fase -`connect`, `response` o `body`- y la duración. Un
-tablero cuenta fallos por categoría sin parsear texto, y una alerta sobre `connectivity` no se
-dispara por un 404 de negocio.
+**Cada fallo deja una sola línea de error, la del filtro de errores.** El cliente no registra:
+lanza, y la excepción lleva los campos. `upstream` trae el nombre del upstream, el `type`, la
+`category`, la fase -`connect`, `response` o `body`- y la duración; `outbound`, el método, la URL
+sin query y el plazo. El filtro los agrega a su línea junto al `traceId`. Un tablero cuenta fallos
+por categoría sin parsear texto, y una alerta sobre `connectivity` no se dispara por un 404 de
+negocio.
+
+`upstream` nombra al upstream sólo por su host porque es lo que se agrupa. La ruta puede llevar
+identificadores de la persona sobre la que era la petición: va aparte, en `outbound`, para leer
+una línea y no para contar.
+
+La primera versión de este ADR registraba el fallo en el cliente y en el filtro. Eran dos líneas
+de error con los mismos campos, así que todo conteo por categoría daba el doble; y con
+`forwardError` había una tercera, falsa, cuando el llamador traducía el error a propósito.
 
 Los nombres del objeto son de Nova y neutros a propósito. Cómo se llaman esos campos en el índice
 de una organización es convención y se ajusta desde su perfil (ADR-036).
+
+### Lo relanzado de `forwardError` es un fallo del upstream
+
+`UpstreamHttpError` es una `UpstreamException`, con la misma clasificación que tendría sin la
+opción. El llamador traduce el status que entiende y relanza el resto, y el resto sale como 502 o
+504, clasificado. Cuando era un `Error` suelto, lo relanzado llegaba al filtro como un fallo propio
+y salía 500: el mismo defecto que este ADR corrige en la lectura del cuerpo, del lado equivocado
+del tablero.
 
 ### El cuerpo no cambia
 
@@ -172,6 +194,11 @@ agrega ninguna dependencia, así que se queda en el núcleo.
 **Exponer el tipo en el cuerpo de la respuesta.** Es lo más cómodo para depurar desde el cliente y
 es justamente lo que el RFC desaconseja hacia afuera. Hacia adentro ya lo resuelve `Proxy-Status`.
 
+**Registrar el fallo en el cliente en `warn` y en el filtro en `error`.** Conserva un rastro de lo
+que el llamador atrapa, pero sigue siendo el mismo fallo en dos líneas con los mismos campos: un
+conteo por `upstream.category` que no filtre por `context` da el doble, y esa condición no la
+recuerda nadie a las tres de la mañana.
+
 ## Preguntas abiertas
 
 **1. Si el estándar recibe la categoría.** Con ella, una organización podría contestar
@@ -210,6 +237,9 @@ llamador sabe cuál. Este ADR no cambia esa regla, pero la categoría `response`
   mayores. Necesita una prueba por tipo contra servidores reales, no sólo pruebas unitarias.
 - `Proxy-Status` es una cabecera que, mal configurada en el borde, expone la topología que el resto
   de la plataforma protege.
+- **Un fallo que el llamador atrapa para degradar la respuesta no deja línea** si el llamador no la
+  escribe. Es el costo de registrar una sola vez: el log es de quien decide qué hacer con el fallo,
+  y la excepción le trae los campos en `logFields`.
 
 ## Referencias
 
