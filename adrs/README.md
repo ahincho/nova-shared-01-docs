@@ -37,6 +37,9 @@ Decisiones aplicables a Java y NestJS.
 | 011 | [Composite Actions y Reusable Workflows](shared/ADR-011-composite-actions-y-reusable-workflows.md) | Aceptada | CI/CD |
 | 012 | [Estandares de Calidad y Testing](shared/ADR-012-estandares-de-calidad-testing.md) | Aceptada | Calidad |
 | 014 | [Observabilidad: Four Golden Signals](shared/ADR-014-observabilidad-four-golden-signals.md) | Aceptada | Observabilidad |
+| 034 | [Lo Duro y lo Reemplazable: Reglas en el Núcleo, Convenciones Detrás de un Puerto](shared/ADR-034-puertos-con-implementacion-por-defecto.md) | Aceptada | Arquitectura |
+| 035 | [Fallos de Upstream Clasificados con el Registro de RFC 9209](shared/ADR-035-fallos-de-upstream-rfc-9209.md) | Aceptada | Errores |
+| 036 | [Perfiles de Organización: Cómo una Organización Adapta Nova sin Forkearla](shared/ADR-036-perfiles-de-organizacion.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 
