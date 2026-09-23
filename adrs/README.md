@@ -40,6 +40,7 @@ Decisiones aplicables a Java y NestJS.
 | 034 | [Lo Duro y lo Reemplazable: Reglas en el Núcleo, Convenciones Detrás de un Puerto](shared/ADR-034-puertos-con-implementacion-por-defecto.md) | Aceptada | Arquitectura |
 | 035 | [Fallos de Upstream Clasificados con el Registro de RFC 9209](shared/ADR-035-fallos-de-upstream-rfc-9209.md) | Aceptada | Errores |
 | 036 | [Perfiles de Organización: Cómo una Organización Adapta Nova sin Forkearla](shared/ADR-036-perfiles-de-organizacion.md) | Aceptada | Arquitectura |
+| 037 | [El Borde: Cómo Entra la Correlación y Quién Escribe la Identidad](shared/ADR-037-borde-correlacion-e-identidad.md) | Aceptada | Observabilidad |
 
 ## ADRs Java (`java/`)
 
