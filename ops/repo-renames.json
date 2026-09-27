@@ -25,14 +25,20 @@
     "nova-java-spring-boot-archetype": "nova-java-17-spring-boot-archetype",
     "nova-java-quarkus-archetype": "nova-java-18-quarkus-archetype",
     "nova-java-quarkus-template": "nova-java-19-quarkus-template",
-    "nova-java-example": "nova-java-20-example",
-    "nova-java-quarkus-example": "nova-java-21-quarkus-example",
-    "ms-course-quarkus": "nova-java-22-ms-course-quarkus",
 
     "nova-nestjs": "nova-nestjs-01-platform",
     "nova-profile-utp": "nova-nestjs-02-profile-utp",
-    "nova-nestjs-example": "nova-nestjs-03-example",
-    "nova-nestjs-generated": "nova-nestjs-04-generated"
+
+    "nova-java-example": "nova-example-01-spring-boot-reference",
+    "nova-java-20-example": "nova-example-01-spring-boot-reference",
+    "nova-java-quarkus-example": "nova-example-04-quarkus-reference",
+    "nova-java-21-quarkus-example": "nova-example-04-quarkus-reference",
+    "ms-course-quarkus": "nova-example-05-quarkus-ms-course",
+    "nova-java-22-ms-course-quarkus": "nova-example-05-quarkus-ms-course",
+    "nova-nestjs-example": "nova-example-07-nestjs-reference",
+    "nova-nestjs-03-example": "nova-example-07-nestjs-reference",
+    "nova-nestjs-generated": "nova-example-08-nestjs-generated",
+    "nova-nestjs-04-generated": "nova-example-08-nestjs-generated"
   },
   "bareNameFiles": [
     "ops/nova-repos-metadata.ps1",

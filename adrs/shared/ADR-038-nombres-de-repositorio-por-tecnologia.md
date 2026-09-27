@@ -2,7 +2,8 @@
 
 ## Estado
 
-Aceptada (2026-09-27). La migración se ejecuta repositorio por repositorio.
+Aceptada (2026-09-27), con una enmienda del mismo día: los ejemplos tienen su propia categoría.
+La migración se ejecuta repositorio por repositorio.
 **Scope:** `shared` (Java + NestJS)
 **Receta de migración:** [`ops/rename-repos.py`](../../ops/rename-repos.py), con el mapa de
 nombres en [`ops/repo-renames.json`](../../ops/repo-renames.json).
@@ -134,6 +135,40 @@ Tres nombres cambian más que el prefijo, y cada uno por una razón:
 Quedan fuera los cuatro repositorios NestJS archivados por ADR-025. Son historia, conservan su
 nombre, y ese nombre tampoco se reutiliza.
 
+Los cinco ejemplos de esta tabla (`java` 20 a 22, `nestjs` 03 y 04) se renombraron otra vez el
+mismo día, por la enmienda que sigue.
+
+### Enmienda (2026-09-27): los ejemplos tienen su propia categoría
+
+Angel pidió que los ejemplos lleven la palabra `example` en el nombre, para distinguirlos a
+primera vista de los componentes de la plataforma. Un ejemplo no se publica ni lo consume nadie:
+existe para mostrar cómo se usa lo que sí se publica, y mezclarlo en el contador de su tecnología
+lo hacía parecer un componente más.
+
+**Los ejemplos se llaman `nova-example-<NN>-<tecnología>-<nombre>`.** La categoría es `example`,
+con un contador propio para todos los stacks, y la tecnología pasa después del número porque ya
+no es la categoría. Las cuatro reglas de arriba se aplican igual: el número solo da orden, se
+asigna una vez y no va en ninguna coordenada.
+
+| # | Antes | Ahora |
+|---|---|---|
+| 01 | `nova-java-20-example` | `nova-example-01-spring-boot-reference` |
+| 02 | `instances/ms-course` (sin repositorio) | `nova-example-02-spring-boot-ms-course` |
+| 03 | `instances/ms-forum` (sin repositorio) | `nova-example-03-spring-boot-ms-forum` |
+| 04 | `nova-java-21-quarkus-example` | `nova-example-04-quarkus-reference` |
+| 05 | `nova-java-22-ms-course-quarkus` | `nova-example-05-quarkus-ms-course` |
+| 06 | `examples/code-with-nova` (sin repositorio) | `nova-example-06-quarkus-code-with-nova` |
+| 07 | `nova-nestjs-03-example` | `nova-example-07-nestjs-reference` |
+| 08 | `nova-nestjs-04-generated` | `nova-example-08-nestjs-generated` |
+
+Dentro de cada tecnología va primero el ejemplo de referencia, el que muestra el uso completo, y
+después los demás por antigüedad. Los tres sin repositorio existían solo como carpetas locales y
+se publican con esta enmienda.
+
+**Los números `java` 20, 21 y 22 y `nestjs` 03 y 04 quedan retirados.** No se reutilizan, así que
+el próximo componente Java es el 23 y el próximo NestJS es el 05, aunque haya un hueco. La
+tecnología usa `nestjs`, igual que los repositorios de la plataforma.
+
 ## Migración
 
 ### La receta automatizada
@@ -242,9 +277,8 @@ perder las redirecciones, y no hay forma de tener las dos cosas.
 dos palabras para la misma tecnología. Renombrar `adrs/nest` rompe los enlaces relativos entre
 ADR, así que por ahora se tolera la diferencia.
 
-**3. Si los ejemplos deberían tener su propio contador.** Hoy van al final de su tecnología, pero
-el siguiente ejemplo que se cree va a quedar mezclado entre componentes. Separarlos sería volver
-a una categoría codificada en otra parte del nombre, y por ahora no parece valer la pena.
+**3. Si los ejemplos deberían tener su propio contador.** Resuelta por la enmienda: sí, con la
+categoría `example`.
 
 ## Consecuencias
 
