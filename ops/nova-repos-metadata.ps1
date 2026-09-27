@@ -88,7 +88,7 @@ $repos = @(
 
     # === Java: Instance / demo ===
     @{
-        name = "nova-java-20-example"
+        name = "nova-example-01-spring-boot-reference"
         description = "Instancia/demo del meta-framework Nova Java. Muestra uso real de las libs puras + starters de Nova."
         topics = @("demo", "example", "java", "nova-platform", "spring-boot")
     },

@@ -257,7 +257,7 @@
                   },
                   {
                       "description":  "Instancia/demo del meta-framework Nova Java. Muestra uso real de las libs puras + starters de Nova.",
-                      "name":  "nova-java-20-example",
+                      "name":  "nova-example-01-spring-boot-reference",
                       "topics":  [
                                      "demo",
                                      "example",
