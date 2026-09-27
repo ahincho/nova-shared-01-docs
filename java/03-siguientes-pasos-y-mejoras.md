@@ -49,7 +49,7 @@ class MaskAutoConfigurationTest {
 
     @Test
     void shouldRespectEnabledProperty() {
-        // Test con galaxy-training.mask.enabled=false
+        // Test con nova.mask.enabled=false
     }
 
     @Test
@@ -69,11 +69,11 @@ class MaskAutoConfigurationTest {
 
 ```java
 @SpringBootTest
-class GalaxyTrainingStarterTest {
+class NovaStarterTest {
 
     @Test
     void shouldBootWithCustomAnnotation() {
-        // Verificar que @GalaxyTrainingSpringBootApplication funciona
+        // Verificar que @NovaSpringBootApplication funciona
     }
 
     @Test
@@ -123,7 +123,7 @@ Cambiar los microservicios de ejemplo de `com.nova.generics` a algo consistente:
 <groupId>com.nova.generics</groupId>
 
 <!-- CORREGIDO -->
-<groupId>pe.edu.galaxy.training.java.examples</groupId>
+<groupId>pe.edu.nova.java.examples</groupId>
 ```
 
 #### 2.3. Versiones SNAPSHOT
@@ -149,7 +149,7 @@ Cambiar todas las versiones de `1.0.0` a `0.1.0-SNAPSHOT` hasta que el framework
 **Problema:** El BOM actual no incluye todos los artefactos.
 
 ```xml
-<!-- galaxy-training-bom/pom.xml - ESTADO ACTUAL -->
+<!-- nova-bom/pom.xml - ESTADO ACTUAL -->
 <dependencyManagement>
     <dependencies>
         <dependency>mask-utils</dependency>
@@ -162,12 +162,12 @@ Cambiar todas las versiones de `1.0.0` a `0.1.0-SNAPSHOT` hasta que el framework
 ```
 
 ```xml
-<!-- galaxy-training-spring-boot-bom/pom.xml - ESTADO ACTUAL -->
+<!-- nova-spring-boot-bom/pom.xml - ESTADO ACTUAL -->
 <dependencyManagement>
     <dependencies>
         <dependency>mask-utils-spring-boot-starter</dependency>
         <dependency>api-standard-spring-boot-starter</dependency>
-        <dependency>galaxy-training-spring-boot-starter</dependency>
+        <dependency>nova-spring-boot-starter</dependency>
         <!-- FALTA: observability-spring-boot-starter -->
     </dependencies>
 </dependencyManagement>
@@ -220,7 +220,7 @@ El plugin actual es un script de 53 lineas sin configurabilidad. Deberia tener:
 
 ```kotlin
 // DSL Extension para configuracion
-abstract class GalaxyTrainingExtension {
+abstract class NovaExtension {
     abstract val javaVersion: Property<Int>           // default: 25
     abstract val enableMasking: Property<Boolean>     // default: true
     abstract val enableObservability: Property<Boolean> // default: true
@@ -230,10 +230,10 @@ abstract class GalaxyTrainingExtension {
 
 // Uso en el proyecto:
 plugins {
-    id("pe.edu.galaxy.training.spring-boot") version "1.0.0"
+    id("pe.edu.nova.spring-boot") version "1.0.0"
 }
 
-galaxyTraining {
+nova {
     javaVersion = 21
     enableMasking = true
     enableObservability = true
@@ -279,7 +279,7 @@ my-app/
     ci.yml (usando los reusable workflows)
 ```
 
-**Opcion avanzada:** Crear un CLI tipo `galaxy init` que permita seleccionar features interactivamente (similar a `spring init` o `quarkus create app`).
+**Opcion avanzada:** Crear un CLI tipo `nova init` que permita seleccionar features interactivamente (similar a `spring init` o `quarkus create app`).
 
 ---
 
@@ -291,14 +291,14 @@ Solo `observability-spring-boot-starter` tiene `additional-spring-configuration-
 {
   "groups": [
     {
-      "name": "galaxy-training.mask",
+      "name": "nova.mask",
       "type": "...MaskProperties",
-      "description": "Configuration for Galaxy Training data masking"
+      "description": "Configuration for Nova Platform data masking"
     }
   ],
   "properties": [
     {
-      "name": "galaxy-training.mask.enabled",
+      "name": "nova.mask.enabled",
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "Enable/disable automatic data masking"
@@ -324,7 +324,7 @@ Mejor aun: usar `spring-boot-configuration-processor` para generarlo automaticam
 ### 8. Roadmap para Quarkus
 
 **Fase 1 - Extension basica:**
-1. Crear `galaxy-training-quarkus-extension/` con modulos `deployment/` y `runtime/`.
+1. Crear `nova-quarkus-extension/` con modulos `deployment/` y `runtime/`.
 2. Implementar `@BuildStep` para registrar beans de las librerias puras.
 3. Crear `MaskConfig` con `@ConfigMapping` (equivalente a `@ConfigurationProperties`).
 4. Implementar `MaskProcessor` para registro en build-time.
@@ -340,7 +340,7 @@ Mejor aun: usar `spring-boot-configuration-processor` para generarlo automaticam
 
 **Estructura esperada:**
 ```
-galaxy-training-quarkus-extension/
+nova-quarkus-extension/
   deployment/
     src/main/java/.../deployment/
       MaskProcessor.java
@@ -358,7 +358,7 @@ galaxy-training-quarkus-extension/
 ### 9. Roadmap para Micronaut
 
 **Fase 1 - Modulo basico:**
-1. Crear `galaxy-training-micronaut-module/`.
+1. Crear `nova-micronaut-module/`.
 2. Implementar `@Factory` con `@Bean` para registrar beans de librerias puras.
 3. Crear `@ConfigurationProperties` para configuracion.
 
@@ -414,23 +414,23 @@ on:
 
 jobs:
   build:
-    uses: galaxy-training-devops/.github/workflows/reusable-build-gradle.yml@main
+    uses: nova-devops/.github/workflows/reusable-build-gradle.yml@main
     with:
       java-version: '25'
 
   quality:
     needs: build
-    uses: galaxy-training-devops/.github/workflows/reusable-sonarcloud-gradle.yml@main
+    uses: nova-devops/.github/workflows/reusable-sonarcloud-gradle.yml@main
     with:
-      sonar-org: 'galaxy-training'
-      sonar-project-key: 'galaxy-training-date-utils'
+      sonar-org: 'nova'
+      sonar-project-key: 'nova-date-utils'
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   publish:
     needs: quality
     if: github.ref == 'refs/heads/main'
-    uses: galaxy-training-devops/.github/workflows/reusable-publish-gradle.yml@main
+    uses: nova-devops/.github/workflows/reusable-publish-gradle.yml@main
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -482,7 +482,7 @@ Fase 4 (Sprint 9-10): Micronaut
   [ ] Tests de compatibilidad
 
 Fase 5 (Sprint 11+): Produccion
-  [ ] CLI (`galaxy init`)
+  [ ] CLI (`nova init`)
   [ ] Publicacion en Maven Central
   [ ] Compatibility matrix automatizada
   [ ] Upgrade guides por version
@@ -515,6 +515,6 @@ Estas decisiones deben tomarse antes de avanzar:
 2. **Version de Java minima:** Java 25 es muy restrictivo. Considerar soportar Java 21 (LTS) como minimo con 25 como opcional.
 3. **Spring Boot 4 exclusivo vs backward compat:** Spring Boot 4 acaba de salir. Soportar 3.x amplificaria la adopcion.
 4. **Mono-repo vs multi-repo:** Actualmente cada modulo parece un repo independiente. Un mono-repo simplificaria el desarrollo coordinado. Un multi-repo da independencia de releases.
-5. **Nombre del framework:** `galaxy-training` sugiere que es educativo. Si es para produccion empresarial, considerar un nombre definitivo.
+5. **Nombre del framework:** `nova` sugiere que es educativo. Si es para produccion empresarial, considerar un nombre definitivo.
 6. **Governance model:** Quien aprueba cambios al framework? Hay un RFC process? Code owners?
 7. **Licencia:** No se encontro archivo LICENSE en ningun modulo.

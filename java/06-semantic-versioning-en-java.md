@@ -3023,7 +3023,7 @@ pe.edu.nova.java.libs:nova-mapper-utils:1.0.0 (by constraint)
 | **Contexto** | Antes de ejecutar NOVA-SEMVER-14 ("crear namespace `pe.edu.nova` en Sonatype OSSRH, ticket en `issues.sonatype.org`"), se investigo el proceso actual de Sonatype/Maven Central via `central.sonatype.org` (documentacion oficial). El resultado invalida varias partes de este documento. |
 | **Hallazgo 1 — infraestructura descontinuada** | `issues.sonatype.org` fue **descontinuado el 9 de enero de 2024** (reemplazado por autoservicio en `central.sonatype.com` + soporte via email `central-support@sonatype.com`). `s01.oss.sonatype.org` (OSSRH, staging area) llego a **end-of-life el 30 de junio de 2025** — a la fecha de este hallazgo (2026-07-12), lleva **mas de un año descontinuado**. Ambas URLs estan referenciadas en este documento (§3.2, §3.3, §8.8, §10.3.6, §11.4, §15.4) y en 2 workflows reales (`reusable-publish-{gradle,maven}-maven-central.yml` en `nova-devops`) que usan la URL de staging de OSSRH — **estos workflows apuntan a un endpoint muerto y fallarian si se ejecutaran hoy**. |
 | **Hallazgo 2 — proceso de reemplazo (Central Portal)** | El nuevo sistema (`central.sonatype.com`, llamado "Central Portal") permite registro con login social de GitHub. La verificacion de namespace es automatica y rapida (minutos a horas), **no requiere ticket manual ni aprobacion humana para casos normales** — contrario a la percepcion de "muchas aprobaciones". El proceso real es: (1) crear cuenta, (2) verificar namespace, (3) publicar. |
-| **Hallazgo 3 — CRITICO: verificacion de namespace requiere dominio real** | Sonatype verifica la propiedad del namespace de 2 formas: **(a) registro DNS TXT** en el dominio reverso exacto (para `pe.edu.nova` deberia agregarse el TXT en `nova.edu.pe`) — requiere control real del DNS de ese dominio; **(b) verificacion automatica** si el namespace tiene la forma `io.github.<usuario>` (u otro hosting: GitLab/Gitee/Bitbucket), verificada instantaneamente via el login social usado para registrarse. **Confirmado con el usuario (2026-07-12): `pe.edu.nova` es un nombre ficticio del proyecto (era antes "Galaxy Training"), sin dominio real `nova.edu.pe` controlado.** Por lo tanto, **NOVA-SEMVER-14 tal como esta planteado (verificar `pe.edu.nova` por DNS) NO es viable.** |
+| **Hallazgo 3 — CRITICO: verificacion de namespace requiere dominio real** | Sonatype verifica la propiedad del namespace de 2 formas: **(a) registro DNS TXT** en el dominio reverso exacto (para `pe.edu.nova` deberia agregarse el TXT en `nova.edu.pe`) — requiere control real del DNS de ese dominio; **(b) verificacion automatica** si el namespace tiene la forma `io.github.<usuario>` (u otro hosting: GitLab/Gitee/Bitbucket), verificada instantaneamente via el login social usado para registrarse. **Confirmado con el usuario (2026-07-12): `pe.edu.nova` es un nombre ficticio del proyecto (el proyecto tuvo otro nombre antes), sin dominio real `nova.edu.pe` controlado.** Por lo tanto, **NOVA-SEMVER-14 tal como esta planteado (verificar `pe.edu.nova` por DNS) NO es viable.** |
 | **Hallazgo 4 — gap adicional: sin plugin oficial de Gradle** | El nuevo Central Portal **no tiene un plugin propio de Gradle** (si de Maven). Publicar desde Gradle requiere un plugin de terceros no soportado oficialmente por Sonatype (ej. `vanniktech/gradle-maven-publish-plugin`, `GradleUp/nmcp`, entre ~15 alternativas listadas en la doc oficial). Esto afecta a **9 de los 15 repos Java** (los que son Gradle), y significa que los workflows `reusable-publish-gradle-maven-central.yml` necesitarian ser reescritos usando un plugin de terceros, no solo apuntar a una URL nueva. |
 | **Hallazgo 5 — limites de publicacion nuevos (no aplican a Nova)** | Sonatype esta introduciendo limites de uso por volumen (soft-limits desde 16-jun-2026, rate limiting desde 11-ago-2026), pero estan pensados para el top 10% de publicadores por volumen (>1,167 archivos/mes en el percentil 90). El volumen esperado de Nova (~14 paquetes totales, publicados esporadicamente) esta muy por debajo — **no es un bloqueante real para este proyecto.** |
 | **Opciones evaluadas** | **(A) Migrar el groupId a `io.github.ahincho.*`** en los 15 repos (verificacion automatica, sin DNS) — esfuerzo grande (cambiar `groupId` en `build.gradle.kts`/`pom.xml`, en el BOM `dependencyManagement`, en toda la documentacion, en los 4 BOMs ya publicados en `1.0.0` que tendrian que re-publicarse con el nuevo groupId). **(B) Descartar Maven Central indefinidamente** y quedarse solo con GitHub Packages (que ya funciona 100% end-to-end, §11.9.14-26) — cero esfuerzo adicional, pierde el beneficio de discovery publico sin autenticacion. **(C) Diferir la decision**, dejar NOVA-SEMVER-14/17/29 explicitamente bloqueados en el roadmap con esta nota, y priorizar el resto de Sprint 4 (NOVA-SEMVER-18-22) que NO dependen de esta decision. |
@@ -3224,12 +3224,12 @@ Fix aplicado: bump manual del manifest a `1.0.2` en un commit `fix(release): bum
 
 ### Pre-requisitos (antes de Sprint 0) — Alineacion de repos
 
-> **Estado verificado al 2026-07-09:** Los pre-requisitos 00a-00d ya fueron **completados** en los 13 repos Java (10 Gradle + 3 Maven). Todos los repos Gradle tienen `gradle.properties`, todos migraron de `pe.edu.galaxy.training` a `pe.edu.nova`, y el placeholder `OWNER` fue corregido a `ahincho`. Verificado en la seccion 15.7.
+> **Estado verificado al 2026-07-09:** Los pre-requisitos 00a-00d ya fueron **completados** en los 13 repos Java (10 Gradle + 3 Maven). Todos los repos Gradle tienen `gradle.properties`, todos migraron al namespace `pe.edu.nova`, y el placeholder `OWNER` fue corregido a `ahincho`. Verificado en la seccion 15.7.
 
 0a. **NOVA-SEMVER-00a:** ✅ Crear `gradle.properties` en los **10 repos Gradle** (api-standard, commons-starter, date-utils, example, gradle-plugin, mapper-utils, mask-utils, observability-starter, observability-utils, starter) con `version=0.1.0-SNAPSHOT` y `group=pe.edu.nova.java.libs` (o `pe.edu.nova.java.starters` segun nivel).
-0b. **NOVA-SEMVER-00b:** ✅ Migrar `groupId` de `pe.edu.galaxy.training.java.libs` a `pe.edu.nova.java.libs` en todos los `build.gradle.kts` y `pom.xml` (13 repos Java).
+0b. **NOVA-SEMVER-00b:** ✅ Migrar el `groupId` a `pe.edu.nova.java.libs` en todos los `build.gradle.kts` y `pom.xml` (13 repos Java).
 0c. **NOVA-SEMVER-00c:** ✅ Corregir placeholder `OWNER` a `ahincho` en las secciones `publishing.repositories.maven.url` de todos los repos que tienen `maven-publish` (10 repos con `maven-publish` configurado).
-0d. **NOVA-SEMVER-00d:** ✅ Renombrar packages Java de `pe.edu.galaxy.training` a `pe.edu.nova` en el codigo fuente de cada repo (refactoring de imports y paquetes, ~200 archivos modificados en 13 repos).
+0d. **NOVA-SEMVER-00d:** ✅ Renombrar los packages Java a `pe.edu.nova` en el codigo fuente de cada repo (refactoring de imports y paquetes, ~200 archivos modificados en 13 repos).
 
 > **Nota:** NOVA-SEMVER-00d es la tarea mas grande (implica renombrar directorios y archivos Java). Puede ejecutarse en paralelo con Sprint 0 si se prefiere, pero debe completarse antes de Sprint 1 para que los workflows de publish generen artefactos con el `groupId` correcto.
 
@@ -3352,7 +3352,7 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 
 | Aspecto | Hoy (sin semver) | Pre-req + Sprint 0 (objetivo) | **Estado real 2026-07-09** ✅ | Sprint 4 (con propuesta) | Sprint 5 (con cache) |
 |---|---|---|---|---|---|
-| `groupId` | `pe.edu.galaxy.training` (viejo) | `pe.edu.nova` (migrado) | ✅ `pe.edu.nova` (migrado en 13 repos Java) | Idem | Idem |
+| `groupId` | namespace anterior | `pe.edu.nova` (migrado) | ✅ `pe.edu.nova` (migrado en 13 repos Java) | Idem | Idem |
 | `gradle.properties` | No existe en ningun repo Gradle | Creado con `version` y `group` | ✅ 10 repos con GP (todos los Gradle code) | Idem | + `org.gradle.caching=true` + `org.gradle.configuration-cache=true` |
 | Versionado en build | Hardcoded en `build.gradle.kts` / `pom.xml` | Idem | ✅ Plugin `net.nemerosa.versioning` 4.0.1 en 10 repos | Idem | Idem |
 | Convencion de commits | Libre | Idem | ✅ Conventional Commits enforced (`commitlint` + `lefthook` auto-install en 15 repos) | Idem | Idem |
@@ -3365,8 +3365,8 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 | Composite Actions | 0 | 0 | ✅ 3 implementadas (Sprint 1: `nova-setup-java`, `nova-setup-node`, `nova-setup-gpg`). ⏳ 4 pendientes (NOVA-SEMVER-26 Sprint 5). Bug de sintaxis bash en `nova-validate-build` corregido (§11.9.2) | ✅ 3 implementadas + 4 diseñadas | **7 totales** (`nova-setup-java/node/gpg`, `nova-gather-facts`, `nova-publish-aggregator`, `nova-configure-gradle-cache`, `nova-validate-build`) |
 | Reusable workflows | 8 originales | 8 | ✅ **20** workflows en `nova-devops` (8 orig + 3 Sprint 1 + 6 Sprint 2 + 1 Sprint 3 + 2 plantillas). 2 version-bump-* deprecados. `reusable-sonarcloud-*` ahora con skip gracioso si falta `SONAR_TOKEN` (§11.9.5) | 20 + 4 composite actions | 20 + 7 composite actions (migrados) |
 | lefthook auto-install | Manual (`lefthook install` por dev) | Manual | ✅ Auto via `npm prepare` script + `lefthook@^2.1.10` (NOVA-SEMVER-02 v2, 2026-07-09) | Idem | Idem |
-| Nomenclatura | GT-SEMVER | NOVA-SEMVER | ✅ NOVA-SEMVER | Idem | Idem |
-| Producto | "Galaxy Training" / "Nova Platform" | Nova (unico) | ✅ Nova (unico, todos los repos renombrados) | Idem | Idem |
+| Nomenclatura | prefijo anterior | NOVA-SEMVER | ✅ NOVA-SEMVER | Idem | Idem |
+| Producto | nombre anterior / "Nova Platform" | Nova (unico) | ✅ Nova (unico, todos los repos renombrados) | Idem | Idem |
 | Troubleshooting | No documentado | No documentado | ✅ Si, seccion 11 con 9 sub-tablas (11.1-11.9) | Idem | Idem |
 | Firma GPG | No requerida | No requerida | ❌ **CANCELLED** (NOVA-SEMVER-29, §11.9.29): GitHub Packages no requiere firma; se descarto indefinidamente junto con Maven Central. Composite action `nova-setup-gpg` y signing plugin en 9 repos quedan sin uso activo (preparados pero no se generara la clave). | N/A (cancelado) | Idem |
 | Calidad de codigo (Checkstyle) | No configurado | Idem | ✅ **9/9 repos Gradle** con plugin `checkstyle` aplicado + ruleset comun + exclusion de sourceSet `test` (§11.9.6, corregido 2026-07-10; antes solo 4/9 y sin ruleset funcional) | Idem | Idem |
@@ -3413,7 +3413,7 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 | 9 repos Gradle con signing plugin `id("signing")` + `useInMemoryPgpKeys` (NOVA-SEMVER-10) — excluye `example` (no publica) | ✅ OK (Sprint 2) | ✅ Confirmado con `Select-String` en 11 `build.gradle.kts` |
 | 2 repos SIN `maven-publish` (commons-starter root, example) | ✅ Esperado | ✅ Confirmado |
 | 10 repos con `gradle.properties` (api-standard, commons-starter, date-utils, example, gradle-plugin, mapper-utils, mask-utils, observability-starter, observability-utils, starter) | ✅ OK | ✅ Confirmado con `Test-Path` |
-| Todos los repos migrados a `pe.edu.nova` (13 Java: 10 Gradle + 3 Maven) | ✅ OK | ✅ 0 referencias a `pe.edu.galaxy` en source files |
+| Todos los repos migrados a `pe.edu.nova` (13 Java: 10 Gradle + 3 Maven) | ✅ OK | ✅ 0 referencias al namespace anterior en source files |
 | Publishing URL usa `ahincho` (no mas placeholder `OWNER`) | ✅ OK | ✅ Confirmado en api-standard y resto |
 | 10 repos con `net.nemerosa.versioning` 4.0.1 | ✅ OK | ✅ Confirmado con grep en `build.gradle.kts` |
 | 15 archivos `commitlint.config.js` (todos los repos Java) | ✅ OK | ✅ Confirmado con `Test-Path` |
@@ -3456,7 +3456,7 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 | **Sprint 2** (NOVA-SEMVER-09-12) | ✅ **COMPLETADO** (commit `aa7692c` en `nova-devops` + commits en 9 repos Java) | Nada. 6 nuevos workflows + signing plugin en 9 repos Gradle |
 | **NOVA-SEMVER-13** (release-please config) | ✅ **COMPLETADO** (commit `688e5d2` en `nova-devops` + 10 commits en repos Java) | Nada. `.release-please-config.json` + `.release-please-manifest.json` + 3 workflows por repo + `reusable-release-publish.yml` en nova-devops. Patron `version-bump` deprecado. |
 | **NOVA-SEMVER-15** (primer release end-to-end) | ✅ **COMPLETADO** (replicado en 9/9 repos Gradle + los 4 BOMs, ver §11.9.10, §11.9.14, §11.9.22-26) | Nada. La evidencia original (`api-standard`, run `29024268916`) quedo inaccesible tras la recreacion de repos de NOVA-SEMVER-31 (§11.9.9), pero se genero evidencia nueva y mas completa en los 9 repos Gradle + los 4 BOMs, incluyendo la validacion del flujo 100% automatico con PAT real. 26 hallazgos adicionales descubiertos y documentados (§11.9.1-11.9.26). |
-| **NOVA-SEMVER-23-24** (Local Build Cache + Configuration Cache) | ✅ **COMPLETADO** (2026-07-09, commits en 10 repos) | Nada. `org.gradle.caching=true` + `org.gradle.configuration-cache=true` agregados a 10 `gradle.properties` (9 en `D:\Galaxy\Projects\java\` + example en `/instances/`). |
+| **NOVA-SEMVER-23-24** (Local Build Cache + Configuration Cache) | ✅ **COMPLETADO** (2026-07-09, commits en 10 repos) | Nada. `org.gradle.caching=true` + `org.gradle.configuration-cache=true` agregados a 10 `gradle.properties` (9 en `D:\Nova\java\` + example en `/instances/`). |
 | **NOVA-SEMVER-25** (Remote Build Cache via GitHub Actions) | ✅ **COMPLETADO** (2026-07-09, commit `27fb98e` en `nova-devops`) | Nada. `gradle/actions/setup-gradle@v4` agregado a `reusable-build-gradle.yml` con `cache-read-only` dinamico. |
 | **Composite actions NOVA-SEMVER-26** (3 creadas, 1 descartada) | ✅ **COMPLETADO** (2026-07-09, commit `95bc786` en `nova-devops`) | Nada. `nova-validate-build`, `nova-gather-facts`, `nova-publish-aggregator` creadas con `action.yml` + `README.md`. `nova-configure-gradle-cache` **descartada** (action oficial `gradle/actions/setup-gradle@v4` es suficiente, ver §5.4.1). |
 | **NOVA-SEMVER-31** (convencion de naming) | ✅ **COMPLETADO** (2026-07-09, commit `3b434be` en `docs` repo) | Nada. §0 + §0.1 + §10.6 + §11.8 creados. 15/15 repos Java con nombres conformes. 12 repos archivados eliminados (ver §15.2). |
@@ -3506,7 +3506,7 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 
 **Que se completo en Pre-req + Sprint 0 + Sprint 1 + Sprint 2 + Sprint 3 parcial + Sprint 5 parcial + Post-Sprint 0 (4 + 4 + 4 + 4 + 2 + 4 + 1 = 23 actividades):**
 - ✅ **NOVA-SEMVER-00a:** `gradle.properties` en 10 repos Gradle.
-- ✅ **NOVA-SEMVER-00b:** `groupId` migrado de `pe.edu.galaxy.training` a `pe.edu.nova` (13 repos).
+- ✅ **NOVA-SEMVER-00b:** `groupId` migrado a `pe.edu.nova` (13 repos).
 - ✅ **NOVA-SEMVER-00c:** placeholder `OWNER` corregido a `ahincho` (10 repos con publishing).
 - ✅ **NOVA-SEMVER-00d:** packages Java renombrados (~200 archivos).
 - ✅ **NOVA-SEMVER-01:** Conventional Commits adoptados (15 Java + 4 NestJS).
@@ -3565,7 +3565,7 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 ## 15.7. Estado verificado al 2026-07-09 (snapshot, actualizado 2026-07-10)
 
 **Fecha del snapshot:** 2026-07-09 (columna `checkstyle` y notas actualizadas 2026-07-10, ver §11.9)
-**Metodo de verificacion:** scripts PowerShell con `Test-Path`, `Select-String`, `git ls-files` sobre los 15 repos Java locales (`D:\Galaxy\Projects\java\`).
+**Metodo de verificacion:** scripts PowerShell con `Test-Path`, `Select-String`, `git ls-files` sobre los 15 repos Java locales (`D:\Nova\java\`).
 
 ### Inventario de los 15 repos Java
 
@@ -3601,14 +3601,14 @@ Una vez configuradas las tres, el flujo es equivalente al de npm:
 | `lefthook.yml` | 15/15 repos Java | Hook pre-commit con `commitlint` |
 | `package.json` | 15/15 repos Java | Dependencias npm para hooks |
 | `.gitignore` cubre `build/`, `.idea/`, `node_modules/`, `.gradle/` | 15/15 repos Java | Algunas variaciones menores en formato (`/.gradle` vs `.gradle/`) |
-| `pe.edu.nova` (sin referencias a `pe.edu.galaxy`) | 15/15 repos Java | ~200 archivos migrados |
+| `pe.edu.nova` (sin referencias al namespace anterior) | 15/15 repos Java | ~200 archivos migrados |
 | Gradle wrapper `9.2.0` | 10/10 repos Gradle | `gradle-wrapper.properties` consistente |
 | 0 archivos `build/` o `.gradle/` tracked en git | 10/10 repos Gradle | Verificado con `git ls-files` |
 | **Convencion de naming aplicada (NOVA-SEMVER-31)** | 15/15 repos Java | ✅ Nombres conformes a §0: libs puras sin `spring-boot`; starters/plugins/parent/archetype con `spring-boot`. 12 repos archivados eliminados via `gh repo delete --yes`. Ver §11.8 para lecciones aprendidas. |
 
 ### Pendiente antes de NOVA-SEMVER-14
 
-- ~~**ADRs (23 archivos)** en `D:\Galaxy\Projects\docs\adrs\`: `shared/` (10), `java/` (5), `nest/` (8 placeholders). **Estado verificado 2026-07-09: siguen sin commitear** (untracked en `git status` de `D:\Galaxy\Projects\docs\`). Pendiente: `git add adrs/ && git commit` en el docs repo.~~ ✅ **Resuelto el 2026-07-09 (commit `7b4f555`)**: 24 ADRs commiteados en `adrs/` (no `docs/adrs/`), ultimo sync `aed5313`. Ver `git ls-files adrs/` para el listado completo.
+- ~~**ADRs (23 archivos)** en `D:\Nova\docs\adrs\`: `shared/` (10), `java/` (5), `nest/` (8 placeholders). **Estado verificado 2026-07-09: siguen sin commitear** (untracked en `git status` de `D:\Nova\docs\`). Pendiente: `git add adrs/ && git commit` en el docs repo.~~ ✅ **Resuelto el 2026-07-09 (commit `7b4f555`)**: 24 ADRs commiteados en `adrs/` (no `docs/adrs/`), ultimo sync `aed5313`. Ver `git ls-files adrs/` para el listado completo.
 - ~~**Test del primer release**~~ — **Flujo 100% automatico validado end-to-end y replicado en 9 de 9 repos Gradle + los 4 BOMs** (ver §11.9.14, §11.9.22-26): merge del PR de release-please → tag creado con el PAT real → `publish-on-tag.yml` disparado automaticamente sin intervencion manual → artefacto publicado en GitHub Packages. En el proceso se encontraron y corrigieron 20 hallazgos adicionales (3 modulos con `publishing{}` incompleto, gap de resolucion de dependencias cross-repo, 3 bugs en `nova-devops` nunca antes ejercitados, `nova-bom` nunca publicado, secret corrupto en `mapper-utils`, workaround del 409 Conflict en BOMs, y el **bug critico de Gradle con `${property}` references** — ver §11.9.16-26). **Cadena completa, todos los repos publicando.**
 - ~~**`NOVA_RELEASE_PAT`**~~ — **Resuelto el 2026-07-10:** el usuario reemplazo el placeholder por el PAT real en los 10 repos (incluyendo `mapper-utils`, que inicialmente tenia un valor invalido — §11.9.22); confirmado funcionando en produccion en los 9 repos Gradle + el BOM (§11.9.14, §11.9.23, §11.9.25) incluyendo lectura cross-repo de paquetes (§11.9.17).
 - ~~**`release-please` roto en `nova-java-api-standard`**~~ — **Resuelto el 2026-07-10** (§11.9.12): tags huerfanos eliminados, `nova-bom` corregido, PR de release verificado y mergeado con exito (§11.9.14).

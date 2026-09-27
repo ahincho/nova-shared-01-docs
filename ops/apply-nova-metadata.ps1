@@ -6,7 +6,7 @@
 # NO COMMITS, NO PUSHES: this script only mutates GitHub remote properties.
 
 $ErrorActionPreference = "Continue"
-$metadataPath = "D:\Galaxy\Projects\nova-platform-metadata.json"
+$metadataPath = Join-Path $PSScriptRoot "nova-platform-metadata.json"
 if (-not (Test-Path -LiteralPath $metadataPath)) {
     Write-Error "Metadata file not found: $metadataPath. Run nova-repos-metadata.ps1 first."
     exit 1

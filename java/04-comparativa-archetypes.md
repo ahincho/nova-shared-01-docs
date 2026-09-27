@@ -1,10 +1,10 @@
-# Evaluacion Comparativa: Quarkus Hexagonal Archetype vs Galaxy Training Archetype
+# Evaluacion Comparativa: Quarkus Hexagonal Archetype vs Nova Platform Archetype
 
 ## 1. Contexto
 
 Se comparan dos enfoques de scaffolding de proyectos Java:
 
-| | Galaxy Training Archetype | Quarkus Hexagonal Archetype |
+| | Nova Platform Archetype | Quarkus Hexagonal Archetype |
 |---|---|---|
 | **Autor** | Equipo propio (meta-framework) | Companero (proyecto independiente) |
 | **Framework** | Spring Boot 4.x | Quarkus 3.15.1 |
@@ -12,19 +12,19 @@ Se comparan dos enfoques de scaffolding de proyectos Java:
 | **Build** | Maven Archetype (`archetype-packaging`) | Bash script (`init.sh`) con copia + sed |
 | **Arquitectura** | Flat (single module) | Hexagonal multi-module (shared + bounded context + boot) |
 | **Patrones** | Meta-framework starter como base | Hexagonal + CQRS + DDD + Event-Driven |
-| **Ubicacion** | `java/galaxy-training-spring-boot-archetype/` | `examples/archetypes/java-projects/quarkus-hexagonal-archetype/` |
+| **Ubicacion** | `java/nova-spring-boot-archetype/` | `examples/archetypes/java-projects/quarkus-hexagonal-archetype/` |
 
 ---
 
 ## 2. Que Genera Cada Uno
 
-### Galaxy Training Archetype -- Proyecto Generado
+### Nova Platform Archetype -- Proyecto Generado
 
 ```
 my-app/
-  pom.xml                    <- Hereda de galaxy-training-spring-boot-parent:1.0.0
+  pom.xml                    <- Hereda de nova-spring-boot-parent:1.0.0
   src/main/java/{package}/
-    Application.java          <- @GalaxyTrainingSpringBootApplication + GalaxyTrainingApplication.run()
+    Application.java          <- @NovaSpringBootApplication + NovaApplication.run()
   src/main/resources/
     application.yaml          <- port: 8080, spring.application.name: ${artifactId}
   src/test/java/{package}/
@@ -96,7 +96,7 @@ ms-course/
 
 ### 3.1. Mecanismo de Generacion
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | **Tipo** | Maven Archetype Plugin | Bash script (`init.sh`) |
 | **Invocacion** | `mvn archetype:generate -DarchetypeGroupId=...` | `make init` (interactivo) |
@@ -114,7 +114,7 @@ ms-course/
 
 ### 3.2. Arquitectura del Proyecto Generado
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | Modulos | 1 (flat) | 3 (shared + product + boot) |
 | Patron arquitectonico | Ninguno impuesto | Hexagonal + CQRS + DDD |
@@ -129,7 +129,7 @@ ms-course/
 
 ### 3.3. Testing
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | Tests generados | 1 (context loads) | ~30 archivos, ~90 tests |
 | Tests unitarios de dominio | No | Si (Product, VOs, excepciones) |
@@ -145,7 +145,7 @@ ms-course/
 
 ### 3.4. Infraestructura y DevEx
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | Makefile | No | Si (10 targets) |
 | Docker Compose | No | Si (PostgreSQL + Jaeger + Prometheus) |
@@ -160,7 +160,7 @@ ms-course/
 
 ### 3.5. Seguridad
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | Autenticacion | No | OIDC/JWT (off en dev, required en prod) |
 | Autorizacion | No | @RolesAllowed por endpoint |
@@ -174,7 +174,7 @@ ms-course/
 
 ### 3.6. Observabilidad
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | Distributed tracing | Via observability-starter (transitivo) | OpenTelemetry nativo Quarkus |
 | Metricas | Via observability-starter (Golden Signals) | Micrometer + Prometheus + metricas custom |
@@ -186,7 +186,7 @@ ms-course/
 
 ### 3.7. Documentacion
 
-| Aspecto | Galaxy Training | Quarkus Hexagonal |
+| Aspecto | Nova Platform | Quarkus Hexagonal |
 |---------|:-:|:-:|
 | README | No generado | 637 lineas (quickstart, arquitectura, guias) |
 | ADRs | No | 8 Architecture Decision Records |
@@ -199,7 +199,7 @@ ms-course/
 
 ### 3.8. Patrones Avanzados
 
-| Patron | Galaxy Training | Quarkus Hexagonal |
+| Patron | Nova Platform | Quarkus Hexagonal |
 |--------|:-:|:-:|
 | Outbox Pattern | No | Si (domain_events_outbox table + scheduler) |
 | Optimistic Locking | No | Si (@Version, transparente) |
@@ -294,7 +294,7 @@ No hay una capa de abstraccion que permita reutilizar el shared kernel con Sprin
 ### 5.3. No integra con el meta-framework
 
 El archetype del companero es un proyecto aislado. No consume:
-- Las librerias de Galaxy Training (mask-utils, date-utils, mapper-utils, api-standard)
+- Las librerias de Nova Platform (mask-utils, date-utils, mapper-utils, api-standard)
 - Los starters del meta-framework
 - El BOM de versiones
 - Los workflows de CI/CD reutilizables
@@ -316,15 +316,15 @@ La version de Quarkus esta hardcodeada en `gradle.properties`. No hay un mecanis
 
 ---
 
-## 6. Puntos Fuertes del Galaxy Training Archetype
+## 6. Puntos Fuertes del Nova Platform Archetype
 
 ### 6.1. Maven Archetype real
 
 Es un archetype Maven estandar publicable en cualquier repositorio Maven:
 ```bash
 mvn archetype:generate \
-  -DarchetypeGroupId=pe.edu.galaxy.training.java \
-  -DarchetypeArtifactId=galaxy-training-spring-boot-archetype \
+  -DarchetypeGroupId=pe.edu.nova.java \
+  -DarchetypeArtifactId=nova-spring-boot-archetype \
   -DarchetypeVersion=1.0.0
 ```
 - Cross-platform (funciona en Windows, Linux, macOS).
@@ -344,7 +344,7 @@ Un proyecto generado tiene 4 archivos y compila. No impone ninguna arquitectura 
 
 ---
 
-## 7. Puntos Debiles del Galaxy Training Archetype
+## 7. Puntos Debiles del Nova Platform Archetype
 
 ### 7.1. Demasiado minimo
 
@@ -374,7 +374,7 @@ No hay Docker Compose, no hay Makefile, no hay `.env`, no hay Dockerfile. El des
 
 ## 8. Que Puede Aprender Cada Proyecto del Otro
 
-### Galaxy Training puede adoptar del Quarkus Hexagonal:
+### Nova Platform puede adoptar del Quarkus Hexagonal:
 
 | Que | Como | Prioridad |
 |-----|------|-----------|
@@ -387,15 +387,15 @@ No hay Docker Compose, no hay Makefile, no hay `.env`, no hay Dockerfile. El des
 | Security headers | Configurar en `application.yaml` generado | MEDIA |
 | Object Mother pattern en test template | Generar una clase Mother de ejemplo | BAJA |
 
-### Quarkus Hexagonal puede adoptar de Galaxy Training:
+### Quarkus Hexagonal puede adoptar de Nova Platform:
 
 | Que | Como | Prioridad |
 |-----|------|-----------|
 | Mecanismo de generacion estandar | Migrar de bash script a Maven Archetype o Quarkus CLI extension | ALTA |
 | Soporte Windows | Consecuencia del punto anterior | ALTA |
 | Integracion con meta-framework | Consumir librerias compartidas (mask-utils, api-standard) via BOM | MEDIA |
-| CI/CD reusable workflows | Integrar con los GitHub Actions workflows de galaxy-training-devops | MEDIA |
-| Observabilidad estandarizada | Usar el stack de observabilidad de galaxy-training-infrastructure | MEDIA |
+| CI/CD reusable workflows | Integrar con los GitHub Actions workflows de nova-devops | MEDIA |
+| Observabilidad estandarizada | Usar el stack de observabilidad de nova-infrastructure | MEDIA |
 | Publicacion como artefacto | Publicar en GitHub Packages para consumo sin clonar | MEDIA |
 
 ---
@@ -405,7 +405,7 @@ No hay Docker Compose, no hay Makefile, no hay `.env`, no hay Dockerfile. El des
 El escenario ideal es que ambos enfoques se complementen dentro del meta-framework:
 
 ```
-Meta-Framework Galaxy Training
+Meta-Framework Nova Platform
   |
   +-- Librerias Puras (Nivel 1) -------- Reutilizables por ambos
   |     mask-utils, date-utils, etc.
@@ -415,9 +415,9 @@ Meta-Framework Galaxy Training
   |     +-- Quarkus extensions ----------- Pueden basarse en los patrones del archetype
   |
   +-- Archetypes (Nivel 5)
-  |     +-- galaxy-training-spring-boot-archetype (flat, para microservicios simples)
-  |     +-- galaxy-training-spring-boot-hexagonal-archetype (multi-module DDD)
-  |     +-- galaxy-training-quarkus-hexagonal-archetype (multi-module DDD)
+  |     +-- nova-spring-boot-archetype (flat, para microservicios simples)
+  |     +-- nova-spring-boot-hexagonal-archetype (multi-module DDD)
+  |     +-- nova-quarkus-hexagonal-archetype (multi-module DDD)
   |
   +-- Shared Kernel
         +-- CQRS buses (framework-agnostico en dominio)
@@ -433,7 +433,7 @@ Meta-Framework Galaxy Training
    - Las implementaciones CDI y Spring van en starters separados
 
 2. **Crear dos variantes de archetype:**
-   - **Simple** (actual Galaxy Training): para APIs CRUD, BFFs, microservicios sin logica compleja
+   - **Simple** (actual Nova Platform): para APIs CRUD, BFFs, microservicios sin logica compleja
    - **Hexagonal** (basado en el del companero): para microservicios con logica de dominio rica
 
 3. **Migrar el script bash a Maven Archetype o Quarkus CLI:**
@@ -441,14 +441,14 @@ Meta-Framework Galaxy Training
    - Cross-platform sin dependencia de bash
 
 4. **Unificar la observabilidad:**
-   - El archetype Quarkus usa Jaeger directamente; Galaxy Training usa OTel Collector + Grafana stack
-   - Estandarizar en OTel Collector (mas flexible) y reutilizar `galaxy-training-infrastructure`
+   - El archetype Quarkus usa Jaeger directamente; Nova Platform usa OTel Collector + Grafana stack
+   - Estandarizar en OTel Collector (mas flexible) y reutilizar `nova-infrastructure`
 
 ---
 
 ## 10. Resumen de Calificaciones
 
-| Criterio | Galaxy Training Archetype | Quarkus Hexagonal Archetype |
+| Criterio | Nova Platform Archetype | Quarkus Hexagonal Archetype |
 |----------|:-:|:-:|
 | Mecanismo de generacion | **7** (Maven estandar, cross-platform) | **4** (bash script, no-Windows, no-publicable) |
 | Completitud del proyecto generado | **2** (4 archivos vacios) | **9** (~113 archivos, bounded context completo) |
@@ -469,8 +469,8 @@ Meta-Framework Galaxy Training
 
 Los dos proyectos estan en extremos opuestos del espectro:
 
-- **Galaxy Training Archetype**: mecanismo de distribucion correcto (Maven Archetype), integrado con el meta-framework, pero genera un proyecto tan minimo que no aporta valor practico al desarrollador.
+- **Nova Platform Archetype**: mecanismo de distribucion correcto (Maven Archetype), integrado con el meta-framework, pero genera un proyecto tan minimo que no aporta valor practico al desarrollador.
 
 - **Quarkus Hexagonal Archetype**: genera un proyecto production-ready con patrones avanzados, testing exhaustivo, documentacion rica, y infraestructura completa, pero usa un mecanismo de generacion fragil y no se integra con el ecosistema del meta-framework.
 
-**La estrategia optima es combinar ambos:** usar el mecanismo de distribucion del Galaxy Training Archetype con la riqueza de contenido del Quarkus Hexagonal Archetype, y extraer el shared kernel de DDD como libreria pura del Nivel 1 del meta-framework para que sea reutilizable por ambos frameworks.
+**La estrategia optima es combinar ambos:** usar el mecanismo de distribucion del Nova Platform Archetype con la riqueza de contenido del Quarkus Hexagonal Archetype, y extraer el shared kernel de DDD como libreria pura del Nivel 1 del meta-framework para que sea reutilizable por ambos frameworks.

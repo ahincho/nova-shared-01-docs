@@ -378,7 +378,7 @@ El doc 08 §3.1 lista clases que NO estan en el codigo del companero. El compane
 - **Checkstyle**: `config/checkstyle/checkstyle.xml` desde el inicio (mismo patron que instance).
 - **Sin jandex**: este repo NO es extension Quarkus, no necesita `META-INF/jandex.idx`.
 - **Tests**: JUnit 6 + jqwik (property-based) + ArchUnit (architecture tests). Cobertura JaCoCo.
-- **Repo path local**: `D:\Galaxy\Projects\java\nova-java-ddd-utils`.
+- **Repo path local**: `D:\Nova\java\nova-java-ddd-utils`.
 - **Repo path GitHub**: `ahincho/nova-java-ddd-utils` (public).
 
 ### 6.5.6. CI / Workflows reusables

@@ -34,7 +34,7 @@ Los modulos NestJS necesitan tests con `@nestjs/testing`:
 
 ```typescript
 import { Test, TestingModule } from '@nestjs/testing';
-import { MaskModule, MaskService } from '@galaxy-training/nestjs-mask';
+import { MaskModule, MaskService } from '@ahincho/nova-nestjs-mask';
 
 describe('MaskModule', () => {
   let module: TestingModule;
@@ -74,9 +74,9 @@ describe('MaskModule', () => {
 #### 1.3. Tests del Meta-Framework Starter (Nivel 3)
 
 ```typescript
-describe('GalaxyTrainingFactory', () => {
+describe('NovaFactory', () => {
   it('should create NestJS application', async () => {
-    const app = await GalaxyTrainingFactory.create(AppModule);
+    const app = await NovaFactory.create(AppModule);
     expect(app).toBeDefined();
     await app.close();
   });
@@ -86,10 +86,10 @@ describe('GalaxyTrainingFactory', () => {
   });
 });
 
-describe('GalaxyTrainingModule', () => {
+describe('NovaModule', () => {
   it('should register MaskModule and ApiStandardModule', async () => {
     const module = await Test.createTestingModule({
-      imports: [GalaxyTrainingModule.forRoot()],
+      imports: [NovaModule.forRoot()],
     }).compile();
     expect(module.get(MaskService)).toBeDefined();
   });
@@ -100,21 +100,21 @@ describe('GalaxyTrainingModule', () => {
 
 ### P1: Resolver Duplicacion de Observabilidad
 
-**Problema:** `@galaxy-training/nestjs-observability` existe en dos lugares:
-1. `galaxy-training-commons-nestjs/packages/nestjs-observability/` -- solo config/interfaces.
-2. `galaxy-training-observability-nestjs-starter/` -- implementacion completa (OTel SDK, Pino, health).
+**Problema:** `@ahincho/nova-nestjs-observability` existe en dos lugares:
+1. `nova-commons-nestjs/packages/nestjs-observability/` -- solo config/interfaces.
+2. `nova-observability-nestjs-starter/` -- implementacion completa (OTel SDK, Pino, health).
 
 **Accion:** Elegir UNA de estas estrategias:
 
 **Opcion A (Recomendada) - Todo en el monorepo:**
-- Mover el codigo completo de `galaxy-training-observability-nestjs-starter/` a `galaxy-training-commons-nestjs/packages/nestjs-observability/`.
-- Eliminar `galaxy-training-observability-nestjs-starter/` como proyecto standalone.
+- Mover el codigo completo de `nova-observability-nestjs-starter/` a `nova-commons-nestjs/packages/nestjs-observability/`.
+- Eliminar `nova-observability-nestjs-starter/` como proyecto standalone.
 - El monorepo queda con 3 paquetes: nestjs-mask, nestjs-api-standard, nestjs-observability.
 - Actualizar `publish-local.sh` para reflejar el cambio.
 
 **Opcion B - Todo standalone:**
-- Mantener `galaxy-training-observability-nestjs-starter/` como canonico.
-- Eliminar `galaxy-training-commons-nestjs/packages/nestjs-observability/`.
+- Mantener `nova-observability-nestjs-starter/` como canonico.
+- Eliminar `nova-commons-nestjs/packages/nestjs-observability/`.
 - El monorepo queda solo con nestjs-mask y nestjs-api-standard.
 
 ---
@@ -123,14 +123,14 @@ describe('GalaxyTrainingModule', () => {
 
 #### 2.1. Versiones de Node.js
 
-`GalaxyTrainingFactory` valida Node.js >= 24 y `assertNodeVersion` valida lo mismo. Node 24 no es LTS (Node 22 es el LTS actual). Esto bloquea la adopcion.
+`NovaFactory` valida Node.js >= 24 y `assertNodeVersion` valida lo mismo. Node 24 no es LTS (Node 22 es el LTS actual). Esto bloquea la adopcion.
 
 **Accion:** Cambiar a Node.js >= 22 como minimo, o hacerlo configurable:
 
 ```typescript
 static async create(
   module: Type<any>,
-  options?: GalaxyTrainingFactoryOptions & { minNodeVersion?: number },
+  options?: NovaFactoryOptions & { minNodeVersion?: number },
 ): Promise<INestApplication> {
   const minVersion = options?.minNodeVersion ?? 22;
   assertNodeVersion(minVersion);
@@ -146,7 +146,7 @@ Actualmente el desarrollador debe importar `ObservabilityModule` por separado:
 // ACTUAL - dos imports separados
 @Module({
   imports: [
-    GalaxyTrainingModule.forRoot(),
+    NovaModule.forRoot(),
     ObservabilityModule.forRoot({ ... }),  // Manual
   ],
 })
@@ -158,7 +158,7 @@ Actualmente el desarrollador debe importar `ObservabilityModule` por separado:
 // PROPUESTO - todo en uno
 @Module({
   imports: [
-    GalaxyTrainingModule.forRoot({
+    NovaModule.forRoot({
       mask: { defaultCountry: CountryCode.PE },
       observability: {
         serviceName: 'my-app',
@@ -171,7 +171,7 @@ Actualmente el desarrollador debe importar `ObservabilityModule` por separado:
 
 #### 2.3. BOM sin valor real
 
-Los paquetes `@galaxy-training/bom` y `@galaxy-training/nestjs-bom` exportan objetos con versiones pero nadie los consume. No hay ninguna herramienta que los lea.
+Los paquetes `@ahincho/nova-bom` y `@ahincho/nova-nestjs-bom` exportan objetos con versiones pero nadie los consume. No hay ninguna herramienta que los lea.
 
 **Opciones:**
 1. **Eliminarlos** y documentar las versiones en un README o CHANGELOG.
@@ -359,7 +359,7 @@ Actualmente los modules solo soportan `forRoot()` sincrono. Se necesita `forRoot
 
 ```typescript
 // Caso de uso: leer config de .env via @nestjs/config
-GalaxyTrainingModule.forRootAsync({
+NovaModule.forRootAsync({
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: (config: ConfigService) => ({
@@ -386,19 +386,19 @@ No existe ningun mecanismo para scaffoldear un proyecto nuevo con el meta-framew
 | Opcion | Esfuerzo | UX | Distribucion |
 |--------|----------|-----|-------------|
 | Script bash (`init.sh`) | Bajo | Buena (interactivo) | Requiere clonar repo |
-| `create-galaxy-training` npm package | Medio | Excelente (`npm init @galaxy-training`) | npm registry |
+| `create-nova` npm package | Medio | Excelente (`npm init @nova`) | npm registry |
 | NestJS Schematics plugin | Alto | Integrado con `nest generate` | npm registry |
 | Nx Plugin | Alto | Excelente para monorepos | npm registry |
 
-**Recomendacion:** `create-galaxy-training` como paquete npm con `npx`:
+**Recomendacion:** `create-nova` como paquete npm con `npx`:
 
 ```bash
-npx @galaxy-training/create my-app
+npx @ahincho/nova-create my-app
 
 # Genera:
 my-app/
   package.json           <- deps: nestjs-starter, nestjs-observability
-  tsconfig.json          <- extends @galaxy-training/nestjs-parent/tsconfig
+  tsconfig.json          <- extends @ahincho/nova-nestjs-parent/tsconfig
   eslint.config.mjs      <- extends parent
   prettier.config.mjs    <- extends parent
   jest.config.ts         <- extends parent
@@ -407,8 +407,8 @@ my-app/
   Dockerfile
   docker-compose.yml
   src/
-    main.ts              <- GalaxyTrainingFactory.create()
-    app.module.ts         <- GalaxyTrainingModule.forRoot() + ObservabilityModule.forRoot()
+    main.ts              <- NovaFactory.create()
+    app.module.ts         <- NovaModule.forRoot() + ObservabilityModule.forRoot()
     health/
       health.controller.ts
   test/
@@ -435,9 +435,9 @@ El lado Java tiene 8 workflows reutilizables. El lado NestJS tiene zero.
 
 ### 10. Crear Infrastructure
 
-El lado Java tiene `galaxy-training-infrastructure/` con Docker Compose para OTel Collector + Grafana stack. El lado NestJS no tiene nada.
+El lado Java tiene `nova-infrastructure/` con Docker Compose para OTel Collector + Grafana stack. El lado NestJS no tiene nada.
 
-**Accion:** Reutilizar el mismo `galaxy-training-infrastructure/` del lado Java. El stack de observabilidad (OTel Collector, Tempo, Loki, Mimir, Grafana) es independiente del lenguaje.
+**Accion:** Reutilizar el mismo `nova-infrastructure/` del lado Java. El stack de observabilidad (OTel Collector, Tempo, Loki, Mimir, Grafana) es independiente del lenguaje.
 
 Agregar al ejemplo NestJS un `docker-compose.yml` que referencia la infraestructura compartida o incluye su propia version minima.
 
@@ -450,15 +450,15 @@ Agregar al ejemplo NestJS un `docker-compose.yml` que referencia la infraestruct
 Actualmente **ningun paquete tiene README**. Cada uno necesita al minimo:
 
 ```markdown
-# @galaxy-training/mask-utils
+# @ahincho/nova-mask-utils
 
 > Libreria pura de enmascaramiento de datos sensibles.
 
 ## Instalacion
-npm install @galaxy-training/mask-utils
+npm install @ahincho/nova-mask-utils
 
 ## Uso Rapido
-import { MaskEngine, MaskType } from '@galaxy-training/mask-utils';
+import { MaskEngine, MaskType } from '@ahincho/nova-mask-utils';
 
 const result = MaskEngine.mask('user@mail.com', MaskType.EMAIL);
 console.log(result.maskedValue); // u***@mail.com
@@ -479,10 +479,10 @@ console.log(result.maskedValue); // u***@mail.com
 Un documento central que explique como usar el meta-framework:
 
 ```markdown
-# Galaxy Training NestJS - Getting Started
+# Nova Platform NestJS - Getting Started
 
 ## 1. Crear proyecto
-npm init @galaxy-training my-app
+npm init @nova my-app
 
 ## 2. Configurar
 Editar .env con las variables de entorno.
@@ -524,14 +524,14 @@ Fase 2 (Sprint 3-5): Solidificacion
   [ ] Agregar forRootAsync() a todos los modules
   [ ] READMEs por paquete
   [ ] CI/CD workflows (build, lint, publish, security)
-  [ ] Generador de proyectos (create-galaxy-training)
+  [ ] Generador de proyectos (create-nova)
 
 Fase 3 (Sprint 6-8): Produccion
   [ ] Cobertura minima 80%
   [ ] Documentacion completa (Getting Started, API, Migration)
   [ ] Docker Compose para ejemplo (reutilizar infra de Java)
   [ ] Publicacion a GitHub Packages (o npm)
-  [ ] NestJS Schematics (nest generate galaxy-module)
+  [ ] NestJS Schematics (nest generate nova-module)
   [ ] Soporte para Fastify (ademas de Express)
   [ ] Security module (JWT, Guards, RBAC)
   [ ] Database module (TypeORM/Prisma helpers, migrations)

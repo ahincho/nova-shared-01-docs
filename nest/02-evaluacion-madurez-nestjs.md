@@ -1,7 +1,7 @@
-# Evaluacion de Madurez - Galaxy Training Meta-Framework (NestJS)
+# Evaluacion de Madurez - Nova Platform Meta-Framework (NestJS)
 
 > **Documento historico, no describe el estado actual.** Evalua el diseno anterior al colapso
-> de 2026-09-05: once paquetes bajo el scope `@galaxy-training/`, repartidos en cuatro
+> de 2026-09-05: once paquetes bajo el scope `@ahincho/`, repartidos en cuatro
 > repositorios que hoy estan archivados. El stack vive ahora en `ahincho/nova-nestjs` con tres
 > paquetes bajo `@ahincho/`. Ver [ADR-025](../adrs/nest/ADR-025-tres-paquetes-en-lugar-de-once.md).
 >
@@ -9,7 +9,7 @@
 
 ## Resumen Ejecutivo
 
-El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con una base conceptualmente solida** y un nivel de madurez ligeramente superior al lado Java en consistencia de build y patron de configuracion. La arquitectura de 5 niveles esta correctamente implementada: librerias puras en TypeScript, NestJS Modules como starters, un agregador principal, BOM/Parent simulados, y un script de publicacion local. Sin embargo, comparte el deficit critico de testing (solo `mask-utils` tiene tests) y carece de tooling de generacion de proyectos.
+El meta-framework Nova Platform para NestJS se encuentra en **fase Alpha con una base conceptualmente solida** y un nivel de madurez ligeramente superior al lado Java en consistencia de build y patron de configuracion. La arquitectura de 5 niveles esta correctamente implementada: librerias puras en TypeScript, NestJS Modules como starters, un agregador principal, BOM/Parent simulados, y un script de publicacion local. Sin embargo, comparte el deficit critico de testing (solo `mask-utils` tiene tests) y carece de tooling de generacion de proyectos.
 
 **Calificacion general: 4.0 / 10** (ver desglose abajo)
 
@@ -21,33 +21,33 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 | Artefacto | Paquete npm | Archivos src | Tests | Madurez |
 |-----------|-------------|:---:|:---:|:---:|
-| `galaxy-training-mask-utils` | `@galaxy-training/mask-utils` | 30 | 15 archivos | 7/10 |
-| `galaxy-training-date-utils` | `@galaxy-training/date-utils` | 3 | 0 | 3/10 |
-| `galaxy-training-mapper-utils` | `@galaxy-training/mapper-utils` | 4 | 0 | 3/10 |
-| `galaxy-training-api-standard` | `@galaxy-training/api-standard` | 7 | 0 | 4/10 |
-| `galaxy-training-observability-utils` | `@galaxy-training/observability-utils` | 5 | 0 | 2/10 |
+| `nova-mask-utils` | `@ahincho/nova-mask-utils` | 30 | 15 archivos | 7/10 |
+| `nova-date-utils` | `@ahincho/nova-date-utils` | 3 | 0 | 3/10 |
+| `nova-mapper-utils` | `@ahincho/nova-mapper-utils` | 4 | 0 | 3/10 |
+| `nova-api-standard` | `@ahincho/nova-api-standard` | 7 | 0 | 4/10 |
+| `nova-observability-utils` | `@ahincho/nova-observability-utils` | 5 | 0 | 2/10 |
 
 ### Nivel 2: NestJS Modules (Starters)
 
 | Artefacto | Paquete npm | Archivos src | Tests | Madurez |
 |-----------|-------------|:---:|:---:|:---:|
-| `nestjs-mask` (en commons monorepo) | `@galaxy-training/nestjs-mask` | 6 | 0 | 5/10 |
-| `nestjs-api-standard` (en commons monorepo) | `@galaxy-training/nestjs-api-standard` | 4 | 0 | 4/10 |
-| `nestjs-observability` (standalone + monorepo) | `@galaxy-training/nestjs-observability` | 9 | 0 | 5/10 |
+| `nestjs-mask` (en commons monorepo) | `@ahincho/nova-nestjs-mask` | 6 | 0 | 5/10 |
+| `nestjs-api-standard` (en commons monorepo) | `@ahincho/nova-nestjs-api-standard` | 4 | 0 | 4/10 |
+| `nestjs-observability` (standalone + monorepo) | `@ahincho/nova-nestjs-observability` | 9 | 0 | 5/10 |
 
 ### Nivel 3: Meta-Framework Module
 
 | Artefacto | Paquete npm | Archivos src | Tests | Madurez |
 |-----------|-------------|:---:|:---:|:---:|
-| `galaxy-training-nestjs-starter` | `@galaxy-training/nestjs-starter` | 5 | 0 | 4/10 |
+| `nova-nestjs-starter` | `@ahincho/nova-nestjs-starter` | 5 | 0 | 4/10 |
 
 ### Nivel 4: BOM + Parent
 
 | Artefacto | Paquete npm | Madurez |
 |-----------|-------------|:---:|
-| `galaxy-training-bom` | `@galaxy-training/bom` | 3/10 |
-| `galaxy-training-nestjs-bom` (dentro de bom/) | `@galaxy-training/nestjs-bom` | 3/10 |
-| `galaxy-training-nestjs-parent` | `@galaxy-training/nestjs-parent` | 6/10 |
+| `nova-bom` | `@ahincho/nova-bom` | 3/10 |
+| `nova-nestjs-bom` (dentro de bom/) | `@ahincho/nova-nestjs-bom` | 3/10 |
+| `nova-nestjs-parent` | `@ahincho/nova-nestjs-parent` | 6/10 |
 
 ### Nivel 5: Build Tooling
 
@@ -59,8 +59,8 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 | Artefacto | Tipo | Madurez |
 |-----------|------|:---:|
-| `galaxy-training-example` | App de ejemplo | 5/10 |
-| `galaxy-training-commons-nestjs` | Turborepo monorepo | 5/10 |
+| `nova-example` | App de ejemplo | 5/10 |
+| `nova-commons-nestjs` | Turborepo monorepo | 5/10 |
 
 ---
 
@@ -68,7 +68,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 ### Nivel 1: Librerias Puras
 
-#### `@galaxy-training/mask-utils` -- EL MAS MADURO (7/10)
+#### `@ahincho/nova-mask-utils` -- EL MAS MADURO (7/10)
 
 **Fortalezas:**
 - Arquitectura Strategy Pattern identica al lado Java: `MaskEngine`, `StrategyRegistry`, `MaskStrategy`.
@@ -83,7 +83,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - El `prepublishOnly` script usa `&` (background) en lugar de `&&` (secuencial) -- bug potencial.
 - No tiene tests de integracion end-to-end (solo unitarios).
 
-#### `@galaxy-training/date-utils` (3/10)
+#### `@ahincho/nova-date-utils` (3/10)
 
 **Fortalezas:**
 - API funcional: `formatISO()`, `formatDate()` (token replacement), `parseDate()` (multi-pattern con 5 regex).
@@ -96,7 +96,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - Falta: relative formatting, timezone handling, date calculation, date ranges.
 - `parseDate()` usa regex manual en lugar de librerias probadas (`date-fns`, `luxon`, `dayjs`).
 
-#### `@galaxy-training/mapper-utils` (3/10)
+#### `@ahincho/nova-mapper-utils` (3/10)
 
 **Fortalezas:**
 - Interfaces bien definidas: `FieldMapping`, `MapperOptions`, `ObjectMapper<S,T>`.
@@ -111,7 +111,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - No tiene `MappingResult` con metadata (campos mapeados, omitidos, warnings).
 - ~160 lineas -- funcionalidad basica.
 
-#### `@galaxy-training/api-standard` (4/10)
+#### `@ahincho/nova-api-standard` (4/10)
 
 **Fortalezas:**
 - `ApiResponse<T>` generico con factory methods inmutables: `ok()`, `created()`, `noContent()`, `error()`.
@@ -124,7 +124,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - Menos funcionalidad que el equivalente Java: no tiene `HttpStatusCode` enum, no tiene `FilterCriteria`/`SortCriteria`, no tiene `PrettyPrinter`, no tiene `UserAgentParser`.
 - `PageInfo` no calcula `totalPages` automaticamente (a diferencia del Java que si lo hace).
 
-#### `@galaxy-training/observability-utils` (2/10)
+#### `@ahincho/nova-observability-utils` (2/10)
 
 **Fortalezas:**
 - Contratos bien definidos: `GoldenSignalsRecorder` interface, `MetricNames` constants.
@@ -142,7 +142,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 ### Nivel 2: NestJS Modules (Starters)
 
-#### `@galaxy-training/nestjs-mask` (5/10)
+#### `@ahincho/nova-nestjs-mask` (5/10)
 
 **Fortalezas:**
 - `MaskModule.forRoot()` con `@Global()` -- se registra una vez y esta disponible en toda la app.
@@ -161,7 +161,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - No tiene health indicator ni info contributor.
 - No tiene integracion con class-serializer de NestJS.
 
-#### `@galaxy-training/nestjs-api-standard` (4/10)
+#### `@ahincho/nova-nestjs-api-standard` (4/10)
 
 **Fortalezas:**
 - `ApiStandardModule.forRoot()` registra interceptor y exception filter.
@@ -179,7 +179,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - No hay opciones para deshabilitarlo (`enabled: false`).
 - No soporta exclusion de rutas (ej: health checks, swagger).
 
-#### `@galaxy-training/nestjs-observability` (5/10)
+#### `@ahincho/nova-nestjs-observability` (5/10)
 
 **Fortalezas:**
 - `ObservabilityModule.forRoot()` con configuracion completa: OTLP endpoint, metricas, trazas, logs.
@@ -198,7 +198,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 **Debilidades:**
 - **Zero tests.**
-- Existe **duplicacion**: la misma logica esta tanto en `galaxy-training-commons-nestjs/packages/nestjs-observability/` (monorepo) como en `galaxy-training-observability-nestjs-starter/` (standalone). Dos copias del mismo codigo.
+- Existe **duplicacion**: la misma logica esta tanto en `nova-commons-nestjs/packages/nestjs-observability/` (monorepo) como en `nova-observability-nestjs-starter/` (standalone). Dos copias del mismo codigo.
 - No implementa `GoldenSignalsRecorder` de observability-utils -- la interface existe pero no tiene implementacion NestJS.
 - No tiene `@Traced` ni `@Metered` interceptors/decorators funcionales -- los decoradores existen en observability-utils pero no hay ningun interceptor NestJS que los procese.
 - Falta `GoldenSignalsFilter` equivalente al de Java (que mide latencia, trafico, errores, saturacion por endpoint).
@@ -207,28 +207,28 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 ### Nivel 3: Meta-Framework Module
 
-#### `@galaxy-training/nestjs-starter` (4/10)
+#### `@ahincho/nova-nestjs-starter` (4/10)
 
 **Fortalezas:**
-- `GalaxyTrainingModule.forRoot()` registra MaskModule + ApiStandardModule en una sola linea.
-- `GalaxyTrainingFactory.create()` valida Node.js >= 24 y NestJS == 11.x antes de crear la app.
+- `NovaModule.forRoot()` registra MaskModule + ApiStandardModule en una sola linea.
+- `NovaFactory.create()` valida Node.js >= 24 y NestJS == 11.x antes de crear la app.
 - Barrel `index.ts` (109 lineas) re-exporta todo: single import experience.
-- Acepta `GalaxyTrainingFactoryOptions` con logger y `skipEnvValidation`.
-- Acepta `GalaxyTrainingModuleOptions` con opciones de mask.
+- Acepta `NovaFactoryOptions` con logger y `skipEnvValidation`.
+- Acepta `NovaModuleOptions` con opciones de mask.
 
 **Debilidades:**
 - **Zero tests.**
-- `GalaxyTrainingFactory.create()` valida Node.js >= 24 -- esto es restrictivo (Node 22 es LTS actual).
+- `NovaFactory.create()` valida Node.js >= 24 -- esto es restrictivo (Node 22 es LTS actual).
 - No integra `ObservabilityModule` -- el desarrollador tiene que importarlo por separado.
 - El barrel re-exporta 30+ simbolos de mask-utils directamente -- esto contamina el namespace del importador.
-- No hay `GalaxyTrainingModuleOptions` para configurar api-standard ni observability.
+- No hay `NovaModuleOptions` para configurar api-standard ni observability.
 - No hay banner/log al arrancar el framework.
 
 ---
 
 ### Nivel 4: BOM + Parent
 
-#### `@galaxy-training/bom` + `@galaxy-training/nestjs-bom` (3/10)
+#### `@ahincho/nova-bom` + `@ahincho/nova-nestjs-bom` (3/10)
 
 **Fortalezas:**
 - Estructura correcta: BOM raiz con versiones de librerias puras, NestJS BOM que extiende con versiones de NestJS.
@@ -239,7 +239,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 - No hay un mecanismo que valide que las versiones declaradas en el BOM coinciden con las realmente instaladas.
 - El BOM tiene su propia `tsconfig.json` standalone en lugar de extender el parent -- inconsistencia.
 
-#### `@galaxy-training/nestjs-parent` (6/10)
+#### `@ahincho/nova-nestjs-parent` (6/10)
 
 **Fortalezas:**
 - Configs base bien definidas: `tsconfig.base.json`, `eslint.config.mjs`, `prettier.config.mjs`, `jest.config.base.ts`, `typedoc.base.json`.
@@ -297,7 +297,7 @@ El meta-framework Galaxy Training para NestJS se encuentra en **fase Alpha con u
 
 A diferencia del lado Java (mezcla Maven/Gradle), el lado NestJS es **consistente**:
 - Todos usan `tsc` para compilar.
-- Todos extienden `@galaxy-training/nestjs-parent` para configs.
+- Todos extienden `@ahincho/nova-nestjs-parent` para configs.
 - Todos publican a GitHub Packages / Verdaccio.
 - El monorepo usa Turborepo para orquestar builds.
 
@@ -307,9 +307,9 @@ Esto es una ventaja sobre Java.
 
 Hay un **problema de duplicacion significativo**:
 
-El paquete `@galaxy-training/nestjs-observability` existe en **dos lugares**:
-1. `galaxy-training-commons-nestjs/packages/nestjs-observability/` -- dentro del monorepo Turborepo.
-2. `galaxy-training-observability-nestjs-starter/` -- como proyecto standalone.
+El paquete `@ahincho/nova-nestjs-observability` existe en **dos lugares**:
+1. `nova-commons-nestjs/packages/nestjs-observability/` -- dentro del monorepo Turborepo.
+2. `nova-observability-nestjs-starter/` -- como proyecto standalone.
 
 El standalone tiene mas codigo (OtelSdkInitializer, Pino logger, health indicator) mientras que el del monorepo solo tiene las interfaces y la resolucion de opciones. No esta claro cual es el canonico.
 

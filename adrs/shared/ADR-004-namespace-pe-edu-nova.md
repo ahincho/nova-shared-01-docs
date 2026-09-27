@@ -8,22 +8,22 @@ Aceptada (implementada)
 2026-07-08
 
 ## Contexto
-Todos los repos usaban el namespace `pe.edu.galaxy.training.java.*` que reflejaba un contexto educativo. El producto se renombro de "Galaxy Training" a "Nova Platform" (ahora simplemente "Nova"). Los `groupId`, packages Java, y publishing URLs debian alinearse con la nueva identidad del producto.
+Todos los repos usaban un namespace heredado del nombre anterior del producto, que reflejaba un contexto educativo. Con el nombre Nova Platform (ahora simplemente "Nova"), los `groupId`, packages Java, y publishing URLs debian alinearse con la identidad del producto.
 
 ## Decision
 Migrar todo el namespace a `pe.edu.nova`:
 
-| Nivel | GroupId anterior | GroupId nuevo |
-|---|---|---|
-| Librerias puras | `pe.edu.galaxy.training.java.libs` | `pe.edu.nova.java.libs` |
-| Starters | `pe.edu.galaxy.training.java.starters` | `pe.edu.nova.java.starters` |
-| Build tools | `pe.edu.galaxy.training.java` | `pe.edu.nova.java` |
-| BOM/Parent | `pe.edu.galaxy.training.java` | `pe.edu.nova.java` |
-| Plugin ID | `pe.edu.galaxy.training.spring-boot` | `pe.edu.nova.java.spring-boot` |
+| Nivel | GroupId |
+|---|---|
+| Librerias puras | `pe.edu.nova.java.libs` |
+| Starters | `pe.edu.nova.java.starters` |
+| Build tools | `pe.edu.nova.java` |
+| BOM/Parent | `pe.edu.nova.java` |
+| Plugin ID | `pe.edu.nova.java.spring-boot` |
 
-Packages Java renombrados: `pe/edu/galaxy/training/` → `pe/edu/nova/`. ~200 archivos modificados. Clases renombradas: `GalaxyTraining*` → `Nova*`.
+Packages Java renombrados a `pe/edu/nova/` (~200 archivos modificados), y las clases al prefijo `Nova*`.
 
-Nomenclatura del roadmap: `GT-SEMVER` → `NOVA-SEMVER`.
+Nomenclatura del roadmap: `NOVA-SEMVER`.
 
 ## Consecuencias
 ### Positivas

@@ -143,6 +143,7 @@ $payload = @{
     labels = $labels
     homepage = $homepage
 }
-$payload | ConvertTo-Json -Depth 5 | Out-File -FilePath "D:\Galaxy\Projects\nova-platform-metadata.json" -Encoding UTF8
-Write-Host "Metadata written to D:\Galaxy\Projects\nova-platform-metadata.json"
+$metadataPath = Join-Path $PSScriptRoot "nova-platform-metadata.json"
+$payload | ConvertTo-Json -Depth 5 | Out-File -FilePath $metadataPath -Encoding UTF8
+Write-Host "Metadata written to $metadataPath"
 Write-Host "Repos: $($repos.Count), Labels: $($labels.Count)"
