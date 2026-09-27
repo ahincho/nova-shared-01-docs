@@ -37,6 +37,7 @@
   "bareNameFiles": [
     "ops/nova-repos-metadata.ps1",
     "ops/nova-platform-metadata.json",
+    "ops/propagate-read-token-parent.ps1",
     "scripts/apply-nova-labels.ps1",
     "scripts/apply-nova-metadata.ps1",
     "scripts/rotate-nova-tokens.ps1"
