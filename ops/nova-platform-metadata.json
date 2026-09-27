@@ -1,5 +1,5 @@
 ﻿{
-    "homepage":  "https://github.com/ahincho/nova-bom",
+    "homepage":  "https://github.com/ahincho/nova-java-13-bom",
     "labels":  [
                    {
                        "color":  "0e8a16",
@@ -8,7 +8,7 @@
                    },
                    {
                        "color":  "1d76db",
-                       "description":  "Cambios en reusable workflows o composite actions de nova-devops",
+                       "description":  "Cambios en reusable workflows o composite actions de nova-shared-02-pipelines",
                        "name":  "nova:workflow"
                    },
                    {
@@ -75,7 +75,7 @@
     "repos":  [
                   {
                       "description":  "Documentacion del meta-framework Nova Platform: ADRs (shared, java, nest), guias tecnicas (semantic versioning, evaluacion de madurez, comparativa de archetypes) y scripts de automatizacion operativa.",
-                      "name":  "nova-docs",
+                      "name":  "nova-shared-01-docs",
                       "topics":  [
                                      "adrs",
                                      "docs",
@@ -87,7 +87,7 @@
                   },
                   {
                       "description":  "Bill of Materials (BOM) raiz del meta-framework Nova Platform. Centraliza versiones para Java, NestJS y futuros stacks.",
-                      "name":  "nova-bom",
+                      "name":  "nova-java-13-bom",
                       "topics":  [
                                      "bom",
                                      "dependency-management",
@@ -101,7 +101,7 @@
                   },
                   {
                       "description":  "Workflows reutilizables de GitHub Actions para CI/CD del meta-framework Nova Platform (build, quality, publish para Maven y Gradle).",
-                      "name":  "nova-devops",
+                      "name":  "nova-shared-02-pipelines",
                       "topics":  [
                                      "build-automation",
                                      "ci-cd",
@@ -114,7 +114,7 @@
                   },
                   {
                       "description":  "Infraestructura como codigo (Docker Compose) del stack de observabilidad Nova Platform: OpenTelemetry Collector, Tempo, Loki, Mimir, Pyroscope y Grafana.",
-                      "name":  "nova-infrastructure",
+                      "name":  "nova-shared-03-infrastructure",
                       "topics":  [
                                      "docker-compose",
                                      "grafana",
@@ -130,7 +130,7 @@
                   },
                   {
                       "description":  "Libreria pura Java de estandares API: ApiResponse/ApiError, HATEOAS links, PageInfo, FilterCriteria, RateLimitInfo, HttpStatusCode y UserAgentParser.",
-                      "name":  "nova-java-api-standard",
+                      "name":  "nova-java-01-api-standard",
                       "topics":  [
                                      "api",
                                      "framework-agnostic",
@@ -141,7 +141,7 @@
                   },
                   {
                       "description":  "Libreria pura Java de utilidades de fechas: formateo, parseo, calculo relativo y helpers de zona horaria. Sin dependencias de Spring.",
-                      "name":  "nova-java-date-utils",
+                      "name":  "nova-java-02-date-utils",
                       "topics":  [
                                      "date",
                                      "framework-agnostic",
@@ -153,7 +153,7 @@
                   },
                   {
                       "description":  "Libreria pura Java de mapeo entre objetos (MapStruct-like) y helpers de conversion. Sin dependencias de Spring.",
-                      "name":  "nova-java-mapper-utils",
+                      "name":  "nova-java-03-mapper-utils",
                       "topics":  [
                                      "framework-agnostic",
                                      "java",
@@ -165,7 +165,7 @@
                   },
                   {
                       "description":  "Libreria pura Java de enmascaramiento de datos sensibles (tarjetas de credito, emails, telefonos). Sin dependencias de Spring.",
-                      "name":  "nova-java-mask-utils",
+                      "name":  "nova-java-04-mask-utils",
                       "topics":  [
                                      "framework-agnostic",
                                      "java",
@@ -178,7 +178,7 @@
                   },
                   {
                       "description":  "Libreria pura Java de utilidades de observabilidad: metricas, trazas y logs sin acoplamiento a Spring. Helpers para OpenTelemetry SDK.",
-                      "name":  "nova-java-observability-utils",
+                      "name":  "nova-java-05-observability-utils",
                       "topics":  [
                                      "framework-agnostic",
                                      "java",
@@ -191,7 +191,7 @@
                   },
                   {
                       "description":  "Starter Spring Boot que re-exporta las libs puras de Nova (api-standard, mask-utils) como dependencias auto-configuradas para una aplicacion Spring Boot.",
-                      "name":  "nova-java-commons-spring-boot-starter",
+                      "name":  "nova-java-08-commons-spring-boot-starter",
                       "topics":  [
                                      "java",
                                      "nova-platform",
@@ -201,7 +201,7 @@
                   },
                   {
                       "description":  "Starter Spring Boot de observabilidad: Four Golden Signals (latency, traffic, errors, saturation), trazas distribuidas con OpenTelemetry y auto-configuracion para Spring Boot Actuator.",
-                      "name":  "nova-java-observability-spring-boot-starter",
+                      "name":  "nova-java-09-observability-spring-boot-starter",
                       "topics":  [
                                      "java",
                                      "nova-platform",
@@ -213,7 +213,7 @@
                   },
                   {
                       "description":  "Meta-starter Spring Boot de Nova Platform: incluye todos los starters Nova (commons, observability) y configura la aplicacion para usar el meta-framework.",
-                      "name":  "nova-java-spring-boot-starter",
+                      "name":  "nova-java-12-spring-boot-starter",
                       "topics":  [
                                      "java",
                                      "nova-platform",
@@ -224,7 +224,7 @@
                   },
                   {
                       "description":  "Maven archetype para generar un nuevo proyecto Spring Boot con las convenciones y dependencias del meta-framework Nova Platform.",
-                      "name":  "nova-java-spring-boot-archetype",
+                      "name":  "nova-java-17-spring-boot-archetype",
                       "topics":  [
                                      "archetype",
                                      "java",
@@ -235,7 +235,7 @@
                   },
                   {
                       "description":  "Plugin Gradle de Nova Platform para proyectos Spring Boot: aplica convenciones de build, configura Java toolchain y Spring Boot plugin automaticamente.",
-                      "name":  "nova-java-spring-boot-gradle-plugin",
+                      "name":  "nova-java-16-spring-boot-gradle-plugin",
                       "topics":  [
                                      "gradle",
                                      "java",
@@ -246,7 +246,7 @@
                   },
                   {
                       "description":  "Parent POM de Maven para proyectos Spring Boot del meta-framework Nova Platform: dependencias gestionadas, plugins y propiedades centralizadas.",
-                      "name":  "nova-java-spring-boot-parent",
+                      "name":  "nova-java-14-spring-boot-parent",
                       "topics":  [
                                      "java",
                                      "maven",
@@ -257,7 +257,7 @@
                   },
                   {
                       "description":  "Instancia/demo del meta-framework Nova Java. Muestra uso real de las libs puras + starters de Nova.",
-                      "name":  "nova-java-example",
+                      "name":  "nova-java-20-example",
                       "topics":  [
                                      "demo",
                                      "example",
