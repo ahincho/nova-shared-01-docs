@@ -37,6 +37,7 @@ Decisiones aplicables a Java y NestJS.
 | 011 | [Composite Actions y Reusable Workflows](shared/ADR-011-composite-actions-y-reusable-workflows.md) | Aceptada | CI/CD |
 | 012 | [Estandares de Calidad y Testing](shared/ADR-012-estandares-de-calidad-testing.md) | Aceptada | Calidad |
 | 014 | [Observabilidad: Four Golden Signals](shared/ADR-014-observabilidad-four-golden-signals.md) | Aceptada | Observabilidad |
+| 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
 
 ## ADRs Java (`java/`)
 
