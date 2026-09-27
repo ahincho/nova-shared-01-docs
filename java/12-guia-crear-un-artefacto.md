@@ -1,7 +1,7 @@
 # Guía para crear un artefacto Java
 
-> Aplica [ADR-039](../adrs/shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md), hoy en
-> estado **Propuesta**. Si el ADR cambia al aceptarse, esta guía cambia con él.
+> Aplica [ADR-039](../adrs/shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md),
+> aceptado el 2026-09-27. Si el ADR cambia, esta guía cambia con él.
 
 Sirve para crear un repositorio que publica un artefacto, o para agregarle un módulo publicable a
 uno que ya existe. Para renombrar un artefacto que ya se publicó, la receta y el orden están en la
@@ -151,8 +151,19 @@ Los workflows se copian del repositorio modelo:
 - `ci.yml`, con `sonar-project-key: ahincho_<artifactId>`;
 - `release-please.yml`, con `permissions: contents: write` y `pull-requests: write` a nivel de
   workflow;
-- `publish-on-tag.yml`, que publica cuando release-please crea el tag. Cuando exista la acción de
-  la regla 6 de ADR-039, se llama después del paso de publicación.
+- `publish-on-tag.yml`, que publica cuando release-please crea el tag y, justo después, llama a
+  `nova-verify-publication` (regla 6 de ADR-039):
+
+  ```yaml
+      - name: Verify the publication can be downloaded
+        if: steps.detect.outputs.should_publish == 'true'
+        uses: ahincho/nova-shared-02-pipelines/.github/actions/nova-verify-publication@main
+        with:
+          group-id: pe.edu.nova.java.starters
+          artifact-ids: nova-observability-quarkus-extension
+          version: ${{ steps.detect.outputs.tag }}
+          token: ${{ github.token }}
+  ```
 
 ## 5. La configuración del repositorio
 
@@ -185,8 +196,10 @@ active ya esté alineada.
 
 1. El primer push a `main` hace que release-please abra el PR de release de 1.0.0.
 2. Al mergearlo, release-please crea el tag `v1.0.0` y `publish-on-tag.yml` publica.
-3. **Se comprueba que se descarga**, no solo que el run quedó en verde. Mientras no exista la
-   acción de la regla 6, a mano:
+3. **Se comprueba que se descarga**, no solo que el run quedó en verde. Lo hace
+   `nova-verify-publication` dentro del mismo run: si el paso falla, la versión no quedó
+   disponible aunque `publish` haya terminado bien. Para comprobarlo a mano, sin pedir nunca la
+   ruta antes de publicar:
 
    ```bash
    GH_TOKEN=$(gh auth token --user ahincho); curl -s -o /dev/null -w '%{http_code}\n' -L -H "Authorization: Bearer $GH_TOKEN" https://maven.pkg.github.com/ahincho/<repositorio>/pe/edu/nova/java/starters/<artifactId>/1.0.0/<artifactId>-1.0.0.pom

@@ -1,0 +1,58 @@
+{
+  "adr": "adrs/shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md",
+  "owner": "ahincho",
+  "renames": [
+    {
+      "phase": 1,
+      "groupId": "pe.edu.nova.java.starters",
+      "from": "nova-quarkus-api-ext",
+      "to": "nova-api-standard-quarkus-extension",
+      "since": "2.0.1"
+    },
+    {
+      "phase": 2,
+      "groupId": "pe.edu.nova.java.starters",
+      "from": "nova-api-standard-starter",
+      "to": "nova-api-standard-spring-boot-starter",
+      "since": "2.0.0"
+    },
+    {
+      "phase": 2,
+      "groupId": "pe.edu.nova.java.starters",
+      "from": "nova-mask-starter",
+      "to": "nova-mask-spring-boot-starter",
+      "since": "2.0.0"
+    },
+    {
+      "phase": 2,
+      "groupId": "pe.edu.nova.java.starters",
+      "from": "nova-observability-starter",
+      "to": "nova-observability-spring-boot-starter",
+      "since": "2.0.0"
+    },
+    {
+      "phase": 2,
+      "groupId": "pe.edu.nova.java.starters",
+      "from": "nova-commons-starter",
+      "to": "nova-commons-spring-boot-starter",
+      "since": null
+    }
+  ],
+  "typeSuffixes": [
+    "spring-boot-starter",
+    "quarkus-extension",
+    "gradle-plugin",
+    "archetype",
+    "parent",
+    "starter",
+    "bom"
+  ],
+  "exampleGroupId": "pe.edu.nova.java.examples",
+  "checkExceptions": {
+    "nova-example-08-nestjs-generated": "es la salida del generador y conserva el nombre que se le pasó (ADR-039, regla 8)",
+    "nova-java-19-quarkus-template": "el nombre del proyecto lo fija quien usa la plantilla"
+  },
+  "skipFiles": ["CHANGELOG.md", "pnpm-lock.yaml", "package-lock.json", "yarn.lock", "gradle.lockfile", "artifact-renames.json", "repo-renames.json"],
+  "skipDirs": [".git", "node_modules", "build", "target", "dist", ".gradle", "adrs"],
+  "historyGlobs": ["java/0[0-9]-*.md", "java/1[01]-*.md", "java/3[0-9]-*.md", "nest/[0-9][0-9]-*.md"]
+}

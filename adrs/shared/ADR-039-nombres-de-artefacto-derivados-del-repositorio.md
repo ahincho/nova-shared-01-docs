@@ -2,11 +2,16 @@
 
 ## Estado
 
-Propuesta (2026-09-27). No se cambia ninguna coordenada hasta que Angel la confirme.
+Aceptada (2026-09-27). Angel confirmó las tres preguntas que quedaban:
+
+1. Con «eliminar el prefijo de `quarkus-api-rest`» se refería a `nova-quarkus-api-ext`, que pasa
+   a `nova-api-standard-quarkus-extension`.
+2. La fase 2 va enseguida de la fase 1; la fase 3, a medida que se toque cada repositorio.
+3. La extensión se publica como 2.0.1.
+
 **Scope:** `shared` (Java + NestJS)
-**Receta de migración:** `ops/rename-artifacts.py`, con el mapa de coordenadas en
-`ops/artifact-renames.json`. Se escribe al aceptar este ADR, antes de publicar el primer nombre
-nuevo.
+**Receta de migración:** [`ops/rename-artifacts.py`](../../ops/rename-artifacts.py), con el mapa
+de coordenadas en [`ops/artifact-renames.json`](../../ops/artifact-renames.json).
 **Guía práctica:** [`java/12-guia-crear-un-artefacto.md`](../../java/12-guia-crear-un-artefacto.md)
 
 ## Fecha
@@ -176,8 +181,9 @@ el workflow descarga el `.pom` y el `.jar` de la versión que acaba de subir, re
 cinco minutos, y falla si no aparecen. Antes de publicar no pide esas rutas, para no sembrar un
 404 en caché. Esta regla reemplaza a «mantener los nombres cortos» como defensa contra el
 fantasma: si algún día un nombre lo provoca, el run lo dice ese mismo día, en lugar de que un
-consumidor lo descubra semanas después. Se implementa como una acción compuesta en
-`nova-shared-02-pipelines`, y cada workflow de publicación la llama.
+consumidor lo descubra semanas después. Se implementa como la acción compuesta
+`nova-verify-publication` de `nova-shared-02-pipelines`, y cada workflow de publicación la llama
+justo después de publicar.
 
 **7. En npm, la tecnología va en el nombre.** npm no tiene `groupId`, así que el nombre la
 lleva: `@ahincho/nova-<tecnología>[-<rol>]`. El monorepo ya lo hace (`@ahincho/nova-nestjs`,
@@ -253,15 +259,18 @@ coordenada vieja, la nueva y la primera versión con el nombre nuevo, y reescrib
 Si la coordenada lleva una versión explícita menor que la primera del nombre nuevo, la sube a
 esa versión, porque la vieja no existe con el nombre nuevo. Tiene las mismas guardas que
 `rename-repos.py`: no toca los CHANGELOG, los lockfiles, los ADR ni los documentos de historia
-fechados; conserva el BOM y los fines de línea; es idempotente, y sin `--apply` solo muestra el
-diff. Con `--check` recorre los clones y lista lo que no cumple las reglas 1 a 5. Al cerrar cada
-fase, esa lista queda vacía para las filas de la fase.
+fechados; conserva el BOM y los fines de línea; es idempotente, y sin `--apply` solo informa.
+`--phase` limita la receta a las filas de una fase, y conviene pasarlo siempre: un consumidor
+migra recién cuando el nombre nuevo está publicado. Con `--check` recorre los clones y lista lo
+que no cumple las reglas 1 a 5, 7 y 8. Al cerrar cada fase, esa lista queda vacía para las filas
+de la fase. El día que se aceptó listaba 33 incumplimientos, los mismos de la tabla.
 
 ### El orden, por artefacto
 
 1. **En el repositorio del artefacto**: el nombre en los archivos de la regla 5, un
    `Release-As` con la primera versión de la tabla y la verificación de la regla 6 en su
-   workflow de publicación. Se empuja a `main`.
+   workflow de publicación. Va por pull request, para que el CI compile con el nombre nuevo antes
+   de que exista una versión que lo lleve.
 2. **La publicación**: release-please abre el PR de release. Al mergearlo se crean el tag y la
    publicación, y la verificación confirma que se descarga.
 3. **Cada consumidor**: la receta, el CI en verde y el push.
@@ -274,9 +283,9 @@ Cambiar la coordenada es incompatible para el consumidor, así que se sube la ve
 2.0.0 ya existe en el registro desde julio, una versión publicada no se sobrescribe, y publicar
 por debajo de ella dejaría a la versión vieja como la más reciente.
 
-Los BOM reflejan cada fase con su propia versión (ADR-018, sección 5). En la fase 1 la familia
-`nova-bom` pasa a 1.1.0, porque la coordenada que deja de administrar nunca resolvió: el cambio
-no rompe nada que funcione. En la fase 2 pasa a 2.0.0.
+Los BOM reflejan los nombres nuevos con una versión mayor (ADR-018, sección 5). Como la fase 2 va
+enseguida de la fase 1, la familia `nova-bom` publica una sola versión, 2.0.0, que cubre las dos y
+se lleva de paso las versiones que se publicaron entretanto.
 
 ### Lo que hace Angel
 
@@ -318,9 +327,8 @@ y no se gana nada frente a 2.0.1.
 
 ## Preguntas abiertas
 
-1. **¿La fase 2 va enseguida o cuando haga falta?** La extensión está rota hoy; los starters
-   funcionan y su cambio solo alinea. Se recomienda la fase 1 ahora, la fase 2 a continuación,
-   mientras la receta está fresca, y la fase 3 a medida que se toque cada repositorio.
+1. ~~**¿La fase 2 va enseguida o cuando haga falta?**~~ Resuelta el 2026-09-27: va enseguida de
+   la fase 1, y la fase 3 a medida que se toque cada repositorio.
 2. **La causa real del fantasma** sigue sin verificar. La regla 6 la hace visible si vuelve. Si
    vuelve, el run, el nombre y su longitud se anotan aquí.
 
