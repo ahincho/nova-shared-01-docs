@@ -86,17 +86,17 @@
                                  ]
                   },
                   {
-                      "description":  "Bill of Materials (BOM) raiz del meta-framework Nova Platform. Centraliza versiones para Java, NestJS y futuros stacks.",
+                      "description":  "Bill of Materials (BOM) del stack Java de Nova Platform: nova-bom para las libs puras y un BOM por framework (Spring Boot, Quarkus y Micronaut).",
                       "name":  "nova-java-13-bom",
                       "topics":  [
                                      "bom",
                                      "dependency-management",
                                      "java",
                                      "meta-framework",
-                                     "nestjs",
+                                     "micronaut",
                                      "nova-platform",
-                                     "spring-boot",
-                                     "typescript"
+                                     "quarkus",
+                                     "spring-boot"
                                  ]
                   },
                   {

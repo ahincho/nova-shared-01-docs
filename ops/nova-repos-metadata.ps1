@@ -11,8 +11,8 @@ $repos = @(
     },
     @{
         name = "nova-java-13-bom"
-        description = "Bill of Materials (BOM) raiz del meta-framework Nova Platform. Centraliza versiones para Java, NestJS y futuros stacks."
-        topics = @("bom", "dependency-management", "java", "meta-framework", "nestjs", "nova-platform", "spring-boot", "typescript")
+        description = "Bill of Materials (BOM) del stack Java de Nova Platform: nova-bom para las libs puras y un BOM por framework (Spring Boot, Quarkus y Micronaut)."
+        topics = @("bom", "dependency-management", "java", "meta-framework", "micronaut", "nova-platform", "quarkus", "spring-boot")
     },
     @{
         name = "nova-shared-02-pipelines"
