@@ -42,6 +42,7 @@ Decisiones aplicables a Java y NestJS.
 | 032 | [Observabilidad como Puerto Conectable](shared/ADR-032-observabilidad-como-puerto-conectable.md) | Propuesta | Observabilidad |
 | 033 | [Que es Nucleo, que es Comun Opcional y que es Plugin](shared/ADR-033-nucleo-comun-y-plugins.md) | Propuesta | Arquitectura |
 | 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
+| 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Propuesta | Estructura |
 
 ## ADRs Java (`java/`)
 
