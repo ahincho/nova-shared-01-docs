@@ -1,6 +1,6 @@
-# Canonical metadata for all 19 Nova Platform repositories
+# Canonical metadata for 16 Nova Platform repositories
 # Used by apply-metadata.ps1 to fix descriptions, topics, homepage, and labels
-# Last updated: 2026-07-09
+# Last updated: 2026-09-28
 
 $repos = @(
     # === Multi-stack (CI/CD, IaC, BOM, Docs) ===
@@ -91,28 +91,6 @@ $repos = @(
         name = "nova-example-01-spring-boot-reference"
         description = "Instancia/demo del meta-framework Nova Java. Muestra uso real de las libs puras + starters de Nova."
         topics = @("demo", "example", "java", "nova-platform", "spring-boot")
-    },
-
-    # === NestJS ===
-    @{
-        name = "nova-nestjs-commons"
-        description = "Monorepo Turborepo con paquetes NestJS comunes: nestjs-mask, nestjs-api-standard y nestjs-observability."
-        topics = @("monorepo", "nestjs", "nova-platform", "turborepo", "typescript", "api-standard", "mask", "observability")
-    },
-    @{
-        name = "nova-nestjs-observability-starter"
-        description = "Modulo dinamico NestJS de observabilidad con OpenTelemetry: Four Golden Signals, trazas distribuidas, correlacion de logs y exportadores OTLP."
-        topics = @("nestjs", "nova-platform", "observability", "opentelemetry", "starter", "typescript", "golden-signals", "metrics", "otlp", "pino", "tracing")
-    },
-    @{
-        name = "nova-nestjs-parent"
-        description = "Configuracion compartida (TypeScript, ESLint, Prettier, Jest, TypeDoc) para proyectos NestJS del meta-framework Nova Platform."
-        topics = @("build-tooling", "eslint", "jest", "nestjs", "nova-platform", "prettier", "typedoc", "typescript", "config")
-    },
-    @{
-        name = "nova-nestjs-starter"
-        description = "Meta-framework NestJS: factoría de arranque que re-exporta libs puras y modulos NestJS del ecosistema Nova Platform."
-        topics = @("meta-framework", "nestjs", "nova-platform", "starter", "typescript", "factory")
     }
 )
 

@@ -265,64 +265,6 @@
                                      "nova-platform",
                                      "spring-boot"
                                  ]
-                  },
-                  {
-                      "description":  "Monorepo Turborepo con paquetes NestJS comunes: nestjs-mask, nestjs-api-standard y nestjs-observability.",
-                      "name":  "nova-nestjs-commons",
-                      "topics":  [
-                                     "monorepo",
-                                     "nestjs",
-                                     "nova-platform",
-                                     "turborepo",
-                                     "typescript",
-                                     "api-standard",
-                                     "mask",
-                                     "observability"
-                                 ]
-                  },
-                  {
-                      "description":  "Modulo dinamico NestJS de observabilidad con OpenTelemetry: Four Golden Signals, trazas distribuidas, correlacion de logs y exportadores OTLP.",
-                      "name":  "nova-nestjs-observability-starter",
-                      "topics":  [
-                                     "nestjs",
-                                     "nova-platform",
-                                     "observability",
-                                     "opentelemetry",
-                                     "starter",
-                                     "typescript",
-                                     "golden-signals",
-                                     "metrics",
-                                     "otlp",
-                                     "pino",
-                                     "tracing"
-                                 ]
-                  },
-                  {
-                      "description":  "Configuracion compartida (TypeScript, ESLint, Prettier, Jest, TypeDoc) para proyectos NestJS del meta-framework Nova Platform.",
-                      "name":  "nova-nestjs-parent",
-                      "topics":  [
-                                     "build-tooling",
-                                     "eslint",
-                                     "jest",
-                                     "nestjs",
-                                     "nova-platform",
-                                     "prettier",
-                                     "typedoc",
-                                     "typescript",
-                                     "config"
-                                 ]
-                  },
-                  {
-                      "description":  "Meta-framework NestJS: factorÃ­a de arranque que re-exporta libs puras y modulos NestJS del ecosistema Nova Platform.",
-                      "name":  "nova-nestjs-starter",
-                      "topics":  [
-                                     "meta-framework",
-                                     "nestjs",
-                                     "nova-platform",
-                                     "starter",
-                                     "typescript",
-                                     "factory"
-                                 ]
                   }
               ]
 }
