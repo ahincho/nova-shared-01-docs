@@ -1,7 +1,9 @@
 # Guía para crear un artefacto Java
 
 > Aplica [ADR-039](../adrs/shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md),
-> aceptado el 2026-09-27. Si el ADR cambia, esta guía cambia con él.
+> aceptado el 2026-09-27, y para una capacidad nueva
+> [ADR-041](../adrs/java/ADR-041-un-repositorio-por-capacidad.md), aceptado el 2026-09-28. Si un ADR
+> cambia, esta guía cambia con él.
 
 Sirve para crear un repositorio que publica un artefacto, o para agregarle un módulo publicable a
 uno que ya existe. Para renombrar un artefacto que ya se publicó, la receta y el orden están en la
@@ -18,13 +20,19 @@ existe.
    tres.
 3. **¿En qué nivel de ADR-001 cae?** De ahí salen el `groupId` y el tipo del nombre.
 
+**Si es una capacidad nueva, la forma ya está decidida** (ADR-041). Es un solo repositorio,
+`nova-java-<NN>-<capacidad>`, con el contrato, la implementación de Nova por defecto, un módulo por
+proveedor y uno por framework, y todos salen con la misma versión. La familia se llama
+`nova-<capacidad>`: la raíz del build lleva ese nombre y no se publica, y el contrato es el módulo
+que se publica con él. El primero es `nova-java-23-secrets`, y es el modelo a copiar.
+
 ## 2. Los nombres
 
 Se deciden juntos y antes del primer commit, porque cada uno sale del anterior.
 
 | Qué | Regla | Ejemplo: un conector de observabilidad para Quarkus |
 |---|---|---|
-| Repositorio | `nova-java-<NN>-<nombre>`, con el siguiente número sin usar de `java` (ADR-038) | `nova-java-23-observability-quarkus-extension` |
+| Repositorio | `nova-java-<NN>-<nombre>`, con el siguiente número sin usar de `java` (ADR-038) | `nova-java-24-observability-quarkus-extension` |
 | `groupId` | según el nivel (ADR-004) | `pe.edu.nova.java.starters` |
 | `artifactId` | `nova-<nombre>` (ADR-039, reglas 1 a 3) | `nova-observability-quarkus-extension` |
 | Paquete Java | el `groupId` seguido de la capacidad | `pe.edu.nova.java.starters.observability.quarkus`, como `nova-java-10` |
@@ -37,6 +45,7 @@ y no se reutilizan. Un número se asigna una sola vez.
 | Nivel (ADR-001) | `groupId` | Forma del `artifactId` |
 |---|---|---|
 | 1, librería pura | `pe.edu.nova.java.libs` | `nova-<capacidad>` |
+| 1, adaptador de un proveedor | `pe.edu.nova.java.libs` | `nova-<capacidad>-<proveedor>` |
 | 2, conector de Spring Boot | `pe.edu.nova.java.starters` | `nova-<capacidad>-spring-boot-starter` |
 | 2, conector de Quarkus | `pe.edu.nova.java.starters` | `nova-<capacidad>-quarkus-extension` |
 | 3, starter del meta-framework | `pe.edu.nova.java.starters` | `nova-<framework>-starter` |
@@ -92,7 +101,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ahincho/nova-java-23-observability-quarkus-extension")
+            url = uri("https://maven.pkg.github.com/ahincho/nova-java-24-observability-quarkus-extension")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -131,6 +140,11 @@ otro repositorio. `nova-java-10` tiene el ejemplo.
 `include-component-in-tag: false` no es opcional. Deja los tags como `vX.Y.Z`, que es lo que espera
 el workflow de publicación, y permite corregir el componente más adelante sin perder el historial
 (ADR-039, regla 5).
+
+**En un repositorio de capacidad hay un solo componente**, con el nombre de la familia
+(`nova-secrets`), y todos los módulos salen con la versión del tag. Si los módulos publican con dos
+`groupId` —el contrato y los adaptadores en `libs`, los conectores en `starters`—, la verificación
+de la publicación se llama una vez por cada `groupId`.
 
 `.release-please-manifest.json`:
 

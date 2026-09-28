@@ -2,9 +2,9 @@
 
 ## Estado
 
-Propuesta (2026-09-28). La planteó Angel al empezar la capacidad de secretos: «cada feature o
+Aceptada (2026-09-28). La planteó Angel al empezar la capacidad de secretos: «cada feature o
 flavour sea un repo», con un contrato único y, por debajo, las implementaciones para cada
-proveedor. Queda a su confirmación.
+proveedor. La confirmó el mismo día.
 **Scope:** `java`
 **Enmienda:** ADR-005, solo para las capacidades nuevas, y la regla 3 de ADR-039, a la que agrega
 el tipo «adaptador de un proveedor».

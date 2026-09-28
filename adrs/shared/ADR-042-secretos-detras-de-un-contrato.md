@@ -2,8 +2,10 @@
 
 ## Estado
 
-Propuesta (2026-09-28). Angel eligió secretos como la primera capacidad nueva y pidió un contrato
-único con implementaciones para Vault y AWS Secrets Manager. Queda a su confirmación.
+Aceptada (2026-09-28). Angel eligió secretos como la primera capacidad nueva y pidió un contrato
+único con implementaciones para Vault y AWS Secrets Manager. Al confirmarlo pidió dejar explícito
+que un secreto de AWS llega como un JSON que hay que abrir para inyectarlo: es la sección
+«El JSON de AWS».
 **Scope:** `shared` (Java + NestJS). Java lo implementa en `nova-java-23-secrets`; NestJS ya tiene
 la fuente del entorno, en la rama `feat/platform-next` de `nova-nestjs-01-platform`.
 **Aplica:** la fila de secretos de [ADR-034](ADR-034-puertos-con-implementacion-por-defecto.md),
@@ -130,6 +132,31 @@ de AWS para la región y las credenciales, que dentro de ECS toma el rol de la t
 
 El adaptador de Vault habla con la API HTTP de Vault usando el cliente HTTP del JDK, sin un
 cliente de terceros. El de AWS usa el módulo `secretsmanager` del SDK v2.
+
+### El JSON de AWS
+
+Un secreto de AWS Secrets Manager es un texto, y por convención ese texto es un objeto JSON con
+varias claves:
+
+```json
+{ "username": "course", "password": "…", "host": "db.internal", "port": 5432 }
+```
+
+No llega como una variable por clave, así que el servicio no puede usarlo tal cual: hay que abrir
+el JSON y convertir cada clave en una propiedad. Ese es el truco que hoy escribe a mano cada
+servicio que lo necesita, y **Nova lo hace en un solo lugar, `Secret.fromJson()` del contrato**.
+
+Lo usan las dos rutas por las que llega un secreto de AWS:
+
+| Ruta | Quién trae el JSON | Quién lo abre |
+|---|---|---|
+| ECS lo inyecta entero en una variable, como `SECRET_DB` | la task definition | la fuente `env` |
+| el servicio lo pide al arrancar | `GetSecretValue`, en su campo `SecretString` | la fuente `aws-secrets-manager` |
+
+Como las dos pasan por el mismo código, **producen exactamente las mismas propiedades**, y un
+servicio puede pasar de una ruta a la otra sin cambiar nada más que de dónde sale el secreto. Un
+secreto guardado como binario (`SecretBinary`) no se abre: corta el arranque con un error que lo
+dice.
 
 ### Cómo se usa en Spring Boot
 

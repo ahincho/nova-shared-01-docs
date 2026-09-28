@@ -135,6 +135,7 @@ extensiones porque ahí el prefijo es el espacio de nombres; en Nova el espacio 
 | Nivel (ADR-001) | Forma | Ejemplo |
 |---|---|---|
 | 1, librería pura | `nova-<capacidad>` | `nova-api-standard`, `nova-date-utils` |
+| 1, adaptador de un proveedor | `nova-<capacidad>-<proveedor>` | `nova-secrets-vault`, agregado por ADR-041 |
 | 2, conector de Spring Boot | `nova-<capacidad>-spring-boot-starter` | `nova-observability-spring-boot-starter` |
 | 2, conector de Quarkus | `nova-<capacidad>-quarkus-extension` | `nova-api-standard-quarkus-extension` |
 | 2, módulo de build de una extensión | `<artifactId de la extensión>-deployment` | ninguno todavía |
