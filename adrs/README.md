@@ -43,6 +43,7 @@ Decisiones aplicables a Java y NestJS.
 | 033 | [Que es Nucleo, que es Comun Opcional y que es Plugin](shared/ADR-033-nucleo-comun-y-plugins.md) | Propuesta | Arquitectura |
 | 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
 | 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Aceptada | Estructura |
+| 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Propuesta | Arquitectura |
 
 ## ADRs Java (`java/`)
 
@@ -55,6 +56,7 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 005 | [Multi-Repo con BOM Coordinador](java/ADR-005-multi-repo-con-bom-coordinador.md) | Aceptada | Estructura |
 | 013 | [Firma GPG Preparada pero Diferida](java/ADR-013-firma-gpg-preparada-diferida.md) | Propuesta | Seguridad |
 | 015 | [Librerias Puras sin Dependencias de Framework](java/ADR-015-librerias-puras-sin-dependencias-framework.md) | Aceptada | Arquitectura |
+| 041 | [Un Repositorio por Capacidad](java/ADR-041-un-repositorio-por-capacidad.md) | Propuesta | Estructura |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
 
