@@ -1,4 +1,4 @@
-# Apply Nova Platform metadata to all 19 repos
+# Apply Nova Platform metadata to the 16 repos in nova-platform-metadata.json
 # - Sets description, homepage, topics for each repo
 # - Creates Nova-specific labels in each repo
 # Idempotent: safe to re-run (gh label create --force)
