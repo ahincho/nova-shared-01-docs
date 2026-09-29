@@ -44,6 +44,7 @@ Decisiones aplicables a Java y NestJS.
 | 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
 | 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Aceptada | Estructura |
 | 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Aceptada | Arquitectura |
+| 043 | [Qhatu, la Plataforma de Compras que Demuestra Nova](shared/ADR-043-qhatu-la-plataforma-de-compras.md) | Propuesta | Producto |
 
 ## ADRs Java (`java/`)
 
