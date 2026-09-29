@@ -169,6 +169,14 @@ se publican con esta enmienda.
 el próximo componente Java es el 23 y el próximo NestJS es el 05, aunque haya un hueco. La
 tecnología usa `nestjs`, igual que los repositorios de la plataforma.
 
+### Enmienda (2026-09-29): un producto lleva su nombre
+
+Un producto construido sobre Nova, con varios servicios que se entienden entre sí, no es un
+ejemplo. Angel pidió que sus repositorios lleven el nombre del producto en el lugar de `example`:
+**`nova-<producto>-<NN>-<tecnología>-<nombre>`**, con un contador propio por producto. El primero
+es Plaza, en [ADR-043](ADR-043-plaza-la-plataforma-de-compras.md): `nova-plaza-01-shared-platform`,
+`nova-plaza-02-nestjs-bff` y los que siguen.
+
 ## Migración
 
 ### La receta automatizada
