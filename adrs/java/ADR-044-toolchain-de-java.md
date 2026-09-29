@@ -4,6 +4,9 @@
 
 Aceptada (2026-09-29). Angel pidió para Java algo equivalente al toolchain de NestJS, con Spotless,
 Checkstyle y las mejores prácticas, y que el toolchain valide también los mensajes de commit.
+**Enmienda (2026-09-29):** los plugins de servicio llevan un id nuevo, `*-service`, porque el
+registro de Maven no deja que otro repositorio publique el id del repo 16. Lo explica «El id de los
+plugins de servicio».
 **Scope:** `java`. NestJS ya tiene el suyo, `@ahincho/nova-nestjs-toolchain`.
 **Aplica:** [ADR-041](ADR-041-un-repositorio-por-capacidad.md) para la forma del repositorio y
 [ADR-006](../shared/ADR-006-conventional-commits-y-semantic-versioning.md) para la convención de
@@ -47,11 +50,26 @@ Un repositorio no nombra ninguna herramienta ni declara su versión.**
 |---|---|---|
 | `pe.edu.nova.java.quality` | todo proyecto Java | compilación, formato, Checkstyle, pruebas, cobertura, validación de commits y hooks de git |
 | `pe.edu.nova.java.library` | librerías y starters de la plataforma | `quality`, más `java-library`, jars de fuentes y javadoc, publicación, POM, OWASP y SBOM |
-| `pe.edu.nova.java.spring-boot` | servicios Spring Boot | `quality`, más Spring Boot, los starters de Nova, OWASP, SBOM y la imagen |
-| `pe.edu.nova.java.quarkus` | servicios Quarkus | `quality`, más Quarkus, la extensión de Nova, OWASP, SBOM y la imagen |
+| `pe.edu.nova.java.spring-boot-service` | servicios Spring Boot | `quality`, más Spring Boot, los starters de Nova, OWASP, SBOM y la imagen |
+| `pe.edu.nova.java.quarkus-service` | servicios Quarkus | `quality`, más Quarkus, la extensión de Nova, OWASP, SBOM y la imagen |
 
-`pe.edu.nova.java.spring-boot` **conserva su id**, así que el consumidor del plugin del repo 16 solo
-sube la versión. Los plugins se publican con el grupo `pe.edu.nova.java`, como el repo 16.
+Los plugins se publican con el grupo `pe.edu.nova.java`, como el repo 16.
+
+### El id de los plugins de servicio
+
+La primera versión de este ADR decía que el plugin de Spring Boot conservaba el id del repo 16,
+`pe.edu.nova.java.spring-boot`, para que su consumidor solo subiera la versión. **No se puede.** Gradle
+resuelve un plugin por un paquete marcador con ese id, y ese paquete ya existe, publicado desde el
+repo 16. El registro de Maven de GitHub Packages solo admite permisos a nivel de repositorio: un
+paquete pertenece al repositorio que lo publicó, y ningún otro puede publicar en él. La configuración
+de acceso por repositorio existe para contenedores, npm, NuGet y RubyGems, no para Maven.
+
+Quedaban dos caminos: borrar ese paquete del repo 16, que es permanente y rompe a sus dos
+consumidores hasta que migren, o un id nuevo. **Se elige el id nuevo:** `pe.edu.nova.java.spring-boot-service`,
+y su par `pe.edu.nova.java.quarkus-service`. Queda en paralelo con `quality` y `library`, y dice para
+qué tipo de proyecto es cada uno.
+
+La migración de un consumidor del repo 16 cambia una línea: el id y la versión del plugin.
 
 ### Las tareas
 
@@ -150,13 +168,15 @@ lo aplicó, para que `git blame` siga mostrando al autor de cada línea.
 
 Un PR por repositorio, en este orden:
 
-1. **Pedidos de Plaza,** con `quality` y `spring-boot`. Es nuevo y no tiene nada que migrar.
+1. **Pedidos de Plaza,** con `spring-boot-service`. Es nuevo y no tiene nada que migrar.
 2. **`nova-java-23-secrets`**, el primer repositorio de plataforma con `library`.
 3. **Los demás repositorios de plataforma,** uno por PR. El primer commit de cada uno es el `style:`
    que aplica el formato, separado del resto para que el diff se pueda revisar.
-4. **El catálogo de Plaza,** con `quarkus`.
+4. **El catálogo de Plaza,** con `quarkus-service`.
 5. **El repo 16 se archiva** cuando ningún consumidor lo use, con una receta de migración: cambiar la
-   versión del plugin y borrar la configuración que el plugin ya trae.
+   línea del plugin, `id("pe.edu.nova.java.spring-boot") version "1.0.3"` por
+   `id("pe.edu.nova.java.spring-boot-service") version "<versión del toolchain>"`, y borrar la
+   configuración que el plugin ya trae.
 
 El CI compartido pasa a llamar a `./gradlew novaVerify` y `novaCommitLint`.
 
