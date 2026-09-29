@@ -58,6 +58,7 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 013 | [Firma GPG Preparada pero Diferida](java/ADR-013-firma-gpg-preparada-diferida.md) | Propuesta | Seguridad |
 | 015 | [Librerias Puras sin Dependencias de Framework](java/ADR-015-librerias-puras-sin-dependencias-framework.md) | Aceptada | Arquitectura |
 | 041 | [Un Repositorio por Capacidad](java/ADR-041-un-repositorio-por-capacidad.md) | Aceptada | Estructura |
+| 044 | [El Toolchain de Java: Plugins de Convención de Gradle](java/ADR-044-toolchain-de-java.md) | Aceptada | Build System |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
 
