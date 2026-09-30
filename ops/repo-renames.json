@@ -1,0 +1,72 @@
+{
+  "adr": "adrs/shared/ADR-038-nombres-de-repositorio-por-tecnologia.md",
+  "owner": "ahincho",
+  "renames": {
+    "nova-docs": "nova-shared-01-docs",
+    "nova-devops": "nova-shared-02-pipelines",
+    "nova-infrastructure": "nova-shared-03-infrastructure",
+
+    "nova-java-api-standard": "nova-java-01-api-standard",
+    "nova-java-date-utils": "nova-java-02-date-utils",
+    "nova-java-mapper-utils": "nova-java-03-mapper-utils",
+    "nova-java-mask-utils": "nova-java-04-mask-utils",
+    "nova-java-observability-utils": "nova-java-05-observability-utils",
+    "nova-java-keycloak": "nova-java-06-keycloak",
+    "nova-java-architecture-rules": "nova-java-07-architecture-rules",
+    "nova-java-commons-spring-boot-starter": "nova-java-08-commons-spring-boot-starter",
+    "nova-java-observability-spring-boot-starter": "nova-java-09-observability-spring-boot-starter",
+    "nova-java-api-standard-quarkus-extension": "nova-java-10-api-standard-quarkus-extension",
+    "nova-java-keycloak-quarkus-extension": "nova-java-11-keycloak-quarkus-extension",
+    "nova-java-spring-boot-starter": "nova-java-12-spring-boot-starter",
+    "nova-bom": "nova-java-13-bom",
+    "nova-java-spring-boot-parent": "nova-java-14-spring-boot-parent",
+    "nova-java-quarkus-parent": "nova-java-15-quarkus-parent",
+    "nova-java-spring-boot-gradle-plugin": "nova-java-16-spring-boot-gradle-plugin",
+    "nova-java-spring-boot-archetype": "nova-java-17-spring-boot-archetype",
+    "nova-java-quarkus-archetype": "nova-java-18-quarkus-archetype",
+    "nova-java-quarkus-template": "nova-java-19-quarkus-template",
+
+    "nova-nestjs": "nova-nestjs-01-platform",
+    "nova-profile-utp": "nova-nestjs-02-profile-utp",
+
+    "nova-java-example": "nova-example-01-spring-boot-reference",
+    "nova-java-20-example": "nova-example-01-spring-boot-reference",
+    "nova-java-quarkus-example": "nova-example-04-quarkus-reference",
+    "nova-java-21-quarkus-example": "nova-example-04-quarkus-reference",
+    "ms-course-quarkus": "nova-example-05-quarkus-ms-course",
+    "nova-java-22-ms-course-quarkus": "nova-example-05-quarkus-ms-course",
+    "nova-nestjs-example": "nova-example-07-nestjs-reference",
+    "nova-nestjs-03-example": "nova-example-07-nestjs-reference",
+    "nova-nestjs-generated": "nova-example-08-nestjs-generated",
+    "nova-nestjs-04-generated": "nova-example-08-nestjs-generated"
+  },
+  "bareNameFiles": [
+    "ops/nova-repos-metadata.ps1",
+    "ops/nova-platform-metadata.json",
+    "ops/propagate-read-token-parent.ps1",
+    "scripts/apply-nova-labels.ps1",
+    "scripts/apply-nova-metadata.ps1",
+    "scripts/rotate-nova-tokens.ps1"
+  ],
+  "skipFiles": [
+    "CHANGELOG.md",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "gradle.lockfile",
+    "repo-renames.json"
+  ],
+  "historyGlobs": [
+    "java/[0-9][0-9]-*.md",
+    "nest/[0-9][0-9]-*.md"
+  ],
+  "skipDirs": [
+    ".git",
+    "node_modules",
+    "build",
+    "target",
+    "dist",
+    ".gradle",
+    "adrs"
+  ]
+}

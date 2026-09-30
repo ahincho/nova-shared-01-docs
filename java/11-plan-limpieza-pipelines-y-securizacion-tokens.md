@@ -539,7 +539,7 @@ Quarkus antes de replicar a los 18 repos. Si funciona â†’ Fase 3 procede co
 | `nova-nestjs-parent` | 2026-07-08 | 0 | 0 |
 | `nova-nestjs-starter` | 2026-07-08 | 0 | 0 |
 
-Los 4 repos NestJS estÃ¡n en `D:\Galaxy\Projects\nest\` pero **no se han tocado desde
+Los 4 repos NestJS estÃ¡n en `D:\Nova\nest\` pero **no se han tocado desde
 el 2026-07-08**. No tienen CI/CD ni secrets. No son parte del plan actual.
 
 ### 11.6.2 DecisiÃ³n pendiente sobre NestJS
@@ -559,9 +559,9 @@ Cuando se reactive el trabajo en NestJS (fecha indefinida), evaluar:
 
 | Repo | RazÃ³n de exclusiÃ³n |
 |---|---|
-| `D:\Galaxy\Projects\notification-parent\` | Repo de OscarBarahona (`github.com/OscarBarahona/notification-parent`), no parte de Nova. Es una referencia externa, no consumir. |
-| `D:\Galaxy\Projects\jira\` | Tickets / docs internos, no cÃ³digo. |
-| `D:\Galaxy\Projects\examples\archetypes\java-projects\quarkus-hexagonal-archetype\` | Referencia para Fase 1 de doc 08, no repo Nova. |
+| `D:\Nova\notification-parent\` | Repo de OscarBarahona (`github.com/OscarBarahona/notification-parent`), no parte de Nova. Es una referencia externa, no consumir. |
+| `D:\Nova\jira\` | Tickets / docs internos, no cÃ³digo. |
+| `D:\Nova\examples\archetypes\java-projects\quarkus-hexagonal-archetype\` | Referencia para Fase 1 de doc 08, no repo Nova. |
 
 ---
 
@@ -573,7 +573,7 @@ Comandos para revalidar el estado antes de ejecutar cualquier fase:
 # Validar workflows muertos (debe dar 0 referencias)
 $token = "ghp_..."
 $headers = @{ Authorization = "Bearer $token" }
-Set-Location "D:\Galaxy\Projects\java"
+Set-Location "D:\Nova\java"
 $dirs = Get-ChildItem -Directory -Name
 $matches = 0
 foreach ($d in $dirs) {

@@ -1,8 +1,8 @@
-# Evaluacion de Madurez - Galaxy Training Meta-Framework (Java)
+# Evaluacion de Madurez - Nova Platform Meta-Framework (Java)
 
 ## Resumen Ejecutivo
 
-El meta-framework Galaxy Training para Java se encuentra en una **fase temprana de desarrollo (Alpha/PoC)** con una arquitectura conceptualmente correcta en sus 5 niveles. El trabajo realizado demuestra un entendimiento solido de los patrones de meta-frameworks, especialmente en la parte de Spring Boot. Sin embargo, solo el soporte para Spring Boot tiene implementacion real; Quarkus y Micronaut existen unicamente como placeholders.
+El meta-framework Nova Platform para Java se encuentra en una **fase temprana de desarrollo (Alpha/PoC)** con una arquitectura conceptualmente correcta en sus 5 niveles. El trabajo realizado demuestra un entendimiento solido de los patrones de meta-frameworks, especialmente en la parte de Spring Boot. Sin embargo, solo el soporte para Spring Boot tiene implementacion real; Quarkus y Micronaut existen unicamente como placeholders.
 
 **Calificacion general: 3.2 / 10** (ver desglose por nivel abajo)
 
@@ -14,11 +14,11 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 | Artefacto | Build | Deps Externas | Clases | Tests | Madurez |
 |-----------|-------|---------------|--------|-------|---------|
-| `galaxy-training-date-utils` | Gradle | Ninguna | 14 | 0 | 3/10 |
-| `galaxy-training-mapper-utils` | Gradle | Ninguna | 18 (+7 pkg-info) | 0 | 3/10 |
-| `galaxy-training-mask-utils` | Maven | Ninguna | 35 | 26 | 7/10 |
-| `galaxy-training-observability-utils` | Maven | Ninguna | 5 | 0 | 2/10 |
-| `galaxy-training-api-standard` | Gradle | Ninguna | 21 (+11 pkg-info) | 0 | 4/10 |
+| `nova-date-utils` | Gradle | Ninguna | 14 | 0 | 3/10 |
+| `nova-mapper-utils` | Gradle | Ninguna | 18 (+7 pkg-info) | 0 | 3/10 |
+| `nova-mask-utils` | Maven | Ninguna | 35 | 26 | 7/10 |
+| `nova-observability-utils` | Maven | Ninguna | 5 | 0 | 2/10 |
+| `nova-api-standard` | Gradle | Ninguna | 21 (+11 pkg-info) | 0 | 4/10 |
 
 ### Nivel 2: Starters (Conectores)
 
@@ -32,32 +32,32 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 | Artefacto | Framework | Build | Clases | Tests | Madurez |
 |-----------|-----------|-------|--------|-------|---------|
-| `galaxy-training-spring-boot-starter` | Spring Boot | Maven | 4 | 0 | 4/10 |
+| `nova-spring-boot-starter` | Spring Boot | Maven | 4 | 0 | 4/10 |
 
 ### Nivel 4: BOMs y Parents
 
 | Artefacto | Build | Madurez |
 |-----------|-------|---------|
-| `galaxy-training-bom` (raiz) | Maven | 4/10 |
-| `galaxy-training-spring-boot-bom` | Maven | 5/10 |
-| `galaxy-training-quarkus-bom` | Maven | 1/10 (placeholder) |
-| `galaxy-training-micronaut-bom` | Maven | 1/10 (placeholder) |
-| `galaxy-training-spring-boot-parent` | Maven | 5/10 |
+| `nova-bom` (raiz) | Maven | 4/10 |
+| `nova-spring-boot-bom` | Maven | 5/10 |
+| `nova-quarkus-bom` | Maven | 1/10 (placeholder) |
+| `nova-micronaut-bom` | Maven | 1/10 (placeholder) |
+| `nova-spring-boot-parent` | Maven | 5/10 |
 
 ### Nivel 5: Build Tooling
 
 | Artefacto | Tipo | Build | Madurez |
 |-----------|------|-------|---------|
-| `galaxy-training-spring-boot-gradle-plugin` | Gradle Plugin | Gradle | 4/10 |
-| `galaxy-training-spring-boot-archetype` | Maven Archetype | Maven | 5/10 |
+| `nova-spring-boot-gradle-plugin` | Gradle Plugin | Gradle | 4/10 |
+| `nova-spring-boot-archetype` | Maven Archetype | Maven | 5/10 |
 
 ### Soporte / Infraestructura
 
 | Artefacto | Tipo | Madurez |
 |-----------|------|---------|
-| `galaxy-training-devops` | GitHub Actions Workflows | 6/10 |
-| `galaxy-training-infrastructure` | Docker Compose | 6/10 |
-| `galaxy-training-example` | Demo App | 5/10 |
+| `nova-devops` | GitHub Actions Workflows | 6/10 |
+| `nova-infrastructure` | Docker Compose | 6/10 |
+| `nova-example` | Demo App | 5/10 |
 | `ms-course` | Demo Microservice | 4/10 |
 | `ms-forum` | Demo Microservice | 4/10 |
 
@@ -67,7 +67,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 ### Nivel 1: Librerias Puras
 
-#### `galaxy-training-mask-utils` -- EL MAS MADURO (7/10)
+#### `nova-mask-utils` -- EL MAS MADURO (7/10)
 
 **Fortalezas:**
 - Arquitectura Strategy Pattern bien implementada con `MaskEngine`, `StrategyRegistry`, `MaskStrategy`.
@@ -86,7 +86,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - Es el unico modulo del Nivel 1 con tests reales.
 - Usa Maven mientras que `date-utils`, `mapper-utils` y `api-standard` usan Gradle (inconsistencia de build system).
 
-#### `galaxy-training-date-utils` (3/10)
+#### `nova-date-utils` (3/10)
 
 **Fortalezas:**
 - API funcional completa: parsing, formatting, conversion, calculation, relative formatting.
@@ -100,7 +100,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - Contiene un `Main.java` de boilerplate de IntelliJ que no deberia existir.
 - Las clases son muy largas (380-454 lineas) lo que sugiere que podrian beneficiarse de mayor descomposicion.
 
-#### `galaxy-training-mapper-utils` (3/10)
+#### `nova-mapper-utils` (3/10)
 
 **Fortalezas:**
 - `MapperEngine` con soporte para mapeo por convencion, explicito, nested recursivo, y deteccion de referencias circulares.
@@ -114,7 +114,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - Reflection-heavy: incompatible con GraalVM sin configuracion adicional.
 - `MappingExecutor` tiene 429 lineas -- candidato a refactoring.
 
-#### `galaxy-training-api-standard` (4/10)
+#### `nova-api-standard` (4/10)
 
 **Fortalezas:**
 - Modelo de respuesta API completo: `ApiResponse`, `ApiError`, `ApiMetadata`, `PageInfo`, `ApiLink` (HATEOAS), `RateLimitInfo`.
@@ -130,7 +130,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - `UserAgentParser` (223 lineas) es una responsabilidad que probablemente no pertenece a un modulo de estandar de API.
 - `ClientInfo` (289 lineas) -- muy largo, incluye logica que podria separarse.
 
-#### `galaxy-training-observability-utils` (2/10)
+#### `nova-observability-utils` (2/10)
 
 **Fortalezas:**
 - Define correctamente las interfaces y contratos (`GoldenSignalsRecorder`, `@Traced`, `@Metered`).
@@ -171,7 +171,7 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 **Fortalezas:**
 - `ApiResponseInterceptor` que envuelve respuestas automaticamente en `ApiResponse`.
 - `GlobalExceptionHandler` con manejo de 404, 400, y 500.
-- Condicional via `@ConditionalOnProperty("galaxy-training.api-standard.enabled")`.
+- Condicional via `@ConditionalOnProperty("nova.api-standard.enabled")`.
 
 **Debilidades:**
 - **Zero tests**.
@@ -205,29 +205,29 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 ### Nivel 3: Meta-Framework Starter
 
-#### `galaxy-training-spring-boot-starter` (4/10)
+#### `nova-spring-boot-starter` (4/10)
 
 **Fortalezas:**
-- `@GalaxyTrainingSpringBootApplication` como meta-anotacion sobre `@SpringBootApplication`.
-- `GalaxyTrainingApplication.run()` como wrapper de `SpringApplication.run()`.
-- `GalaxyTrainingEnvironmentPostProcessor` que valida Java >= 25 y Spring Boot major == 4.
+- `@NovaSpringBootApplication` como meta-anotacion sobre `@SpringBootApplication`.
+- `NovaApplication.run()` como wrapper de `SpringApplication.run()`.
+- `NovaEnvironmentPostProcessor` que valida Java >= 25 y Spring Boot major == 4.
 - Correctamente registrado via `spring.factories` (EnvironmentPostProcessor) y `AutoConfiguration.imports`.
 - Trae transitivamente todos los starters necesarios.
 
 **Debilidades:**
 - **Zero tests**.
-- `GalaxyTrainingApplication` es un wrapper trivial que no agrega valor significativo sobre `SpringApplication.run()`.
-- `GalaxyTrainingAutoConfiguration` es un placeholder vacio -- solo tiene `@AutoConfiguration`.
+- `NovaApplication` es un wrapper trivial que no agrega valor significativo sobre `SpringApplication.run()`.
+- `NovaAutoConfiguration` es un placeholder vacio -- solo tiene `@AutoConfiguration`.
 - El `EnvironmentPostProcessor` lanza `IllegalStateException` que mata la aplicacion -- deberia usar logging con nivel ERROR y permitir configurar el comportamiento (fail vs warn).
 - No hay banner customizado.
-- No hay `GalaxyTrainingProperties` para configuracion general del framework.
+- No hay `NovaProperties` para configuracion general del framework.
 - La version de Java esta hardcodeada a 25 lo cual es muy restrictivo.
 
 ---
 
 ### Nivel 4: BOMs y Parents
 
-#### `galaxy-training-bom` (4/10)
+#### `nova-bom` (4/10)
 
 **Fortalezas:**
 - Estructura multi-BOM correcta: BOM raiz + BOM por framework.
@@ -236,20 +236,20 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - Placeholders para Quarkus y Micronaut muestran la intencion multi-framework.
 
 **Debilidades:**
-- `galaxy-training-quarkus-bom` y `galaxy-training-micronaut-bom` estan completamente vacios (dependencias comentadas).
+- `nova-quarkus-bom` y `nova-micronaut-bom` estan completamente vacios (dependencias comentadas).
 - El BOM raiz no incluye `observability-utils` -- posible olvido.
 - El BOM de Spring Boot referencia `mask-utils-spring-boot-starter` y `api-standard-spring-boot-starter` pero no `observability-spring-boot-starter`.
 - No hay un mecanismo para que las librerias Gradle (date-utils, mapper-utils, api-standard) publiquen al mismo repositorio Maven con el mismo groupId -- hay inconsistencia de groupIds.
 - Todas las versiones son `1.0.0` sin un property centralizado para bump coordinado.
 - Spring Boot 4.0.5 esta hardcodeado en el BOM de Spring Boot.
 
-#### `galaxy-training-spring-boot-parent` (5/10)
+#### `nova-spring-boot-parent` (5/10)
 
 **Fortalezas:**
 - Importa el BOM de Spring Boot correctamente.
 - Configura `maven-compiler-plugin`, `maven-surefire-plugin`, y `spring-boot-maven-plugin`.
 - Java 25 con `--enable-preview`.
-- Agrega `galaxy-training-spring-boot-starter` y `spring-boot-starter-test` como dependencias heredadas.
+- Agrega `nova-spring-boot-starter` y `spring-boot-starter-test` como dependencias heredadas.
 
 **Debilidades:**
 - Solo soporta Maven -- no hay equivalente para Gradle (el plugin de Gradle existe pero no es un "parent" completo).
@@ -263,13 +263,13 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 ### Nivel 5: Build Tooling
 
-#### `galaxy-training-spring-boot-gradle-plugin` (4/10)
+#### `nova-spring-boot-gradle-plugin` (4/10)
 
 **Fortalezas:**
 - Implementacion funcional de `Plugin<Project>`.
 - Aplica `java` + `org.springframework.boot`.
 - Configura Java 25 toolchain.
-- Agrega `galaxy-training-spring-boot-starter` automaticamente.
+- Agrega `nova-spring-boot-starter` automaticamente.
 - Publicado con markers de plugin correctos.
 
 **Debilidades:**
@@ -281,12 +281,12 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 - No es configurable via extension DSL -- todo esta hardcodeado.
 - Archivos de `build/` estan en el repositorio -- deberian estar en `.gitignore`.
 
-#### `galaxy-training-spring-boot-archetype` (5/10)
+#### `nova-spring-boot-archetype` (5/10)
 
 **Fortalezas:**
 - Archetype funcional con `archetype-metadata.xml` correcto.
 - Template POM hereda del Parent.
-- Usa `@GalaxyTrainingSpringBootApplication` y `GalaxyTrainingApplication.run()`.
+- Usa `@NovaSpringBootApplication` y `NovaApplication.run()`.
 - Incluye `application.yaml` y test basico.
 
 **Debilidades:**
@@ -343,14 +343,14 @@ El meta-framework Galaxy Training para Java se encuentra en una **fase temprana 
 
 | Tipo | GroupId |
 |------|---------|
-| Librerias puras | `pe.edu.galaxy.training.java.libs` |
-| Starters | `pe.edu.galaxy.training.java.starters` |
-| BOM / Parent | `pe.edu.galaxy.training.java` |
-| Gradle Plugin | `pe.edu.galaxy.training.java` |
-| Archetype | `pe.edu.galaxy.training.java` |
+| Librerias puras | `pe.edu.nova.java.libs` |
+| Starters | `pe.edu.nova.java.starters` |
+| BOM / Parent | `pe.edu.nova.java` |
+| Gradle Plugin | `pe.edu.nova.java` |
+| Archetype | `pe.edu.nova.java` |
 | ms-course | `com.nova.generics` |
 | ms-forum | `com.nova.generics` |
-| example | `pe.edu.galaxy.training.java.examples` |
+| example | `pe.edu.nova.java.examples` |
 
 **Conclusion:** Los groupIds estan bien organizados por tipo, excepto los microservicios de ejemplo que usan un groupId completamente diferente (`com.nova.generics`).
 

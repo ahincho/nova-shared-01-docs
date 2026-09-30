@@ -118,7 +118,7 @@ NestJS no tiene un sistema de condiciones declarativo como Spring Boot. Se imple
 static forRoot(options?: MaskModuleOptions): DynamicModule {
   const providers: Provider[] = [MaskService];
 
-  // Equivalente a @ConditionalOnProperty("galaxy-training.mask.enabled")
+  // Equivalente a @ConditionalOnProperty("nova.mask.enabled")
   if (options?.enabled !== false) {
     providers.push({ provide: APP_INTERCEPTOR, useClass: MaskInterceptor });
   }
@@ -133,15 +133,15 @@ static forRoot(options?: MaskModuleOptions): DynamicModule {
 
 ```typescript
 // El proyecto final solo necesita esto:
-import { GalaxyTrainingModule } from '@galaxy-training/nestjs-starter';
+import { NovaModule } from '@ahincho/nova-nestjs-starter';
 
 @Module({
-  imports: [GalaxyTrainingModule.forRoot()],
+  imports: [NovaModule.forRoot()],
 })
 export class AppModule {}
 ```
 
-Internamente, `GalaxyTrainingModule.forRoot()` registra:
+Internamente, `NovaModule.forRoot()` registra:
 - `MaskModule.forRoot()` (enmascaramiento automatico)
 - `ApiStandardModule.forRoot()` (envelope de respuestas)
 - Re-exporta todas las librerias puras
@@ -153,7 +153,7 @@ Adicionalmente, el paquete puede proveer un **Factory** para el bootstrap:
 const app = await NestFactory.create(AppModule);
 
 // Se usa:
-const app = await GalaxyTrainingFactory.create(AppModule);
+const app = await NovaFactory.create(AppModule);
 // Esto valida Node.js version, NestJS version, configura logger, etc.
 ```
 
@@ -164,7 +164,7 @@ const app = await GalaxyTrainingFactory.create(AppModule);
 En npm no existe un mecanismo nativo de BOM. Se simula con un paquete que exporta un objeto con versiones:
 
 ```typescript
-// @galaxy-training/bom
+// @ahincho/nova-bom
 export const versions = {
   maskUtils: '1.0.0',
   dateUtils: '1.0.0',
@@ -184,7 +184,7 @@ Un paquete npm que exporta configuraciones base via `exports` en `package.json`:
 
 ```json
 {
-  "name": "@galaxy-training/nestjs-parent",
+  "name": "@ahincho/nova-nestjs-parent",
   "exports": {
     "./tsconfig": "./tsconfig.base.json",
     "./eslint": "./eslint.config.mjs",
@@ -198,12 +198,12 @@ Los proyectos hijos extienden con archivos thin wrapper:
 
 ```json
 // tsconfig.json del hijo
-{ "extends": "@galaxy-training/nestjs-parent/tsconfig" }
+{ "extends": "@ahincho/nova-nestjs-parent/tsconfig" }
 ```
 
 ```javascript
 // eslint.config.mjs del hijo
-import base from '@galaxy-training/nestjs-parent/eslint';
+import base from '@ahincho/nova-nestjs-parent/eslint';
 export default [...base];
 ```
 
@@ -215,7 +215,7 @@ En el ecosistema NestJS, las opciones de generacion son:
 |-------------|------|----------|-------------|
 | NestJS CLI Schematics | Plugin de `@nestjs/cli` | Integrado con `nest generate` | Solo genera dentro de un proyecto existente |
 | Yeoman Generator | Generador independiente | Cross-platform, interactivo | Ecosistema en declive |
-| `create-*` package | `npm init @galaxy-training` | Convencion npm estandar | Requiere publicar en npm |
+| `create-*` package | `npm init @nova` | Convencion npm estandar | Requiere publicar en npm |
 | Script bash | `init.sh` | Flexible, rapido de implementar | No cross-platform, no publicable |
 | Nx Plugin | Plugin de Nx workspace | Monorepo-native, generadores potentes | Acoplamiento a Nx |
 
@@ -245,7 +245,7 @@ Un NestJS Module (starter) debe declarar NestJS como `peerDependency`, no como `
     "reflect-metadata": "~0.2.2"
   },
   "dependencies": {
-    "@galaxy-training/mask-utils": "1.0.0"
+    "@ahincho/nova-mask-utils": "1.0.0"
   }
 }
 ```
@@ -281,7 +281,7 @@ Esto garantiza que:
 ### Estructura tipica con Turborepo
 
 ```
-galaxy-training-commons-nestjs/
+nova-commons-nestjs/
   turbo.json                   <- Task pipeline (build, test, lint)
   package.json                 <- workspaces: ["packages/*"]
   packages/

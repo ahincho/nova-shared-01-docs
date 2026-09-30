@@ -125,7 +125,7 @@ mask-utils-micronaut/
 **Caracteristicas:**
 - Dependencia transitiva hacia todos los starters del Nivel 2.
 - Proporciona la "experiencia de desarrollador" unificada.
-- Define anotaciones de alto nivel (ej: `@GalaxyTrainingSpringBootApplication`).
+- Define anotaciones de alto nivel (ej: `@NovaSpringBootApplication`).
 - Puede incluir validaciones de entorno (version de Java, version del framework).
 - Opcionalmente define un `main()` wrapper para bootstrapping customizado.
 
@@ -133,8 +133,8 @@ mask-utils-micronaut/
 ```xml
 <!-- El proyecto final solo necesita esto: -->
 <dependency>
-    <groupId>pe.edu.galaxy.training.java.starters</groupId>
-    <artifactId>galaxy-training-spring-boot-starter</artifactId>
+    <groupId>pe.edu.nova.java.starters</groupId>
+    <artifactId>nova-spring-boot-starter</artifactId>
 </dependency>
 <!-- Esto trae transitivamente: mask-utils, api-standard, observability, etc. -->
 ```
@@ -149,13 +149,13 @@ Un BOM es un POM con `<packaging>pom</packaging>` que solo contiene `<dependency
 
 **Estructura multi-BOM (para soporte multi-framework):**
 ```
-galaxy-training-bom/                     <- BOM raiz (libs puras)
+nova-bom/                     <- BOM raiz (libs puras)
   pom.xml                                <- dependencyManagement de Nivel 1
-  galaxy-training-spring-boot-bom/       <- BOM para Spring Boot
+  nova-spring-boot-bom/       <- BOM para Spring Boot
     pom.xml                              <- importa spring-boot-dependencies + starters Nivel 2
-  galaxy-training-quarkus-bom/           <- BOM para Quarkus
+  nova-quarkus-bom/           <- BOM para Quarkus
     pom.xml                              <- importa quarkus-bom + extensiones Nivel 2
-  galaxy-training-micronaut-bom/         <- BOM para Micronaut
+  nova-micronaut-bom/         <- BOM para Micronaut
     pom.xml                              <- importa micronaut-bom + modulos Nivel 2
 ```
 
@@ -244,7 +244,7 @@ La auto-configuracion debe ser **no invasiva**: solo se activa si las condicione
 @AutoConfiguration
 @ConditionalOnClass(MaskEngine.class)           // Solo si mask-utils esta en classpath
 @ConditionalOnProperty(
-    prefix = "galaxy-training.mask",
+    prefix = "nova.mask",
     name = "enabled",
     havingValue = "true",
     matchIfMissing = true                        // Habilitado por defecto
@@ -290,8 +290,8 @@ Un meta-framework debe soportar ambos build systems porque los equipos de la org
 **Maven (via Parent POM):**
 ```xml
 <parent>
-    <groupId>pe.edu.galaxy.training.java</groupId>
-    <artifactId>galaxy-training-spring-boot-parent</artifactId>
+    <groupId>pe.edu.nova.java</groupId>
+    <artifactId>nova-spring-boot-parent</artifactId>
     <version>1.0.0</version>
 </parent>
 ```
@@ -299,7 +299,7 @@ Un meta-framework debe soportar ambos build systems porque los equipos de la org
 **Gradle (via Plugin custom):**
 ```kotlin
 plugins {
-    id("pe.edu.galaxy.training.spring-boot") version "1.0.0"
+    id("pe.edu.nova.spring-boot") version "1.0.0"
 }
 ```
 

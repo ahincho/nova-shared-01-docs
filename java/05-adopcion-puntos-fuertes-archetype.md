@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Identificar los puntos fuertes concretos del archetype desarrollado por el companero y definir como incorporarlos al meta-framework Galaxy Training, manteniendo la compatibilidad con la arquitectura de 5 niveles ya existente y el soporte multi-framework (Spring Boot / Quarkus / Micronaut).
+Identificar los puntos fuertes concretos del archetype desarrollado por el companero y definir como incorporarlos al meta-framework Nova Platform, manteniendo la compatibilidad con la arquitectura de 5 niveles ya existente y el soporte multi-framework (Spring Boot / Quarkus / Micronaut).
 
 ---
 
@@ -36,17 +36,17 @@ El modulo `shared/domain/` contiene un kernel DDD completo en Java puro (zero im
 
 **Todo esto es Java puro.** No importa `jakarta.*`, ni `io.quarkus.*`, ni `org.springframework.*`.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
-**Crear una nueva libreria de Nivel 1:** `galaxy-training-ddd-utils`
+**Crear una nueva libreria de Nivel 1:** `nova-ddd-utils`
 
 Esta libreria encaja naturalmente en el Nivel 1 junto a `mask-utils`, `date-utils`, `mapper-utils`, etc. Es codigo Java puro reutilizable por cualquier framework.
 
 ```
 java/
-  galaxy-training-ddd-utils/            <- NUEVA LIBRERIA
+  nova-ddd-utils/            <- NUEVA LIBRERIA
     pom.xml (o build.gradle)
-    src/main/java/pe/edu/galaxy/training/java/libs/ddd/
+    src/main/java/pe/edu/nova/java/libs/ddd/
       aggregate/
         AggregateRoot.java
       bus/
@@ -80,8 +80,8 @@ java/
 
 **Adaptaciones necesarias al portarlo:**
 
-1. Cambiar el paquete de `pe.edu.utp.archetype.shared.domain` a `pe.edu.galaxy.training.java.libs.ddd`.
-2. Agregar al BOM raiz (`galaxy-training-bom/pom.xml`).
+1. Cambiar el paquete de `pe.edu.utp.archetype.shared.domain` a `pe.edu.nova.java.libs.ddd`.
+2. Agregar al BOM raiz (`nova-bom/pom.xml`).
 3. El codigo es 100% portable tal cual -- no requiere cambios funcionales.
 4. Agregar tests unitarios (el companero tiene 9 archivos de test para el shared domain).
 
@@ -102,11 +102,11 @@ El modulo `shared/infrastructure/` tiene implementaciones CDI de los buses:
 | `SynchronousCdiEventBus` | 35 | Usa CDI `Event<DomainEvent>` para fire sincrono |
 | `GenericTypeResolver` | 54 | Resuelve el tipo generico de un handler en runtime |
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 Crear starters framework-especificos que implementen los buses:
 
-**Para Spring Boot:** `galaxy-training-ddd-spring-boot-starter`
+**Para Spring Boot:** `nova-ddd-spring-boot-starter`
 ```java
 // Equivalente del CdiCommandBus pero con Spring
 @Component
@@ -138,10 +138,10 @@ public class SpringCommandBus implements CommandBus {
 
 **Estructura resultante:**
 ```
-galaxy-training-ddd-utils/                        <- Nivel 1: interfaces puras
-galaxy-training-ddd-spring-boot-starter/          <- Nivel 2: SpringCommandBus, SpringQueryBus, SpringEventBus
-galaxy-training-ddd-quarkus-extension/            <- Nivel 2: CdiCommandBus, CdiQueryBus, CdiEventBus
-galaxy-training-ddd-micronaut-module/             <- Nivel 2: MicronautCommandBus, etc.
+nova-ddd-utils/                        <- Nivel 1: interfaces puras
+nova-ddd-spring-boot-starter/          <- Nivel 2: SpringCommandBus, SpringQueryBus, SpringEventBus
+nova-ddd-quarkus-extension/            <- Nivel 2: CdiCommandBus, CdiQueryBus, CdiEventBus
+nova-ddd-micronaut-module/             <- Nivel 2: MicronautCommandBus, etc.
 ```
 
 ---
@@ -164,9 +164,9 @@ Dos clases de ArchUnit que se ejecutan en cada `./gradlew test`:
 
 Esto convierte reglas arquitectonicas en **tests que fallan si se violan**.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
-**Accion 1:** Agregar ArchUnit como dependencia de test en el `galaxy-training-spring-boot-parent`:
+**Accion 1:** Agregar ArchUnit como dependencia de test en el `nova-spring-boot-parent`:
 
 ```xml
 <dependency>
@@ -188,7 +188,7 @@ class ArchitectureTest {
     @DisplayName("Libs del meta-framework no dependen de Spring internamente")
     void libsShouldNotDependOnSpring() {
         JavaClasses classes = new ClassFileImporter()
-            .importPackages("pe.edu.galaxy.training.java.libs");
+            .importPackages("pe.edu.nova.java.libs");
 
         ArchRule rule = noClasses()
             .should().dependOnClassesThat()
@@ -223,13 +223,13 @@ Migraciones SQL:
 - `V3__create_domain_events_outbox.sql` (tabla con retry_count, error_message, published_at)
 - `V5__create_command_idempotency.sql` (tabla para idempotencia)
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 El Outbox Pattern es transversal -- no deberia vivir dentro de un bounded context. Deberia ser parte del shared kernel o un starter dedicado.
 
 **Opcion A (Recomendada) - Agregar a `ddd-utils` + starters:**
 
-Interfaces en `galaxy-training-ddd-utils` (Nivel 1):
+Interfaces en `nova-ddd-utils` (Nivel 1):
 ```java
 // Puerto puro
 public interface OutboxRepository {
@@ -247,8 +247,8 @@ public record OutboxEvent(
 ```
 
 Implementaciones en los starters framework-especificos (Nivel 2):
-- `galaxy-training-ddd-spring-boot-starter`: `JpaOutboxRepository`, `OutboxScheduler` con `@Scheduled`
-- `galaxy-training-ddd-quarkus-extension`: `PanacheOutboxRepository`, `OutboxScheduler` con `@Scheduled`
+- `nova-ddd-spring-boot-starter`: `JpaOutboxRepository`, `OutboxScheduler` con `@Scheduled`
+- `nova-ddd-quarkus-extension`: `PanacheOutboxRepository`, `OutboxScheduler` con `@Scheduled`
 
 **Accion concreta:** Incluir la migracion SQL como recurso del starter, que se auto-aplique con Flyway/Liquibase.
 
@@ -269,14 +269,14 @@ Headers procesados:
 - `X-Transaction-Id` -> transactionId (correlationId)
 - `X-Tenant-Id` -> tenantId
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
-Galaxy Training ya tiene `RequestContext` en `api-standard`, pero es menos rico. El del companero agrega:
+Nova Platform ya tiene `RequestContext` en `api-standard`, pero es menos rico. El del companero agrega:
 - Propagacion a MDC (logging estructurado con correlationId en cada linea).
 - Propagacion a llamadas HTTP salientes (trazabilidad entre microservicios).
 - Tenant support (multi-tenancy).
 
-**Accion:** Enriquecer el `galaxy-training-api-standard` con:
+**Accion:** Enriquecer el `nova-api-standard` con:
 
 1. Agregar `tenantId` al `RequestContext` existente.
 2. Crear un `MdcPopulatingFilter` en el `api-standard-spring-boot-starter` que haga el equivalente:
@@ -339,14 +339,14 @@ public record ProblemDetail(String type, String title, int status, String detail
 
 Y un `DomainExceptionMapper` que mapea `DomainException` subclasses a HTTP status codes y retorna `ProblemDetail`.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 El `api-standard` actual usa `ApiResponse.error()` para errores. RFC 7807 es el estandar de la industria (`application/problem+json`).
 
-**Accion:** Agregar `ProblemDetail` a `galaxy-training-api-standard` (Nivel 1):
+**Accion:** Agregar `ProblemDetail` a `nova-api-standard` (Nivel 1):
 
 ```java
-// En galaxy-training-api-standard
+// En nova-api-standard
 public record ProblemDetail(
     String type,        // URI que identifica el tipo de error
     String title,       // Titulo legible
@@ -382,14 +382,14 @@ public @interface ExternalServiceCall {}
 
 Una sola anotacion que combina timeout + retry + circuit breaker con defaults sensatos.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 En Spring Boot, el equivalente usa `spring-retry` o `resilience4j`:
 
 **Accion:** Crear una composed annotation en las librerias del meta-framework:
 
 ```java
-// En galaxy-training-api-standard o un nuevo galaxy-training-resilience-utils
+// En nova-api-standard o un nuevo nova-resilience-utils
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface ExternalServiceCall {
@@ -422,7 +422,7 @@ Y en el starter de Spring Boot, crear un AOP aspect que lea esta anotacion y apl
 
 Y un `template.md` para nuevos ADRs.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 **Accion 1:** Crear `docs/adr/` en el meta-framework con ADRs de las decisiones ya tomadas:
 
@@ -457,7 +457,7 @@ public final class ProductMother {
 
 Factories reutilizables para crear objetos de test en estados especificos, ubicados en `src/test/java/.../mother/`.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 **Accion:** Incluir el patron Object Mother en la guia de testing del meta-framework y generar un ejemplo en el archetype.
 
@@ -485,7 +485,7 @@ make coverage   # JaCoCo report
 make clean      # Limpiar
 ```
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
 **Accion:** Agregar un `Makefile` (o `Justfile` para cross-platform) al archetype generado:
 
@@ -545,9 +545,9 @@ jacocoTestCoverageVerification {
 
 El build **falla** si la cobertura cae por debajo de estos umbrales.
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
-**Accion:** Configurar JaCoCo en el `galaxy-training-spring-boot-parent`:
+**Accion:** Configurar JaCoCo en el `nova-spring-boot-parent`:
 
 ```xml
 <plugin>
@@ -607,14 +607,14 @@ quarkus.http.header."Permissions-Policy".value=geolocation=(), microphone=(), ca
 %prod.quarkus.http.header."Strict-Transport-Security".value=max-age=31536000; includeSubDomains
 ```
 
-### Como adoptarlo en Galaxy Training
+### Como adoptarlo en Nova Platform
 
-**Accion:** Agregar security headers en el `GalaxyTrainingAutoConfiguration` o en un nuevo auto-configuration:
+**Accion:** Agregar security headers en el `NovaAutoConfiguration` o en un nuevo auto-configuration:
 
 ```java
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@ConditionalOnProperty(prefix = "galaxy-training.security.headers", name = "enabled",
+@ConditionalOnProperty(prefix = "nova.security.headers", name = "enabled",
     havingValue = "true", matchIfMissing = true)
 public class SecurityHeadersAutoConfiguration {
 
@@ -632,19 +632,19 @@ public class SecurityHeadersAutoConfiguration {
 
 ## Resumen: Prioridad de Adopcion
 
-| # | Que adoptar | Donde va en Galaxy Training | Esfuerzo | Impacto |
+| # | Que adoptar | Donde va en Nova Platform | Esfuerzo | Impacto |
 |---|-----------|---------------------------|----------|---------|
-| 1 | **Shared Kernel DDD** (AggregateRoot, buses, VOs, exceptions) | Nueva lib: `galaxy-training-ddd-utils` (Nivel 1) | Alto | Muy alto |
+| 1 | **Shared Kernel DDD** (AggregateRoot, buses, VOs, exceptions) | Nueva lib: `nova-ddd-utils` (Nivel 1) | Alto | Muy alto |
 | 2 | **ArchUnit tests** para enforcement de arquitectura | Parent POM (dep) + archetype (test generado) | Bajo | Alto |
 | 3 | **Coverage enforcement** con JaCoCo por capa | Parent POM + Gradle Plugin | Bajo | Alto |
 | 4 | **Request Context + MDC + Correlation ID** | Enriquecer `api-standard-spring-boot-starter` | Medio | Alto |
-| 5 | **RFC 7807 ProblemDetail** para errores | Agregar a `galaxy-training-api-standard` (Nivel 1) | Bajo | Medio |
+| 5 | **RFC 7807 ProblemDetail** para errores | Agregar a `nova-api-standard` (Nivel 1) | Bajo | Medio |
 | 6 | **ADRs** para el meta-framework | `docs/adr/` + template en archetype | Bajo | Medio |
-| 7 | **Makefile** en archetype generado | `galaxy-training-spring-boot-archetype` | Bajo | Medio |
+| 7 | **Makefile** en archetype generado | `nova-spring-boot-archetype` | Bajo | Medio |
 | 8 | **Object Mother** pattern en guia de testing | Archetype + documentacion | Bajo | Medio |
 | 9 | **Security headers** por defecto | Nuevo auto-configuration en starter | Bajo | Medio |
 | 10 | **Outbox Pattern** como componente reutilizable | `ddd-utils` (interface) + starters (impl) | Alto | Medio |
-| 11 | **Resilience annotation** (`@ExternalServiceCall`) | Nuevo `galaxy-training-resilience-utils` | Medio | Medio |
+| 11 | **Resilience annotation** (`@ExternalServiceCall`) | Nuevo `nova-resilience-utils` | Medio | Medio |
 | 12 | **Bus implementations** por framework | Starters de DDD (Spring/Quarkus/Micronaut) | Alto | Alto |
 
 ### Orden de ejecucion recomendado

@@ -37,10 +37,19 @@ Decisiones aplicables a Java y NestJS.
 | 011 | [Composite Actions y Reusable Workflows](shared/ADR-011-composite-actions-y-reusable-workflows.md) | Aceptada | CI/CD |
 | 012 | [Estandares de Calidad y Testing](shared/ADR-012-estandares-de-calidad-testing.md) | Aceptada | Calidad |
 | 014 | [Observabilidad: Four Golden Signals](shared/ADR-014-observabilidad-four-golden-signals.md) | Aceptada | Observabilidad |
+| 030 | [Contrato de Plataforma Versionado](shared/ADR-030-contrato-de-plataforma-versionado.md) | Propuesta | Arquitectura |
+| 031 | [El Módulo de Errores por Capas, con Trazabilidad](shared/ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md) | Aceptada | Arquitectura |
+| 032 | [Observabilidad como Puerto Conectable](shared/ADR-032-observabilidad-como-puerto-conectable.md) | Propuesta | Observabilidad |
+| 033 | [Que es Nucleo, que es Comun Opcional y que es Plugin](shared/ADR-033-nucleo-comun-y-plugins.md) | Propuesta | Arquitectura |
 | 034 | [Lo Duro y lo Reemplazable: Reglas en el Núcleo, Convenciones Detrás de un Puerto](shared/ADR-034-puertos-con-implementacion-por-defecto.md) | Aceptada | Arquitectura |
 | 035 | [Fallos de Upstream Clasificados con el Registro de RFC 9209](shared/ADR-035-fallos-de-upstream-rfc-9209.md) | Aceptada | Errores |
 | 036 | [Perfiles de Organización: Cómo una Organización Adapta Nova sin Forkearla](shared/ADR-036-perfiles-de-organizacion.md) | Aceptada | Arquitectura |
 | 037 | [El Borde: Cómo Entra la Correlación y Quién Escribe la Identidad](shared/ADR-037-borde-correlacion-e-identidad.md) | Aceptada | Observabilidad |
+| 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
+| 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Aceptada | Estructura |
+| 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Aceptada | Arquitectura |
+| 043 | [Plaza, la Plataforma de Compras que Demuestra Nova](shared/ADR-043-plaza-la-plataforma-de-compras.md) | Aceptada | Producto |
+| 047 | [La Idempotencia de las Operaciones, detrás de un Contrato](shared/ADR-047-idempotencia-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 
@@ -53,6 +62,10 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 005 | [Multi-Repo con BOM Coordinador](java/ADR-005-multi-repo-con-bom-coordinador.md) | Aceptada | Estructura |
 | 013 | [Firma GPG Preparada pero Diferida](java/ADR-013-firma-gpg-preparada-diferida.md) | Propuesta | Seguridad |
 | 015 | [Librerias Puras sin Dependencias de Framework](java/ADR-015-librerias-puras-sin-dependencias-framework.md) | Aceptada | Arquitectura |
+| 041 | [Un Repositorio por Capacidad](java/ADR-041-un-repositorio-por-capacidad.md) | Aceptada | Estructura |
+| 044 | [El Toolchain de Java: Plugins de Convención de Gradle](java/ADR-044-toolchain-de-java.md) | Aceptada | Build System |
+| 045 | [La Imagen Nativa de GraalVM, junto a la JVM](java/ADR-045-imagen-nativa-junto-a-la-jvm.md) | Aceptada | Build System |
+| 046 | [Las Imágenes Base: Distroless por Defecto, Docker Hardened como Opción](java/ADR-046-imagenes-base-distroless.md) | Aceptada | Build System |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
 
