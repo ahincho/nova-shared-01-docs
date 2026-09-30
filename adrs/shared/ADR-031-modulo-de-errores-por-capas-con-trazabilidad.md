@@ -8,6 +8,11 @@ los tipos de cada capa, `Retry-After`, un código por cada 5xx, `platform` como 
 en `metadata`, un modelo que no arrastra el framework, una suite de contrato y una métrica.
 También pidió que el módulo sea **un contrato con una implementación por defecto de Nova**,
 extensible por organización, como UTP.
+
+Enmendada el mismo 2026-09-30, al implementarse en Java y NestJS. Los puertos reciben el fallo ya
+saneado, como pide [ADR-034](ADR-034-puertos-con-implementacion-por-defecto.md); los mensajes
+genéricos quedan fijados en el catálogo; y se corrigen la lectura de las excepciones del framework y
+la receta de migración.
 **Scope:** `shared` (Java y NestJS).
 **Resuelve:** la pregunta 2 de [ADR-030](ADR-030-contrato-de-plataforma-versionado.md): los errores
 se escriben en el sobre de Nova.
@@ -96,6 +101,10 @@ arrancar no se responde: la aplicación no arranca, como ya hacen secrets y la c
 | causa | la excepción original | **no**: solo en el log |
 | `traceId` | tomado del contexto de la petición al construir el error | sí, en `metadata.traceId` |
 
+- Un `retryAfter` negativo se descarta: el error sale sin `Retry-After`, en vez de fallar al
+  construirse y convertir un 429 en un 500.
+- Un error de validación de todo el objeto, sin un campo propio, lleva `field` como cadena vacía.
+
 El modelo **no importa ningún framework web**. Ese es el punto del cambio: el mismo caso de uso corre
 detrás de HTTP o de un consumidor de cola.
 
@@ -123,22 +132,52 @@ Un perfil como `@ahincho/nova-profile-utp`, o un starter de UTP en Java, puede t
 sus propios códigos y textos, o su serializador, y un servicio de UTP lo activa con solo agregarlo.
 Nova no trae ninguna implementación de UTP mientras no haya un consumidor que la use.
 
+**Los puertos reciben el fallo ya saneado.** Es la regla de ADR-034: una convención reemplazable
+nunca ve lo que una regla dura protege. Antes de llamarlos, el núcleo escribe la línea de log con el
+proveedor y la causa, una sola vez, como pide ADR-035. Después les pasa un fallo sin esos dos
+campos:
+
+| Campo | Qué lleva |
+|---|---|
+| `layer` | la capa |
+| `type` | el tipo; falta en una excepción del framework, que no tiene fila en la tabla |
+| `status` | el HTTP |
+| `code` | el propio, si es un 4xx que lo trae; si no, el del catálogo |
+| `message` | el propio, si es un 4xx que lo trae; en un 5xx, siempre el genérico |
+| `fieldErrors` | los errores por campo |
+| `retryAfter` | la espera, si la hay |
+| `traceId` | el de la petición |
+
+Así, la regla de que un 5xx nunca revela al proveedor no depende de quién escriba el puerto: un
+serializador de UTP no la puede romper, porque nunca ve al proveedor. `ErrorStatusMapper` se consulta
+solo para los errores de Nova; una excepción del framework ya trae su status.
+
 ### El catálogo de códigos de la plataforma
 
-El mismo en los tres stacks. Sale del que ya tiene NestJS, y le suma un código por cada 5xx.
+El mismo en los tres stacks, con los mismos textos. Sale del que ya tiene NestJS, y le suma un código
+por cada 5xx.
 
-| Status | Código | Status | Código |
-|---|---|---|---|
-| 400 | `BAD_REQUEST` | 410 | `GONE` |
-| 401 | `UNAUTHORIZED` | 415 | `UNSUPPORTED_MEDIA_TYPE` |
-| 403 | `FORBIDDEN` | 422 | `UNPROCESSABLE_ENTITY` |
-| 404 | `NOT_FOUND` | 429 | `TOO_MANY_REQUESTS` |
-| 405 | `METHOD_NOT_ALLOWED` | 500 | `INTERNAL_SERVER_ERROR` |
-| 406 | `NOT_ACCEPTABLE` | 502 | `BAD_GATEWAY` |
-| 408 | `REQUEST_TIMEOUT` | 503 | `SERVICE_UNAVAILABLE` |
-| 409 | `CONFLICT` | 504 | `GATEWAY_TIMEOUT` |
+| Status | Código | Mensaje genérico |
+|---|---|---|
+| 400 | `BAD_REQUEST` | La solicitud no es válida |
+| 401 | `UNAUTHORIZED` | Hace falta autenticarse |
+| 403 | `FORBIDDEN` | No hay permiso para esta operación |
+| 404 | `NOT_FOUND` | El recurso no existe |
+| 405 | `METHOD_NOT_ALLOWED` | El método no está permitido en este recurso |
+| 406 | `NOT_ACCEPTABLE` | No hay una representación en el formato pedido |
+| 408 | `REQUEST_TIMEOUT` | La solicitud tardó demasiado en llegar |
+| 409 | `CONFLICT` | La operación choca con el estado actual del recurso |
+| 410 | `GONE` | El recurso ya no está disponible |
+| 415 | `UNSUPPORTED_MEDIA_TYPE` | El tipo de contenido no está soportado |
+| 422 | `UNPROCESSABLE_ENTITY` | La solicitud no se puede procesar |
+| 429 | `TOO_MANY_REQUESTS` | Demasiadas solicitudes; conviene esperar antes de reintentar |
+| 500 | `INTERNAL_SERVER_ERROR` | Error interno del servidor |
+| 502 | `BAD_GATEWAY` | Una dependencia respondió con un error |
+| 503 | `SERVICE_UNAVAILABLE` | El servicio no está disponible en este momento |
+| 504 | `GATEWAY_TIMEOUT` | Una dependencia no respondió a tiempo |
 
-Cualquier otro 4xx lleva `REQUEST_ERROR`, y cualquier otro 5xx, `INTERNAL_SERVER_ERROR`.
+Cualquier otro 4xx lleva `REQUEST_ERROR`, con «La solicitud no se pudo atender», y cualquier otro
+5xx, `INTERNAL_SERVER_ERROR`. Un 4xx sin mensaje propio lleva el de su código.
 
 **Un 5xx nunca revela al proveedor.** El cuerpo lleva el código genérico de su status y el `traceId`.
 Con eso el cliente sabe si conviene reintentar -un 503 o un 504 sí, un 500 no- sin conocer la
@@ -150,7 +189,9 @@ Un error de Nova toma su `traceId` en el constructor, del contexto de petición 
 instante, y no al momento de responder, cuando el contexto puede haberse perdido.
 
 - **En el cuerpo:** `metadata.traceId`, en los tres stacks. Java ya tiene ese campo en
-  `ApiMetadata`; NestJS suma `metadata` a su sobre.
+  `ApiMetadata`; NestJS suma `metadata` a su sobre. Si el error nace fuera de todo contexto, como un
+  cuerpo ilegible que falla antes de llegar al contexto de la petición, la plataforma genera un id y
+  escribe el mismo en el cuerpo y en el log.
 - **En el log:** `traceId`, `layer`, `code` y, si hay, `upstream`, como campos y no dentro del
   mensaje.
 - **En las métricas:** un contador `nova.errors` con las etiquetas `layer` y `code`, en el registro de
@@ -165,9 +206,12 @@ para revisar su decisión de no reintentar.
 
 ### Lo que ya existe
 
-- Las excepciones propias de cada framework se leen como `application` según su status: en Spring,
-  las que implementan `ErrorResponse`; en NestJS, `HttpException`.
-- `UpstreamHttpError` de NestJS es `infrastructure`.
+- Las excepciones propias de cada framework se leen por su status: en Spring, las que implementan
+  `ErrorResponse`; en NestJS, `HttpException`. Un 4xx es `application`; un 502, un 503 o un 504,
+  `infrastructure`; y cualquier otro 5xx, `platform`. Leer todo como `application` mandaría un 5xx a
+  `warn` y apagaría su alerta.
+- `UpstreamHttpError` de NestJS es `infrastructure`, y con la clasificación de ADR-035 lleva al
+  proveedor.
 - Cualquier otra excepción es `platform`, y sale como 500.
 
 Así un servicio migra de a poco: lo que no cambió sigue respondiendo con el status correcto y el
@@ -201,11 +245,27 @@ corre estos casos en sus propias pruebas; un ejecutor compartido queda como preg
 
 ### Versión y migración
 
-El cambio de `ERROR` a los códigos del catálogo cambia lo que ve un cliente de un servicio Java, así
-que el starter de Spring y la extensión de Quarkus salen con **versión mayor**. La receta: un cliente
-que comparaba contra `ERROR` pasa a comparar contra el código del catálogo o el código propio del
-error; `ERROR` deja de aparecer. En NestJS los códigos ya eran los del catálogo, y lo nuevo es
-`metadata`, que es aditivo.
+**Java.** El cambio de `ERROR` a los códigos del catálogo cambia lo que ve un cliente de un servicio
+Java, así que el starter de Spring y la extensión de Quarkus salen con **versión mayor**. La receta:
+
+- Un cliente que comparaba contra `ERROR` pasa a comparar contra el código del catálogo o el código
+  propio del error; `ERROR` deja de aparecer.
+- La validación pasa de `VALIDATION_ERROR` a `BAD_REQUEST`, con los mismos errores por campo.
+- Una `IllegalArgumentException`, que el starter de Spring respondía como 400, pasa a ser `platform` y
+  sale como 500. Un servicio que la lanzaba por una entrada inválida la cambia por
+  `ApplicationError.invalidInput`.
+- En la misma versión mayor entran las correcciones del sobre de Spring: el status real en el cuerpo,
+  `success: false` en un 4xx o un 5xx sin cuerpo, los 4xx propios de Spring MVC en vez de 500, y el
+  actuator y el controlador de errores sin envolver.
+
+**NestJS.** Sale en una versión menor de 0.x, que según
+[ADR-028](../nest/ADR-028-changesets-y-versionado-cero-x.md) puede romper. No es solo `metadata`, que
+es aditivo:
+
+- Un 502, un 503 y un 504 pasan de `INTERNAL_SERVER_ERROR` a `BAD_GATEWAY`, `SERVICE_UNAVAILABLE` y
+  `GATEWAY_TIMEOUT`. Un cliente que reintentaba al ver `INTERNAL_SERVER_ERROR` pasa a mirar esos tres.
+- Los mensajes genéricos pasan al español del catálogo.
+- La línea de log cambia de forma: suma `layer` y `upstream`, y el nivel sale de la capa.
 
 ## Alternativas descartadas
 
@@ -229,8 +289,9 @@ error; `ERROR` deja de aparecer. En NestJS los códigos ya eran los del catálog
 
 1. **Un ejecutor compartido de la suite de contrato**, que corra los mismos casos contra un servicio
    de cada stack. Por ahora cada stack los implementa en sus pruebas.
-2. **Los textos por idioma.** Los mensajes genéricos van en español; una organización que necesite
-   otros los pone en su `ErrorCatalog`. Si aparece más de un idioma por servicio, se decide aquí.
+2. **Los textos por idioma.** Resuelta en parte: los mensajes genéricos van en español, con los textos
+   de la tabla del catálogo, y una organización que necesite otros los pone en su `ErrorCatalog`. Si
+   aparece más de un idioma por servicio, se decide aquí.
 3. **El resto del sobre.** `links`, `pageInfo` y `rateLimitInfo` siguen existiendo solo en Java. Es
    la pregunta 1 de ADR-030.
 
@@ -257,6 +318,9 @@ error; `ERROR` deja de aparecer. En NestJS los códigos ya eran los del catálog
 ## Referencias
 
 - [ADR-030: Contrato de Plataforma Versionado](ADR-030-contrato-de-plataforma-versionado.md)
+- [ADR-034: Lo Duro y lo Reemplazable](ADR-034-puertos-con-implementacion-por-defecto.md)
+- [ADR-035: Fallos de Upstream Clasificados con el Registro de RFC 9209](ADR-035-fallos-de-upstream-rfc-9209.md)
+- [ADR-028: Changesets y Versionado `0.x` para el Stack NestJS](../nest/ADR-028-changesets-y-versionado-cero-x.md)
 - [ADR-014: Observabilidad - Four Golden Signals](ADR-014-observabilidad-four-golden-signals.md)
 - [ADR-029: Sin Reintentos ni Corte de Circuito en el Cliente HTTP](../nest/ADR-029-sin-reintentos-en-el-cliente-http.md)
 - [ADR-042: Secretos detrás de un Contrato](ADR-042-secretos-detras-de-un-contrato.md)
