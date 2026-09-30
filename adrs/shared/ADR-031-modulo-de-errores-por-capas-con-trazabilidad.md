@@ -12,7 +12,9 @@ extensible por organización, como UTP.
 Enmendada el mismo 2026-09-30, al implementarse en Java y NestJS. Los puertos reciben el fallo ya
 saneado, como pide [ADR-034](ADR-034-puertos-con-implementacion-por-defecto.md); los mensajes
 genéricos quedan fijados en el catálogo; y se corrigen la lectura de las excepciones del framework y
-la receta de migración.
+la receta de migración. Angel aprobó la enmienda tal cual: el manejo de errores es opinado por
+defecto y se reemplaza por puertos, para que un perfil como el de UTP adapte códigos, textos o
+formato; una `IllegalArgumentException` pasa a 500 sin una versión de transición.
 **Scope:** `shared` (Java y NestJS).
 **Resuelve:** la pregunta 2 de [ADR-030](ADR-030-contrato-de-plataforma-versionado.md): los errores
 se escriben en el sobre de Nova.
