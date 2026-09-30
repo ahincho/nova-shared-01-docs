@@ -38,7 +38,7 @@ Decisiones aplicables a Java y NestJS.
 | 012 | [Estandares de Calidad y Testing](shared/ADR-012-estandares-de-calidad-testing.md) | Aceptada | Calidad |
 | 014 | [Observabilidad: Four Golden Signals](shared/ADR-014-observabilidad-four-golden-signals.md) | Aceptada | Observabilidad |
 | 030 | [Contrato de Plataforma Versionado](shared/ADR-030-contrato-de-plataforma-versionado.md) | Propuesta | Arquitectura |
-| 031 | [Modulo Base de Errores por Capas, con Trazabilidad](shared/ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md) | Propuesta | Arquitectura |
+| 031 | [El Módulo de Errores por Capas, con Trazabilidad](shared/ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md) | Aceptada | Arquitectura |
 | 032 | [Observabilidad como Puerto Conectable](shared/ADR-032-observabilidad-como-puerto-conectable.md) | Propuesta | Observabilidad |
 | 033 | [Que es Nucleo, que es Comun Opcional y que es Plugin](shared/ADR-033-nucleo-comun-y-plugins.md) | Propuesta | Arquitectura |
 | 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |

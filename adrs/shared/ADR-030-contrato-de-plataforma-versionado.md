@@ -135,6 +135,11 @@ alinear el sobre, es reemplazarlo en las respuestas de error, y con eso el clien
 dos formas de cuerpo segun el resultado. Lo que 7807 da a cambio es un formato que herramientas de
 terceros ya entienden. Se decide antes de escribir `errors/`, no despues.
 
+**Resuelta (2026-09-30), en [ADR-031](ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md):** los
+errores se escriben en el sobre de Nova, igual en los tres stacks. RFC 7807 queda posible como otro
+`ErrorSerializer`, detrás del puerto que define ese ADR. De paso, `metadata.traceId` pasa a ser
+común: NestJS suma `metadata` a su sobre. El resto de la pregunta 1 sigue abierta.
+
 **3. Que significa un major del contrato.** Si la spec sube a 2.0, que pasa con un servicio
 desplegado que implementa la 1.x. Depende de la politica de soporte y por ahora no tiene
 respuesta.
