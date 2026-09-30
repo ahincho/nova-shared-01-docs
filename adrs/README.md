@@ -59,6 +59,7 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 015 | [Librerias Puras sin Dependencias de Framework](java/ADR-015-librerias-puras-sin-dependencias-framework.md) | Aceptada | Arquitectura |
 | 041 | [Un Repositorio por Capacidad](java/ADR-041-un-repositorio-por-capacidad.md) | Aceptada | Estructura |
 | 044 | [El Toolchain de Java: Plugins de Convención de Gradle](java/ADR-044-toolchain-de-java.md) | Aceptada | Build System |
+| 045 | [La Imagen Nativa de GraalVM, junto a la JVM](java/ADR-045-imagen-nativa-junto-a-la-jvm.md) | Propuesta | Build System |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
 
