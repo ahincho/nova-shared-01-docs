@@ -41,6 +41,10 @@ Decisiones aplicables a Java y NestJS.
 | 031 | [El Módulo de Errores por Capas, con Trazabilidad](shared/ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md) | Aceptada | Arquitectura |
 | 032 | [Observabilidad como Puerto Conectable](shared/ADR-032-observabilidad-como-puerto-conectable.md) | Propuesta | Observabilidad |
 | 033 | [Que es Nucleo, que es Comun Opcional y que es Plugin](shared/ADR-033-nucleo-comun-y-plugins.md) | Propuesta | Arquitectura |
+| 034 | [Lo Duro y lo Reemplazable: Reglas en el Núcleo, Convenciones Detrás de un Puerto](shared/ADR-034-puertos-con-implementacion-por-defecto.md) | Aceptada | Arquitectura |
+| 035 | [Fallos de Upstream Clasificados con el Registro de RFC 9209](shared/ADR-035-fallos-de-upstream-rfc-9209.md) | Aceptada | Errores |
+| 036 | [Perfiles de Organización: Cómo una Organización Adapta Nova sin Forkearla](shared/ADR-036-perfiles-de-organizacion.md) | Aceptada | Arquitectura |
+| 037 | [El Borde: Cómo Entra la Correlación y Quién Escribe la Identidad](shared/ADR-037-borde-correlacion-e-identidad.md) | Aceptada | Observabilidad |
 | 038 | [Nombres de Repositorio por Tecnología y Número](shared/ADR-038-nombres-de-repositorio-por-tecnologia.md) | Aceptada | Estructura |
 | 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Aceptada | Estructura |
 | 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Aceptada | Arquitectura |
