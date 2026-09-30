@@ -45,6 +45,7 @@ Decisiones aplicables a Java y NestJS.
 | 039 | [Nombres de Artefacto Derivados del Repositorio](shared/ADR-039-nombres-de-artefacto-derivados-del-repositorio.md) | Aceptada | Estructura |
 | 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 | 043 | [Plaza, la Plataforma de Compras que Demuestra Nova](shared/ADR-043-plaza-la-plataforma-de-compras.md) | Aceptada | Producto |
+| 047 | [La Idempotencia de las Operaciones, detrás de un Contrato](shared/ADR-047-idempotencia-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 
