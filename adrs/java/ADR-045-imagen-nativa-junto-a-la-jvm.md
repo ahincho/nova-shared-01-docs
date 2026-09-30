@@ -2,8 +2,9 @@
 
 ## Estado
 
-Propuesta (2026-09-29). Angel pidió que los servicios se puedan compilar en nativo con GraalVM sin
-dejar la JVM, para comparar los dos modos y sacar métricas.
+Aceptada (2026-09-29). Angel pidió que los servicios se puedan compilar en nativo con GraalVM sin
+dejar la JVM, para comparar los dos modos y sacar métricas, y aprobó el plan con las respuestas
+recomendadas a las preguntas abiertas. Sigue abierta la fecha de la presentación.
 **Scope:** `java`. NestJS no tiene un equivalente.
 **Extiende:** [ADR-044](ADR-044-toolchain-de-java.md), que define los plugins de servicio y la imagen
 de la JVM.
@@ -83,6 +84,16 @@ necesita el token del registro.
 **La memoria del compilador se acota:** el Dockerfile fija un tope de heap para `native-image`, que se
 puede subir con `--build-arg`. Un build nativo nunca corre dentro de `./gradlew build`.
 
+### En la máquina, para ensayar
+
+Native Build Tools trae además `nativeCompile` y `nativeRun`, que compilan con el GraalVM instalado en la
+máquina. En Windows piden también las herramientas de C++ de Visual Studio, y generan un `.exe` que
+corre en la propia estación: sirve para ensayar rápido o para medir en la máquina de la presentación.
+El toolchain les pone el mismo tope de heap que al Dockerfile.
+
+**No reemplazan a la imagen.** Un `.exe` de Windows no corre en un contenedor Linux, así que la imagen
+nativa se construye siempre en Docker, y los números del informe salen siempre de las imágenes.
+
 ### Cada librería de Nova responde por su modo nativo
 
 Si una librería usa reflexión o recursos, ella declara sus metadatos y prueba el modo nativo en su CI.
@@ -142,25 +153,29 @@ Un PR por repositorio, en este orden:
 
 ## Preguntas abiertas
 
-1. **Cuándo compila el CI en nativo.** Recomiendo solo en la medición manual y al publicar una
+Las cuatro primeras se resolvieron con la aceptación.
+
+1. **Cuándo compila el CI en nativo.** Resuelta: solo en la medición manual y al publicar una
    versión. Cada PR sigue con la JVM.
-2. **La distribución de GraalVM.** Recomiendo GraalVM Community para Spring, que es la que usa la
+2. **La distribución de GraalVM.** Resuelta: GraalVM Community para Spring, que es la que usa la
    documentación de Spring Boot, y Mandrel para Quarkus, que es su valor por defecto. Oracle GraalVM
-   trae el recolector G1 y la optimización guiada por perfiles, pero con otra licencia.
-3. **Dónde se mide.** Recomiendo un runner de GitHub: siempre el mismo tipo de máquina, y ninguna
-   estación de trabajo ocupada durante minutos. El mismo script corre en local para ensayar.
-4. **Un tercer modo: la JVM con la caché AOT de Java 25.** Es la respuesta de la JVM al nativo: menos
-   tiempo de arranque sin mundo cerrado. Pide una corrida de entrenamiento al construir la imagen, y en
-   pedidos esa corrida necesita la base de datos. Recomiendo evaluarlo después del catálogo.
-5. **La fecha de la presentación.** Marca hasta dónde llega el alcance: los pasos 1 a 4 dan el primer
-   informe.
+   trae el recolector G1 y la optimización guiada por perfiles, pero con otra licencia. En la máquina
+   de Angel está instalado Oracle GraalVM para ensayar, y eso no cambia la imagen.
+3. **Dónde se mide.** Resuelta: en un runner de GitHub, que es siempre el mismo tipo de máquina y no
+   ocupa ninguna estación de trabajo durante minutos. El mismo script corre en local para ensayar.
+4. **Un tercer modo: la JVM con la caché AOT de Java 25.** Resuelta: se evalúa después del catálogo.
+   Es la respuesta de la JVM al nativo, menos tiempo de arranque sin mundo cerrado, pero pide una
+   corrida de entrenamiento al construir la imagen, y en pedidos esa corrida necesita la base de datos.
+5. **La fecha de la presentación.** Abierta. Marca hasta dónde llega el alcance: los pasos 1 a 4 dan el
+   primer informe.
 
 ## Alternativas descartadas
 
 - **El nativo en todos los servicios.** Cada build pagaría el AOT y sus restricciones, aunque el
   servicio nunca se compile en nativo.
-- **Compilar con GraalVM instalado en la máquina.** En Windows sale un `.exe` que no corre en el
-  contenedor, y obliga a instalar y mantener GraalVM en cada estación.
+- **Construir la imagen con el GraalVM de la máquina.** En Windows sale un `.exe` que no corre en el
+  contenedor, y la imagen dependería de lo que cada estación tenga instalado. El GraalVM local queda
+  para ensayar.
 - **Paketo Buildpacks con `bootBuildImage`.** Construye la imagen nativa sin Dockerfile, pero se aparta
   del modelo de ADR-044, en el que la imagen vive en el plugin y se puede leer. Quarkus tampoco lo usa
   por defecto.
