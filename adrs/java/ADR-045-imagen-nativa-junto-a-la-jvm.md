@@ -129,6 +129,7 @@ compara sobre su propia infraestructura. `nova-plaza-01-shared-platform` suma un
 | Memoria | la del proceso en reposo, y el máximo bajo carga |
 | Latencia y rendimiento | p50, p95, p99 y peticiones por segundo con k6 a una tasa fija, separando el calentamiento del régimen estable |
 | CPU | el promedio bajo carga |
+| CVE | los de cada imagen con Trivy, del sistema y de las librerías, y cuántos tienen arreglo ([ADR-046](ADR-046-imagenes-base-distroless.md)) |
 
 Para que la comparación sea justa: la misma infraestructura, los mismos endpoints y el mismo tope de
 heap relativo a la memoria del contenedor. Cada informe registra las versiones (JDK, GraalVM y el
