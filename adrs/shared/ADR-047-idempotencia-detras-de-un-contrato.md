@@ -2,9 +2,9 @@
 
 ## Estado
 
-Propuesta (2026-09-30). Angel pidió una capacidad de idempotencia con adaptadores para los tres
-stacks, y que un subagente cree su repositorio y la implemente. Este ADR fija el diseño antes de
-crearlo.
+Aceptada (2026-09-30). Angel pidió una capacidad de idempotencia con adaptadores para los tres
+stacks, y que un subagente cree su repositorio y la implemente. La aprobó con las respuestas
+recomendadas a las preguntas abiertas, que quedan escritas abajo.
 **Scope:** `shared` (Java y NestJS).
 **Aplica:** [ADR-041](../java/ADR-041-un-repositorio-por-capacidad.md) para la forma del repositorio,
 [ADR-042](ADR-042-secretos-detras-de-un-contrato.md) para el contrato con adaptadores y
@@ -149,15 +149,21 @@ acotarse por cliente.
 
 ## Preguntas abiertas
 
-1. **El almacén en memoria en producción.** `@nestjs/idempotency` se niega a arrancar con él en
-   producción. En Java no hay una señal universal de «producción»; una opción es exigir un almacén
-   explícito salvo que una propiedad declare el modo de desarrollo.
-2. **La clave entre comillas.** El borrador la define como un string de Structured Fields
-   (`"abc"`), y Stripe y NestJS la aceptan sin comillas. ¿Se aceptan las dos formas?
-3. **El cifrado de las respuestas guardadas,** con AES-256-GCM, como ofrece NestJS. Entra cuando un
+Las cinco se resolvieron con la aceptación.
+
+1. **El almacén en memoria en producción.** Resuelta: si no hay un almacén persistente, el servicio
+   no arranca, salvo que la configuración elija la memoria a propósito
+   (`nova.idempotency.store=memory`). En Java no hay una señal universal de «producción», así que se
+   exige la decisión explícita.
+2. **La clave entre comillas.** Resuelta: se toma tal como llega, igual que `@nestjs/idempotency`,
+   para que los tres stacks respondan lo mismo. `"abc"` y `abc` son dos claves distintas.
+3. **El cifrado de las respuestas guardadas.** Resuelta: se suma con AES-256-GCM cuando un
    consumidor guarde datos sensibles, como pagos.
-4. **La retención.** 24 horas es lo habitual; la API v2 de Stripe usa 30 días.
-5. **Una suite de contrato común** con la de ADR-031, que corra los mismos casos en los tres stacks.
+4. **La retención.** Resuelta: 24 horas por defecto, configurable.
+5. **Una suite de contrato común.** Resuelta: una sola, compartida con la de ADR-031.
+
+**El alcance nunca es global por defecto.** Si no hay una identidad autenticada ni un header de
+alcance configurado, el servicio no arranca: es el defecto de pedidos, y se cierra por diseño.
 
 ## Consecuencias
 
