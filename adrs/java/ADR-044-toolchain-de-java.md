@@ -151,7 +151,8 @@ Con eso, **un repositorio Java deja de necesitar Node**: `package.json`, `commit
 
 El Dockerfile vive en el plugin, igual que en NestJS
 ([ADR-027](../nest/ADR-027-imagen-de-contenedor-compartida.md)): JRE 25, un usuario sin privilegios y
-el jar por capas, para que una imagen nueva reuse las dependencias de la anterior. **No se copia a
+el jar por capas, para que una imagen nueva reuse las dependencias de la anterior. Desde
+[ADR-046](ADR-046-imagenes-base-distroless.md), la imagen final es distroless. **No se copia a
 cada repositorio**, porque una copia envejece sin fallar. `novaDockerEject` lo escribe con un
 encabezado que dice de dónde salió.
 
