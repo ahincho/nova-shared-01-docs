@@ -15,6 +15,7 @@ adrs/
   java/        Java-specific
   nest/        NestJS-specific
   versioning/  versioning policy
+diagrams/      Excalidraw diagrams of the platform, each stack and Plaza
 java/          technical guides for the Java stack
 nest/          technical guides for the NestJS stack
 ops/           metadata automation scripts
@@ -49,6 +50,15 @@ target (003), deferred GPG signing (013), framework-free libraries (015).
 
 The [ADR index](adrs/README.md) carries the status of each one: accepted,
 accepted with a concern, proposed, pending, deprecated or superseded.
+
+## Diagrams
+
+[`diagrams/`](diagrams/README.md) draws the current state: the repositories by
+stack and level, what a service receives in Spring Boot, Quarkus and NestJS,
+the Plaza services, and a capability matrix across the three stacks. Each one
+is an editable `.excalidraw` file with its SVG next to it.
+
+![Nova Platform capabilities by stack](diagrams/05-capacidades.svg)
 
 ## Guides
 
