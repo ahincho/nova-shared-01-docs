@@ -69,6 +69,7 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 045 | [La Imagen Nativa de GraalVM, junto a la JVM](java/ADR-045-imagen-nativa-junto-a-la-jvm.md) | Aceptada | Build System |
 | 046 | [Las Imágenes Base: Distroless por Defecto, Docker Hardened como Opción](java/ADR-046-imagenes-base-distroless.md) | Aceptada | Build System |
 | 050 | [Los Errores por Capas en Quarkus: la Extensión del Estándar de API 3.0.0](java/ADR-050-errores-por-capas-en-quarkus.md) | Aceptada | Errores |
+| 052 | [La Meta-Extensión de Quarkus, el Nivel 3 que le Faltaba](java/ADR-052-meta-extension-de-quarkus.md) | Aceptada | Arquitectura |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
 
