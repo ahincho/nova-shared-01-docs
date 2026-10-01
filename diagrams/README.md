@@ -6,7 +6,7 @@ versiones publicadas al 2026-10-01.
 
 | Diagrama | Qué muestra |
 |---|---|
-| [Panorama](#panorama) | los repositorios por stack y por nivel de [ADR-001](../adrs/shared/ADR-001-arquitectura-meta-framework-cinco-niveles.md) |
+| [Panorama](#panorama) | los repositorios por stack y por nivel: los seis de [ADR-001](../adrs/shared/ADR-001-arquitectura-meta-framework-cinco-niveles.md) con la enmienda que propone [ADR-051](../adrs/shared/ADR-051-plantillas-de-servicio.md) |
 | [Spring Boot](#spring-boot) | qué recibe un servicio Spring Boot y de dónde sale |
 | [Quarkus](#quarkus) | lo mismo en Quarkus, con lo que propone [ADR-050](../adrs/java/ADR-050-errores-por-capas-en-quarkus.md) |
 | [NestJS](#nestjs) | el monorepo, sus cinco paquetes y el perfil de UTP |

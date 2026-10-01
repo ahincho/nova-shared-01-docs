@@ -4,6 +4,8 @@
 {"type":"text","id":"t1","x":40,"y":76,"text":"Qué recibe un servicio y de dónde sale. Versiones publicadas al 2026-10-01.","fontSize":18,"strokeColor":"#495057"},
 {"type":"cameraUpdate","width":1600,"height":1200,"x":0,"y":0},
 {"type":"rectangle","id":"svc","x":420,"y":120,"width":560,"height":80,"roundness":{"type":3},"backgroundColor":"#b2f2bb","strokeColor":"#2f9e44","label":{"text":"Servicio Spring Boot\nplaza-orders, examples 01 a 03","fontSize":20}},
+{"type":"rectangle","id":"tpl","x":1010,"y":120,"width":270,"height":80,"roundness":{"type":3},"backgroundColor":"#f3f0ff","strokeColor":"#7048e8","strokeStyle":"dashed","label":{"text":"nace de nova-template-01-\nspring-boot-service (ADR-051)","fontSize":17}},
+{"type":"arrow","id":"tpl-a","x":1010,"y":160,"width":30,"height":0,"points":[[0,0],[-30,0]],"endArrowhead":"arrow","strokeColor":"#7048e8","strokeStyle":"dashed","startBinding":{"elementId":"tpl"},"endBinding":{"elementId":"svc"}},
 {"type":"rectangle","id":"tc","x":40,"y":260,"width":380,"height":90,"roundness":{"type":3},"backgroundColor":"#ebfbee","strokeColor":"#2f9e44","label":{"text":"24 gradle-toolchain 2.0.0\nplugin spring-boot-service","fontSize":18}},
 {"type":"arrow","id":"a1","x":560,"y":200,"width":330,"height":60,"points":[[0,0],[-330,60]],"endArrowhead":"arrow","strokeColor":"#2f9e44","startBinding":{"elementId":"svc"},"endBinding":{"elementId":"tc"}},
 {"type":"rectangle","id":"bom","x":480,"y":260,"width":360,"height":90,"roundness":{"type":3},"backgroundColor":"#ebfbee","strokeColor":"#2f9e44","label":{"text":"13 nova-spring-boot-bom 3.1.0\nfija las versiones","fontSize":18}},

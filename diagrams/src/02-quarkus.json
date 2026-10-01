@@ -4,6 +4,8 @@
 {"type":"text","id":"t1","x":40,"y":76,"text":"Qué recibe un servicio y qué falta. Versiones publicadas al 2026-10-01.","fontSize":18,"strokeColor":"#495057"},
 {"type":"cameraUpdate","width":1600,"height":1200,"x":0,"y":0},
 {"type":"rectangle","id":"svc","x":420,"y":120,"width":560,"height":80,"roundness":{"type":3},"backgroundColor":"#a5d8ff","strokeColor":"#1971c2","label":{"text":"Servicio Quarkus\nexamples 04 a 06; plaza-catalog, planeado","fontSize":20}},
+{"type":"rectangle","id":"tpl","x":1010,"y":120,"width":270,"height":80,"roundness":{"type":3},"backgroundColor":"#f3f0ff","strokeColor":"#7048e8","strokeStyle":"dashed","label":{"text":"nace de nova-template-02-\nquarkus-service (ADR-051)","fontSize":17}},
+{"type":"arrow","id":"tpl-a","x":1010,"y":160,"width":30,"height":0,"points":[[0,0],[-30,0]],"endArrowhead":"arrow","strokeColor":"#7048e8","strokeStyle":"dashed","startBinding":{"elementId":"tpl"},"endBinding":{"elementId":"svc"}},
 {"type":"rectangle","id":"bom","x":40,"y":260,"width":380,"height":90,"roundness":{"type":3},"backgroundColor":"#e7f5ff","strokeColor":"#1971c2","label":{"text":"13 nova-quarkus-bom 3.1.0\nimporta quarkus-bom 3.33.3.3","fontSize":18}},
 {"type":"arrow","id":"a1","x":560,"y":200,"width":330,"height":60,"points":[[0,0],[-330,60]],"endArrowhead":"arrow","strokeColor":"#1971c2","startBinding":{"elementId":"svc"},"endBinding":{"elementId":"bom"}},
 {"type":"rectangle","id":"par","x":480,"y":260,"width":360,"height":90,"roundness":{"type":3},"backgroundColor":"#f1f3f5","strokeColor":"#868e96","label":{"text":"15 quarkus-parent 2.0.0\nimporta el BOM 2.0.2","fontSize":18}},

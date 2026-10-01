@@ -24,6 +24,7 @@ const rows = [
   ['Imagen nativa (ADR-045)', ['done', 'toolchain y starters 3.0.1'], ['partial', 'secretos sí; estándar con ADR-050'], ['na', 'no aplica']],
   ['Toolchain de build', ['done', '24 gradle-toolchain 2.0.0'], ['pending', 'sin plugin quarkus-service'], ['done', 'nova-nestjs-toolchain 0.16.1']],
   ['Generadores', ['partial', '17 archetype sin release'], ['partial', '18 y 19 por actualizar'], ['done', 'schematics 0.16.1']],
+  ['Plantillas de servicio (ADR-051)', ['proposed', 'nova-template-01'], ['proposed', 'nova-template-02, hoy el 19'], ['proposed', 'nova-template-03, hoy el ejemplo 08']],
   ['Outbox transaccional (ADR-048)', ['proposed', 'propuesta, docs #14'], ['proposed', 'propuesta, docs #14'], ['proposed', 'propuesta, docs #14']],
 ];
 
@@ -47,9 +48,9 @@ const headers = [
 headers.forEach(([text, s], i) => box(`h${i}`, cols[i], 120, widths[i], 50, s, text, 22));
 
 rows.forEach((row, r) => {
-  const y = 186 + r * 64;
-  box(`c${r}`, cols[0], y, widths[0], 56, { bg: '#ffffff', stroke: '#495057' }, row[0], 17);
-  row.slice(1).forEach(([state, text], c) => box(`m${r}-${c}`, cols[c + 1], y, widths[c + 1], 56, status[state], text, 17));
+  const y = 186 + r * 60;
+  box(`c${r}`, cols[0], y, widths[0], 52, { bg: '#ffffff', stroke: '#495057' }, row[0], 17);
+  row.slice(1).forEach(([state, text], c) => box(`m${r}-${c}`, cols[c + 1], y, widths[c + 1], 52, status[state], text, 17));
 });
 
 const legend = [
@@ -59,7 +60,7 @@ const legend = [
   ['proposed', 'propuesto en un ADR'],
   ['na', 'no aplica'],
 ];
-const ly = 186 + rows.length * 64 + 20;
+const ly = 186 + rows.length * 60 + 20;
 legend.forEach(([state, text], i) => box(`lg${i}`, 40 + i * 300, ly, 280, 44, status[state], text, 17));
 
 writeFileSync(new URL('../src/05-capacidades.json', import.meta.url), JSON.stringify(el, null, 0).replaceAll('},{', '},\n{') + '\n');

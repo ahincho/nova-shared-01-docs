@@ -22,12 +22,12 @@
       "frameId": null,
       "index": "a0",
       "roundness": null,
-      "seed": 1609964509,
+      "seed": 630454790,
       "version": 2,
-      "versionNonce": 688858397,
+      "versionNonce": 1748227974,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false,
       "text": "Plaza: la plataforma de compras que demuestra Nova (ADR-043)",
@@ -59,12 +59,12 @@
       "frameId": null,
       "index": "a1",
       "roundness": null,
-      "seed": 1458560115,
+      "seed": 692392282,
       "version": 2,
-      "versionNonce": 246875955,
+      "versionNonce": 1195101146,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false,
       "text": "Borde sólido: existe hoy. Borde punteado: planeado. plaza-01 levanta orders-db, catalog-db y Vault con compose.",
@@ -98,21 +98,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 903911485,
+      "seed": 1179830598,
       "version": 3,
-      "versionNonce": 872424147,
+      "versionNonce": 1382534298,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "c-GaQOivaLvMG-fo0a6dL"
+          "id": "_IRDkQA7wreRRe9pUmue9"
         },
         {
           "id": "a-cli",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732872,
+      "updated": 1790893536574,
       "link": null,
       "locked": false
     },
@@ -137,21 +137,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 138532371,
+      "seed": 336451098,
       "version": 3,
-      "versionNonce": 1139450195,
+      "versionNonce": 567783322,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "ZrItsTzGUnhPaKOS9eESY"
+          "id": "ywZ4rqYOGlTXxN_DztyA_"
         },
         {
           "id": "a-kc",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732876,
+      "updated": 1790893536577,
       "link": null,
       "locked": false
     },
@@ -176,14 +176,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1979484317,
+      "seed": 1559605382,
       "version": 7,
-      "versionNonce": 1794939891,
+      "versionNonce": 1792881242,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "UQdn9Ic0W-iMvfDmyEoVc"
+          "id": "Vf1LMx9J1I8tXCim7wg2v"
         },
         {
           "id": "a-cli",
@@ -206,7 +206,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790891732884,
+      "updated": 1790893536585,
       "link": null,
       "locked": false
     },
@@ -229,12 +229,12 @@
       "frameId": null,
       "index": "a5",
       "roundness": null,
-      "seed": 1550031795,
+      "seed": 1524630234,
       "version": 4,
-      "versionNonce": 631662557,
+      "versionNonce": 1111253510,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732873,
+      "updated": 1790893536574,
       "link": null,
       "locked": false,
       "points": [
@@ -281,17 +281,17 @@
       "frameId": null,
       "index": "a6",
       "roundness": null,
-      "seed": 1106996477,
+      "seed": 1161408454,
       "version": 4,
-      "versionNonce": 25114877,
+      "versionNonce": 517674950,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "gzH5wD30wnATEzzy_C39A"
+          "id": "U9gM6hmIb4gdItuOU3A-1"
         }
       ],
-      "updated": 1790891732876,
+      "updated": 1790893536577,
       "link": null,
       "locked": false,
       "points": [
@@ -338,12 +338,12 @@
       "frameId": null,
       "index": "a7",
       "roundness": null,
-      "seed": 2138811731,
+      "seed": 139368346,
       "version": 2,
-      "versionNonce": 1816776723,
+      "versionNonce": 1469145626,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false,
       "text": "La saga: reservar el stock, crear el pedido,\ncobrar y confirmar. Si un paso falla, compensa.\nCon Idempotency-Key y sin reintentos (ADR-029).",
@@ -377,14 +377,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 157205853,
+      "seed": 1530644230,
       "version": 5,
-      "versionNonce": 1914820659,
+      "versionNonce": 1258219994,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "nI3NjofNgTzd1hFPRU7O8"
+          "id": "s3SM3IHzsg1yZ_6vHFpIt"
         },
         {
           "id": "h-cat",
@@ -399,7 +399,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790891732916,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -422,12 +422,12 @@
       "frameId": null,
       "index": "a9",
       "roundness": null,
-      "seed": 1424001779,
+      "seed": 1552716890,
       "version": 4,
-      "versionNonce": 24124957,
+      "versionNonce": 1745397126,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732878,
+      "updated": 1790893536579,
       "link": null,
       "locked": false,
       "points": [
@@ -476,14 +476,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1333268925,
+      "seed": 1870198342,
       "version": 6,
-      "versionNonce": 231527923,
+      "versionNonce": 369114714,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "F6R7qCq6ytfOHR5-jfPwj"
+          "id": "hc-fAgQ3Uu1maRGJh3s50"
         },
         {
           "id": "h-ord",
@@ -502,7 +502,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -525,17 +525,17 @@
       "frameId": null,
       "index": "aB",
       "roundness": null,
-      "seed": 286831763,
+      "seed": 426572058,
       "version": 4,
-      "versionNonce": 1235593117,
+      "versionNonce": 1312731782,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "upuqA554yIBzwKSe4_kkB"
+          "id": "9C7bpZJpXwW69B62eKLFv"
         }
       ],
-      "updated": 1790891732883,
+      "updated": 1790893536583,
       "link": null,
       "locked": false,
       "points": [
@@ -584,14 +584,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 828953117,
+      "seed": 986594694,
       "version": 4,
-      "versionNonce": 1886401843,
+      "versionNonce": 175370202,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "ReMS1aVJ_tfmZ_E1mSRbN"
+          "id": "RTE6cHoYvNmAw82rbxFgG"
         },
         {
           "id": "h-pay",
@@ -602,7 +602,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -625,12 +625,12 @@
       "frameId": null,
       "index": "aD",
       "roundness": null,
-      "seed": 333097523,
+      "seed": 1315096026,
       "version": 4,
-      "versionNonce": 1168216253,
+      "versionNonce": 579418182,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732884,
+      "updated": 1790893536585,
       "link": null,
       "locked": false,
       "points": [
@@ -679,14 +679,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 740460157,
+      "seed": 1383636166,
       "version": 4,
-      "versionNonce": 305252787,
+      "versionNonce": 1907238618,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "bF4MNfFxVl-Dl8crn6B2Q"
+          "id": "TfiMJDIwp43CD4mvVpxhw"
         },
         {
           "id": "a-out",
@@ -697,7 +697,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790891732915,
+      "updated": 1790893536612,
       "link": null,
       "locked": false
     },
@@ -720,17 +720,17 @@
       "frameId": null,
       "index": "aF",
       "roundness": null,
-      "seed": 34401235,
+      "seed": 612432538,
       "version": 4,
-      "versionNonce": 1689831997,
+      "versionNonce": 1904207174,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "TO4BWDLZiatBX802g0-Ec"
+          "id": "qXZxRwAVu25RuQZLtSHKY"
         }
       ],
-      "updated": 1790891732915,
+      "updated": 1790893536612,
       "link": null,
       "locked": false,
       "points": [
@@ -777,12 +777,12 @@
       "frameId": null,
       "index": "aG",
       "roundness": null,
-      "seed": 577154781,
+      "seed": 471143430,
       "version": 4,
-      "versionNonce": 971972349,
+      "versionNonce": 1691339718,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732915,
+      "updated": 1790893536612,
       "link": null,
       "locked": false,
       "points": [
@@ -839,21 +839,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 533068147,
+      "seed": 712677210,
       "version": 3,
-      "versionNonce": 1523931219,
+      "versionNonce": 24084890,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "ChfnJCmgUvZibfgjIjjyP"
+          "id": "tzti-FVXTqTKojuWnv8yv"
         },
         {
           "id": "v-ord2",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -878,21 +878,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 583453501,
+      "seed": 1101046598,
       "version": 3,
-      "versionNonce": 725506515,
+      "versionNonce": 33070746,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "gS_o8RnBb_fqTf84cwpCc"
+          "id": "lchQy4F_ftqApjUnIqFuf"
         },
         {
           "id": "d-cat",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732916,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -915,12 +915,12 @@
       "frameId": null,
       "index": "aJ",
       "roundness": null,
-      "seed": 1783386899,
+      "seed": 547527706,
       "version": 4,
-      "versionNonce": 464337021,
+      "versionNonce": 404797638,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732916,
+      "updated": 1790893536614,
       "link": null,
       "locked": false,
       "points": [
@@ -969,21 +969,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1839487901,
+      "seed": 628640390,
       "version": 3,
-      "versionNonce": 1951835827,
+      "versionNonce": 1347824858,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "M1---RxnmYnL7OUXLLBPh"
+          "id": "yJeBvzWaYKTIc2fIQcaQh"
         },
         {
           "id": "d-ord",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -1006,12 +1006,12 @@
       "frameId": null,
       "index": "aL",
       "roundness": null,
-      "seed": 1914075315,
+      "seed": 1156319450,
       "version": 4,
-      "versionNonce": 1330589,
+      "versionNonce": 1816520326,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false,
       "points": [
@@ -1058,12 +1058,12 @@
       "frameId": null,
       "index": "aM",
       "roundness": null,
-      "seed": 993058813,
+      "seed": 1448675782,
       "version": 4,
-      "versionNonce": 1778993757,
+      "versionNonce": 813071622,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false,
       "points": [
@@ -1112,21 +1112,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1959455315,
+      "seed": 518643098,
       "version": 3,
-      "versionNonce": 1773737683,
+      "versionNonce": 1490871450,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "eSYdiYi38HTNJP2uHYerr"
+          "id": "ujfaYTv-ClkBJjsHE-HvP"
         },
         {
           "id": "d-pay",
           "type": "arrow"
         }
       ],
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false
     },
@@ -1149,12 +1149,12 @@
       "frameId": null,
       "index": "aO",
       "roundness": null,
-      "seed": 1097717853,
+      "seed": 56615174,
       "version": 4,
-      "versionNonce": 901720957,
+      "versionNonce": 2061963974,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732917,
+      "updated": 1790893536614,
       "link": null,
       "locked": false,
       "points": [
@@ -1201,12 +1201,12 @@
       "frameId": null,
       "index": "aP",
       "roundness": null,
-      "seed": 926951411,
+      "seed": 1271863898,
       "version": 2,
-      "versionNonce": 389362355,
+      "versionNonce": 1280447706,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false,
       "text": "orders lee sus credenciales\nde Vault al arrancar;\ncatalog lo hará con la\nextensión de secretos.",
@@ -1240,17 +1240,17 @@
       "roundness": {
         "type": 3
       },
-      "seed": 2049754301,
+      "seed": 1879691334,
       "version": 2,
-      "versionNonce": 133350909,
+      "versionNonce": 1764343238,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "4QXeUyST-Tr8M9Wub2bbj"
+          "id": "Is6YTju82JOAaz10-fmBC"
         }
       ],
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false
     },
@@ -1275,22 +1275,22 @@
       "roundness": {
         "type": 3
       },
-      "seed": 528265619,
+      "seed": 1248771866,
       "version": 2,
-      "versionNonce": 973235283,
+      "versionNonce": 1705929114,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "uoIYTi9P6tRjV-6nNWRVT"
+          "id": "ShC6s-VWfMOm_4WR-unsJ"
         }
       ],
-      "updated": 1790891732838,
+      "updated": 1790893536544,
       "link": null,
       "locked": false
     },
     {
-      "id": "c-GaQOivaLvMG-fo0a6dL",
+      "id": "_IRDkQA7wreRRe9pUmue9",
       "type": "text",
       "x": 99.5361328125,
       "y": 477.5,
@@ -1308,12 +1308,12 @@
       "frameId": null,
       "index": "aS",
       "roundness": null,
-      "seed": 688062045,
+      "seed": 1643779334,
       "version": 3,
-      "versionNonce": 1072111773,
+      "versionNonce": 1488093318,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "Cliente",
@@ -1327,7 +1327,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "ZrItsTzGUnhPaKOS9eESY",
+      "id": "ywZ4rqYOGlTXxN_DztyA_",
       "type": "text",
       "x": 409.5654296875,
       "y": 175,
@@ -1345,12 +1345,12 @@
       "frameId": null,
       "index": "aT",
       "roundness": null,
-      "seed": 1076701885,
+      "seed": 1698530374,
       "version": 3,
-      "versionNonce": 1846444979,
+      "versionNonce": 572011226,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "Keycloak\nrealm plaza",
@@ -1364,7 +1364,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "UQdn9Ic0W-iMvfDmyEoVc",
+      "id": "Vf1LMx9J1I8tXCim7wg2v",
       "type": "text",
       "x": 351.6923828125,
       "y": 445,
@@ -1382,12 +1382,12 @@
       "frameId": null,
       "index": "aU",
       "roundness": null,
-      "seed": 1578289949,
+      "seed": 1691421574,
       "version": 3,
-      "versionNonce": 584254717,
+      "versionNonce": 1356627910,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "plaza-bff, NestJS :8080\nnova-plaza-02\nel único que valida el token\ny orquesta la saga",
@@ -1401,7 +1401,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "gzH5wD30wnATEzzy_C39A",
+      "id": "U9gM6hmIb4gdItuOU3A-1",
       "type": "text",
       "x": 440.78125,
       "y": 325,
@@ -1419,12 +1419,12 @@
       "frameId": null,
       "index": "aV",
       "roundness": null,
-      "seed": 2007458877,
+      "seed": 28193094,
       "version": 3,
-      "versionNonce": 1804178771,
+      "versionNonce": 419481498,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "JWKS",
@@ -1438,7 +1438,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "nI3NjofNgTzd1hFPRU7O8",
+      "id": "s3SM3IHzsg1yZ_6vHFpIt",
       "type": "text",
       "x": 815.373046875,
       "y": 176.25,
@@ -1456,12 +1456,12 @@
       "frameId": null,
       "index": "aW",
       "roundness": null,
-      "seed": 1049170269,
+      "seed": 1282420486,
       "version": 3,
-      "versionNonce": 461593949,
+      "versionNonce": 168072966,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "plaza-catalog, Quarkus :8082\nnova-plaza-04\nproductos, precios y reservas",
@@ -1475,7 +1475,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "F6R7qCq6ytfOHR5-jfPwj",
+      "id": "hc-fAgQ3Uu1maRGJh3s50",
       "type": "text",
       "x": 805.1689453125,
       "y": 446.25,
@@ -1493,12 +1493,12 @@
       "frameId": null,
       "index": "aX",
       "roundness": null,
-      "seed": 358634109,
+      "seed": 1009124550,
       "version": 3,
-      "versionNonce": 1458664179,
+      "versionNonce": 2004403290,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "plaza-orders, Spring Boot :8081\nnova-plaza-03\npedidos, con idempotencia",
@@ -1512,7 +1512,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "upuqA554yIBzwKSe4_kkB",
+      "id": "9C7bpZJpXwW69B62eKLFv",
       "type": "text",
       "x": 671.3046875,
       "y": 475,
@@ -1530,12 +1530,12 @@
       "frameId": null,
       "index": "aY",
       "roundness": null,
-      "seed": 973798109,
+      "seed": 1003846662,
       "version": 3,
-      "versionNonce": 1632217533,
+      "versionNonce": 1822934598,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "HTTP",
@@ -1549,7 +1549,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "ReMS1aVJ_tfmZ_E1mSRbN",
+      "id": "RTE6cHoYvNmAw82rbxFgG",
       "type": "text",
       "x": 815.76416015625,
       "y": 786.25,
@@ -1567,12 +1567,12 @@
       "frameId": null,
       "index": "aZ",
       "roundness": null,
-      "seed": 556313597,
+      "seed": 1779593670,
       "version": 3,
-      "versionNonce": 1892457619,
+      "versionNonce": 1733503258,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "plaza-payments, Spring Boot\nnova-plaza-05\nautorización simulada",
@@ -1586,7 +1586,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "bF4MNfFxVl-Dl8crn6B2Q",
+      "id": "TfiMJDIwp43CD4mvVpxhw",
       "type": "text",
       "x": 781.0673828125,
       "y": 633.75,
@@ -1604,12 +1604,12 @@
       "frameId": null,
       "index": "aa",
       "roundness": null,
-      "seed": 1141535005,
+      "seed": 1720074118,
       "version": 3,
-      "versionNonce": 1162308125,
+      "versionNonce": 1235422598,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "Kafka\nOrderConfirmed, con outbox (ADR-048)",
@@ -1623,7 +1623,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "TO4BWDLZiatBX802g0-Ec",
+      "id": "qXZxRwAVu25RuQZLtSHKY",
       "type": "text",
       "x": 904.42578125,
       "y": 565,
@@ -1641,12 +1641,12 @@
       "frameId": null,
       "index": "ab",
       "roundness": null,
-      "seed": 1463305597,
+      "seed": 199253702,
       "version": 3,
-      "versionNonce": 617714227,
+      "versionNonce": 1610806746,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "publica",
@@ -1660,7 +1660,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "ChfnJCmgUvZibfgjIjjyP",
+      "id": "tzti-FVXTqTKojuWnv8yv",
       "type": "text",
       "x": 1211.4052734375,
       "y": 316.25,
@@ -1678,12 +1678,12 @@
       "frameId": null,
       "index": "ac",
       "roundness": null,
-      "seed": 1812739933,
+      "seed": 1504600838,
       "version": 3,
-      "versionNonce": 2020482685,
+      "versionNonce": 1311993030,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "Vault\ncredenciales\nde las bases",
@@ -1697,7 +1697,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "gS_o8RnBb_fqTf84cwpCc",
+      "id": "lchQy4F_ftqApjUnIqFuf",
       "type": "text",
       "x": 1216.69189453125,
       "y": 187.5,
@@ -1715,12 +1715,12 @@
       "frameId": null,
       "index": "ad",
       "roundness": null,
-      "seed": 531055549,
+      "seed": 1027084870,
       "version": 3,
-      "versionNonce": 602330067,
+      "versionNonce": 1922771610,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "catalog-db\nPostgres",
@@ -1734,7 +1734,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "M1---RxnmYnL7OUXLLBPh",
+      "id": "yJeBvzWaYKTIc2fIQcaQh",
       "type": "text",
       "x": 1220.5107421875,
       "y": 457.5,
@@ -1752,12 +1752,12 @@
       "frameId": null,
       "index": "ae",
       "roundness": null,
-      "seed": 1909137629,
+      "seed": 777629702,
       "version": 3,
-      "versionNonce": 293553885,
+      "versionNonce": 2012603398,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "orders-db\nPostgres",
@@ -1771,7 +1771,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "eSYdiYi38HTNJP2uHYerr",
+      "id": "ujfaYTv-ClkBJjsHE-HvP",
       "type": "text",
       "x": 1207.283203125,
       "y": 797.5,
@@ -1789,12 +1789,12 @@
       "frameId": null,
       "index": "af",
       "roundness": null,
-      "seed": 579466941,
+      "seed": 2012015686,
       "version": 3,
-      "versionNonce": 1042473331,
+      "versionNonce": 365872986,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "payments-db\nPostgres",
@@ -1808,12 +1808,12 @@
       "lineHeight": 1.25
     },
     {
-      "id": "4QXeUyST-Tr8M9Wub2bbj",
+      "id": "Is6YTju82JOAaz10-fmBC",
       "type": "text",
       "x": 1419.11962890625,
-      "y": 234.375,
+      "y": 213.125,
       "width": 141.7607421875,
-      "height": 191.25,
+      "height": 233.75,
       "angle": 0,
       "strokeColor": "#f08c00",
       "backgroundColor": "transparent",
@@ -1826,26 +1826,26 @@
       "frameId": null,
       "index": "ag",
       "roundness": null,
-      "seed": 2066133981,
+      "seed": 1531234822,
       "version": 3,
-      "versionNonce": 1393320765,
+      "versionNonce": 149386054,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
-      "text": "Fases\n\n1. servicios Java\ncon Vault, en curso\n2. BFF, Keycloak\ny saga\n3. outbox y Kafka\n4. CQRS en orders\n5. arquetipos",
+      "text": "Fases\n\n1. servicios Java\ncon Vault, en curso\n2. BFF, Keycloak\ny saga\n3. outbox y Kafka\n4. CQRS en orders\n5. servicios nuevos\ndesde las plantillas\n(ADR-051)",
       "fontSize": 17,
       "fontFamily": 5,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "phases",
-      "originalText": "Fases\n\n1. servicios Java\ncon Vault, en curso\n2. BFF, Keycloak\ny saga\n3. outbox y Kafka\n4. CQRS en orders\n5. arquetipos",
+      "originalText": "Fases\n\n1. servicios Java\ncon Vault, en curso\n2. BFF, Keycloak\ny saga\n3. outbox y Kafka\n4. CQRS en orders\n5. servicios nuevos\ndesde las plantillas\n(ADR-051)",
       "autoResize": true,
       "lineHeight": 1.25
     },
     {
-      "id": "uoIYTi9P6tRjV-6nNWRVT",
+      "id": "ShC6s-VWfMOm_4WR-unsJ",
       "type": "text",
       "x": 298.69970703125,
       "y": 958.75,
@@ -1863,12 +1863,12 @@
       "frameId": null,
       "index": "ah",
       "roundness": null,
-      "seed": 1329475645,
+      "seed": 761895238,
       "version": 3,
-      "versionNonce": 2093759251,
+      "versionNonce": 1911606298,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790891732943,
+      "updated": 1790893536637,
       "link": null,
       "locked": false,
       "text": "nova-shared-03-infrastructure: OpenTelemetry Collector, Tempo, Loki, Mimir y Grafana. La meta: una traza que cruce los tres stacks",
