@@ -51,6 +51,7 @@ Decisiones aplicables a Java y NestJS.
 | 043 | [Plaza, la Plataforma de Compras que Demuestra Nova](shared/ADR-043-plaza-la-plataforma-de-compras.md) | Aceptada | Producto |
 | 047 | [La Idempotencia de las Operaciones, detrás de un Contrato](shared/ADR-047-idempotencia-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 | 049 | [Los Secretos en Quarkus y NestJS, con las Mismas Reglas que en Spring Boot](shared/ADR-049-secretos-en-quarkus-y-nestjs.md) | Aceptada | Arquitectura |
+| 051 | [Las Plantillas de Servicio, un Nivel entre el Build y los Generadores](shared/ADR-051-plantillas-de-servicio.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 
@@ -67,6 +68,7 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 044 | [El Toolchain de Java: Plugins de Convención de Gradle](java/ADR-044-toolchain-de-java.md) | Aceptada | Build System |
 | 045 | [La Imagen Nativa de GraalVM, junto a la JVM](java/ADR-045-imagen-nativa-junto-a-la-jvm.md) | Aceptada | Build System |
 | 046 | [Las Imágenes Base: Distroless por Defecto, Docker Hardened como Opción](java/ADR-046-imagenes-base-distroless.md) | Aceptada | Build System |
+| 050 | [Los Errores por Capas en Quarkus: la Extensión del Estándar de API 3.0.0](java/ADR-050-errores-por-capas-en-quarkus.md) | Aceptada | Errores |
 | 052 | [La Meta-Extensión de Quarkus, el Nivel 3 que le Faltaba](java/ADR-052-meta-extension-de-quarkus.md) | Propuesta | Arquitectura |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
