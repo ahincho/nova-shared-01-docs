@@ -2,7 +2,7 @@
 
 ## Estado
 
-Propuesta (2026-10-01). Es el segundo punto del plan que Angel aprobó el mismo día: llevar
+Aceptada (2026-10-01), con las recomendaciones de sus preguntas abiertas. Es el segundo punto del plan que Angel aprobó el mismo día: llevar
 [ADR-031](../shared/ADR-031-modulo-de-errores-por-capas-con-trazabilidad.md) a la extensión de
 Quarkus, que hoy es el único stack que no lo aplica.
 **Scope:** `java`, solo Quarkus.
@@ -193,18 +193,18 @@ capacidades que nacen desde ahí, y el estándar de API es anterior.
 respuesta que envuelva el éxito en Quarkus, como `ApiResponseInterceptor` en Spring. Los ejemplos ya
 arman el sobre a mano, y un filtro que no toca una `ApiResponse` no los cambia. Lo que sí cambia es
 un recurso que devuelve un objeto suelto, así que agregarlo después costaría una 4.0.0.
-Recomendación: **incluirlo en la 3.0.0, en su propio PR**, con la regla de Spring de no envolver lo
+Resuelta: **incluirlo en la 3.0.0, en su propio PR**, con la regla de Spring de no envolver lo
 que ya es un sobre ni las sondas de salud.
 
 **2. Las pilas de errores propias de la plantilla y del arquetipo.** `nova-java-19-quarkus-template`
 tiene su `DomainExceptionMapper` y su `GenericExceptionMapper`, y `nova-java-18-quarkus-archetype`
 genera un mapper con RFC 7807, que ADR-031 descartó como formato por defecto. Ninguno usa la
-extensión. Recomendación: **migrarlos después de la 3.0.0, un PR por repositorio**, para que lo que
+extensión. Resuelta: **migrarlos después de la 3.0.0, un PR por repositorio**, para que lo que
 generan responda como el resto.
 
 **3. La autenticación que se rechaza antes de llegar a REST.** Con la autenticación proactiva de
 Quarkus, un token inválido se responde en la capa HTTP, sin pasar por ningún mapper, y sale sin
-cuerpo. Eso es de `nova-java-11-keycloak-quarkus-extension`. Recomendación: **medirlo con esa
+cuerpo. Eso es de `nova-java-11-keycloak-quarkus-extension`. Resuelta: **medirlo con esa
 extensión y decidirlo en su propio PR**. La 3.0.0 cubre las excepciones de seguridad que sí llegan
 a REST.
 
