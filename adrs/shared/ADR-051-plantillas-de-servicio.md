@@ -2,7 +2,7 @@
 
 ## Estado
 
-Propuesta (2026-10-01). Angel pidió un nivel de plantillas, como el que se planteó en el curso
+Aceptada (2026-10-01), con las recomendaciones de sus preguntas abiertas. Angel pidió un nivel de plantillas, como el que se planteó en el curso
 entre el BOM y las herramientas, con repositorios que se llamen como
 `nova-template-01-spring-boot-service`.
 **Scope:** `shared` (Java y NestJS).
@@ -175,15 +175,15 @@ Gradle, porque `archetype:create-from-project` solo lee proyectos Maven. Hay dos
   copiado en cada servicio.
 - **b)** Un generador propio, una CLI como la de NestJS.
 
-Recomendación: **a**. Ya existe la mitad, y no suma otra herramienta que mantener.
+Resuelta: **a**. Ya existe la mitad, y no suma otra herramienta que mantener.
 
 **2. Qué pasa con los arquetipos 17 y 18.** Generan servicios Maven, y Nova construye con Gradle
-desde ADR-044. Recomendación: **archivar `nova-java-17`**, que nunca se publicó, cuando exista la
+desde ADR-044. Resuelta: **archivar `nova-java-17`**, que nunca se publicó, cuando exista la
 plantilla 01, y **dejar `nova-java-18` como generador Maven** mientras haya consumidores de
 `nova-quarkus-parent`, construido desde la plantilla 02. Su retiro se decide con su propio ADR.
 
 **3. Si la plantilla 03 reemplaza a `nova-example-08-nestjs-generated`.** Son el mismo archivo: la
-salida del schematic `service`. Recomendación: **sí**. El ejemplo 08 se archiva cuando la plantilla
+salida del schematic `service`. Resuelta: **sí**. El ejemplo 08 se archiva cuando la plantilla
 03 exista, y su número queda retirado.
 
 ## Consecuencias
