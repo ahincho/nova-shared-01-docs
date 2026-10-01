@@ -2,7 +2,7 @@
 
 ## Estado
 
-Propuesta (2026-10-01). Angel preguntó por qué Quarkus no tenía un meta-starter, y pidió este ADR
+Aceptada (2026-10-01), con las recomendaciones de sus preguntas abiertas. Angel preguntó por qué Quarkus no tenía un meta-starter, y pidió este ADR
 para agregarlo.
 **Scope:** `java`, Quarkus. Fija además una regla para el meta-starter de Spring Boot.
 **Completa:** el nivel 3 de [ADR-001](../shared/ADR-001-arquitectura-meta-framework-cinco-niveles.md),
@@ -153,11 +153,11 @@ es el nivel 5 de ADR-051, no qué dependencia lo mantiene al día.
 ## Preguntas abiertas
 
 **1. Si entra la extensión de Keycloak cuando exista.** Depende de si arranca sin configuración.
-Recomendación: **diseñarla para que no haga nada sin `nova.auth.*`**, como el `auth` de NestJS, que
+Resuelta: **diseñarla para que no haga nada sin `nova.auth.*`**, como el `auth` de NestJS, que
 está apagado si el servicio no lo declara. Así entra en la meta-extensión y la paridad se mantiene.
 
 **2. Si la prueba de completitud también exige el orden de publicación en el workflow.**
-Recomendación: **no por ahora**. La prueba del BOM ya frena una publicación fuera de orden, y
+Resuelta: **no por ahora**. La prueba del BOM ya frena una publicación fuera de orden, y
 automatizar la cadena es trabajo del pipeline compartido.
 
 ## Consecuencias
