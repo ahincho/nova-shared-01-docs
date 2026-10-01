@@ -22,12 +22,12 @@
       "frameId": null,
       "index": "a0",
       "roundness": null,
-      "seed": 1632567550,
+      "seed": 343174295,
       "version": 2,
-      "versionNonce": 1370264290,
+      "versionNonce": 1298001625,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false,
       "text": "Nova en Quarkus",
@@ -59,12 +59,12 @@
       "frameId": null,
       "index": "a1",
       "roundness": null,
-      "seed": 1608259042,
+      "seed": 1825016921,
       "version": 2,
-      "versionNonce": 1531184190,
+      "versionNonce": 853526327,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false,
       "text": "Qué recibe un servicio y qué falta. Versiones publicadas al 2026-10-01.",
@@ -98,14 +98,14 @@
       "roundness": {
         "type": 3
       },
-      "seed": 738341182,
+      "seed": 1317585335,
       "version": 6,
-      "versionNonce": 1130019938,
+      "versionNonce": 686887321,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "VcunUUIQOWJgByyoB1LOJ"
+          "id": "N1TgSwGfIMSLPj249pzj8"
         },
         {
           "id": "tpl-a",
@@ -124,7 +124,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1790893468387,
+      "updated": 1790897579035,
       "link": null,
       "locked": false
     },
@@ -149,21 +149,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 828574114,
+      "seed": 1285986617,
       "version": 3,
-      "versionNonce": 1139426082,
+      "versionNonce": 716801017,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "BcbQeDwVyBxwcWQSIsefS"
+          "id": "kfuc5Z6zWaewOKxC--UMm"
         },
         {
           "id": "tpl-a",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468368,
+      "updated": 1790897579019,
       "link": null,
       "locked": false
     },
@@ -186,12 +186,12 @@
       "frameId": null,
       "index": "a4",
       "roundness": null,
-      "seed": 1365596542,
+      "seed": 697660119,
       "version": 4,
-      "versionNonce": 2032695294,
+      "versionNonce": 445355031,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468369,
+      "updated": 1790897579019,
       "link": null,
       "locked": false,
       "points": [
@@ -240,21 +240,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1700103522,
+      "seed": 2060519961,
       "version": 3,
-      "versionNonce": 902210082,
+      "versionNonce": 1297039225,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "Z6cwsNyfhtRejKQSzP65S"
+          "id": "Q117FUASv-xuLB4QVcDF_"
         },
         {
           "id": "a1",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468373,
+      "updated": 1790897579024,
       "link": null,
       "locked": false
     },
@@ -277,12 +277,12 @@
       "frameId": null,
       "index": "a6",
       "roundness": null,
-      "seed": 1756985790,
+      "seed": 506396663,
       "version": 4,
-      "versionNonce": 1674727614,
+      "versionNonce": 2087540599,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468373,
+      "updated": 1790897579024,
       "link": null,
       "locked": false,
       "points": [
@@ -331,21 +331,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 889358626,
+      "seed": 1614438137,
       "version": 3,
-      "versionNonce": 218987874,
+      "versionNonce": 1173186073,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "V1Cb4Bnq6cXOWI4lsLFeP"
+          "id": "WyjMp5Eq0D5Abo_DKgRHt"
         },
         {
           "id": "a2",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468379,
+      "updated": 1790897579028,
       "link": null,
       "locked": false
     },
@@ -368,12 +368,12 @@
       "frameId": null,
       "index": "a8",
       "roundness": null,
-      "seed": 2032112126,
+      "seed": 509208855,
       "version": 4,
-      "versionNonce": 857334142,
+      "versionNonce": 605640407,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468379,
+      "updated": 1790897579028,
       "link": null,
       "locked": false,
       "points": [
@@ -422,21 +422,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1473844450,
+      "seed": 2070288345,
       "version": 3,
-      "versionNonce": 1032003746,
+      "versionNonce": 605130937,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "EUv453xTrUHlj-hh6W0A8"
+          "id": "gHylpAPFRIUd8J2gvVFsi"
         },
         {
           "id": "a3",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468387,
+      "updated": 1790897579035,
       "link": null,
       "locked": false
     },
@@ -459,17 +459,17 @@
       "frameId": null,
       "index": "aA",
       "roundness": null,
-      "seed": 2107155006,
+      "seed": 1737141815,
       "version": 4,
-      "versionNonce": 674640510,
+      "versionNonce": 202879831,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "zMmWck1AUt5MZWYDPcOiI"
+          "id": "dpA9fOYggfPYmnGbHfXBj"
         }
       ],
-      "updated": 1790893468387,
+      "updated": 1790897579035,
       "link": null,
       "locked": false,
       "points": [
@@ -516,12 +516,12 @@
       "frameId": null,
       "index": "aB",
       "roundness": null,
-      "seed": 1063790754,
+      "seed": 778548409,
       "version": 2,
-      "versionNonce": 365141374,
+      "versionNonce": 912876759,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false,
       "text": "Nivel 2: extensiones",
@@ -555,21 +555,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1761979006,
+      "seed": 346410839,
       "version": 3,
-      "versionNonce": 1852751650,
+      "versionNonce": 1303769593,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "8MhP6GBC3uKgDYxl3XOsx"
+          "id": "ZrJfQK-RJ4YakZXEPCmrD"
         },
         {
           "id": "v1",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468398,
+      "updated": 1790897579046,
       "link": null,
       "locked": false
     },
@@ -594,21 +594,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1398719586,
+      "seed": 1289926041,
       "version": 3,
-      "versionNonce": 1802418786,
+      "versionNonce": 688072857,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "c9JFRaWrhLBuovEw4GB0q"
+          "id": "ystISqKYPp61Pkjz7yPZ8"
         },
         {
           "id": "v2",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468399,
+      "updated": 1790897579047,
       "link": null,
       "locked": false
     },
@@ -633,21 +633,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 707242686,
+      "seed": 1879034999,
       "version": 3,
-      "versionNonce": 582057378,
+      "versionNonce": 1567646521,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "WTFJcWHTehCnGOXro-M0F"
+          "id": "u7OnwAfEtWXpL-uE-KttA"
         },
         {
           "id": "v3",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468399,
+      "updated": 1790897579048,
       "link": null,
       "locked": false
     },
@@ -670,12 +670,12 @@
       "frameId": null,
       "index": "aF",
       "roundness": null,
-      "seed": 764143650,
+      "seed": 1779079801,
       "version": 2,
-      "versionNonce": 633132542,
+      "versionNonce": 2019121943,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false,
       "text": "Nivel 1: librerías puras",
@@ -709,21 +709,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 798991102,
+      "seed": 89990551,
       "version": 3,
-      "versionNonce": 1112443618,
+      "versionNonce": 2046249689,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "1sWZMDgqy3z3wSfPmNTxO"
+          "id": "5wJ9fUOUHsUAlKO8Q2aK6"
         },
         {
           "id": "v1",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468398,
+      "updated": 1790897579046,
       "link": null,
       "locked": false
     },
@@ -746,12 +746,12 @@
       "frameId": null,
       "index": "aH",
       "roundness": null,
-      "seed": 1440650210,
+      "seed": 1721951065,
       "version": 4,
-      "versionNonce": 70892542,
+      "versionNonce": 106235415,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468398,
+      "updated": 1790897579046,
       "link": null,
       "locked": false,
       "points": [
@@ -800,21 +800,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1810797374,
+      "seed": 1945262775,
       "version": 3,
-      "versionNonce": 1814896162,
+      "versionNonce": 1873063289,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "mqEsDClWnIzIl1cgde8m-"
+          "id": "AaxM7e3mDbk9tfiRT8VGw"
         },
         {
           "id": "v2",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468399,
+      "updated": 1790897579047,
       "link": null,
       "locked": false
     },
@@ -837,12 +837,12 @@
       "frameId": null,
       "index": "aJ",
       "roundness": null,
-      "seed": 2120599458,
+      "seed": 1056903225,
       "version": 4,
-      "versionNonce": 1404703934,
+      "versionNonce": 982780279,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468399,
+      "updated": 1790897579047,
       "link": null,
       "locked": false,
       "points": [
@@ -891,21 +891,21 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1500871550,
+      "seed": 6548439,
       "version": 3,
-      "versionNonce": 213219682,
+      "versionNonce": 600937497,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "Kwpp4SbXi5994pknUjzAG"
+          "id": "pV7eyVs9Ogu8lGEb9g0qu"
         },
         {
           "id": "v3",
           "type": "arrow"
         }
       ],
-      "updated": 1790893468400,
+      "updated": 1790897579048,
       "link": null,
       "locked": false
     },
@@ -928,12 +928,12 @@
       "frameId": null,
       "index": "aL",
       "roundness": null,
-      "seed": 1062241122,
+      "seed": 419602713,
       "version": 4,
-      "versionNonce": 963126654,
+      "versionNonce": 983910615,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468400,
+      "updated": 1790897579048,
       "link": null,
       "locked": false,
       "points": [
@@ -982,17 +982,17 @@
       "roundness": {
         "type": 3
       },
-      "seed": 2121620414,
+      "seed": 1724274935,
       "version": 2,
-      "versionNonce": 229008418,
+      "versionNonce": 2093615225,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "ITP__luxR1j1W-fwQuNAP"
+          "id": "tAC3BtCDmTU6-C_V_-b7m"
         }
       ],
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false
     },
@@ -1017,17 +1017,17 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1391314722,
+      "seed": 304158201,
       "version": 2,
-      "versionNonce": 1367009022,
+      "versionNonce": 320051095,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "taXpkcgAiiSDUfSDEiniE"
+          "id": "AmHS4b0L5efZJU-xTlS17"
         }
       ],
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false
     },
@@ -1037,7 +1037,7 @@
       "x": 1290,
       "y": 480,
       "width": 290,
-      "height": 460,
+      "height": 470,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "#ffc9c9",
@@ -1052,22 +1052,22 @@
       "roundness": {
         "type": 3
       },
-      "seed": 1896821758,
+      "seed": 1822302743,
       "version": 2,
-      "versionNonce": 1162448866,
+      "versionNonce": 189043033,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
-          "id": "_dIBfkLT0zmt70Cn4UGmx"
+          "id": "UI1wTHBI4bg_K9GfTuXba"
         }
       ],
-      "updated": 1790893468302,
+      "updated": 1790897578958,
       "link": null,
       "locked": false
     },
     {
-      "id": "VcunUUIQOWJgByyoB1LOJ",
+      "id": "N1TgSwGfIMSLPj249pzj8",
       "type": "text",
       "x": 513.5595703125,
       "y": 135,
@@ -1085,12 +1085,12 @@
       "frameId": null,
       "index": "aP",
       "roundness": null,
-      "seed": 968972094,
+      "seed": 638225591,
       "version": 3,
-      "versionNonce": 1128429182,
+      "versionNonce": 1813685591,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "Servicio Quarkus\nexamples 04 a 06; plaza-catalog, planeado",
@@ -1104,7 +1104,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "BcbQeDwVyBxwcWQSIsefS",
+      "id": "kfuc5Z6zWaewOKxC--UMm",
       "type": "text",
       "x": 1042.771728515625,
       "y": 138.75,
@@ -1122,12 +1122,12 @@
       "frameId": null,
       "index": "aQ",
       "roundness": null,
-      "seed": 1750056830,
+      "seed": 1688591831,
       "version": 3,
-      "versionNonce": 1629796450,
+      "versionNonce": 1951285145,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "nace de nova-template-02-\nquarkus-service (ADR-051)",
@@ -1141,7 +1141,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "Z6cwsNyfhtRejKQSzP65S",
+      "id": "Q117FUASv-xuLB4QVcDF_",
       "type": "text",
       "x": 110.04248046875,
       "y": 282.5,
@@ -1159,12 +1159,12 @@
       "frameId": null,
       "index": "aR",
       "roundness": null,
-      "seed": 395626558,
+      "seed": 1716451639,
       "version": 3,
-      "versionNonce": 988477118,
+      "versionNonce": 1852433015,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "13 nova-quarkus-bom 3.1.0\nimporta quarkus-bom 3.33.3.3",
@@ -1178,7 +1178,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "V1Cb4Bnq6cXOWI4lsLFeP",
+      "id": "WyjMp5Eq0D5Abo_DKgRHt",
       "type": "text",
       "x": 566.2119140625,
       "y": 282.5,
@@ -1196,12 +1196,12 @@
       "frameId": null,
       "index": "aS",
       "roundness": null,
-      "seed": 1761970430,
+      "seed": 1642156183,
       "version": 3,
-      "versionNonce": 1987271714,
+      "versionNonce": 1869931641,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "15 quarkus-parent 2.0.0\nimporta el BOM 2.0.2",
@@ -1215,7 +1215,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "EUv453xTrUHlj-hh6W0A8",
+      "id": "gHylpAPFRIUd8J2gvVFsi",
       "type": "text",
       "x": 925.279296875,
       "y": 282.5,
@@ -1233,12 +1233,12 @@
       "frameId": null,
       "index": "aT",
       "roundness": null,
-      "seed": 849150398,
+      "seed": 1721132023,
       "version": 3,
-      "versionNonce": 1645833982,
+      "versionNonce": 437549975,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "18 archetype 1.0.1, 19 template 1.0.0\ngeneradores, sin la extensión",
@@ -1252,7 +1252,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "zMmWck1AUt5MZWYDPcOiI",
+      "id": "dpA9fOYggfPYmnGbHfXBj",
       "type": "text",
       "x": 930.54296875,
       "y": 220,
@@ -1270,12 +1270,12 @@
       "frameId": null,
       "index": "aU",
       "roundness": null,
-      "seed": 1297226238,
+      "seed": 741657879,
       "version": 3,
-      "versionNonce": 2042071010,
+      "versionNonce": 473165145,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "genera",
@@ -1289,7 +1289,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "8MhP6GBC3uKgDYxl3XOsx",
+      "id": "ZrJfQK-RJ4YakZXEPCmrD",
       "type": "text",
       "x": 90.78564453125,
       "y": 451.25,
@@ -1307,12 +1307,12 @@
       "frameId": null,
       "index": "aV",
       "roundness": null,
-      "seed": 1107767998,
+      "seed": 1737830519,
       "version": 3,
-      "versionNonce": 1162796862,
+      "versionNonce": 1666117815,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "10 api-standard-quarkus-extension\n2.0.1, un jar con índice Jandex;\nresponde los errores a la antigua",
@@ -1326,7 +1326,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "c9JFRaWrhLBuovEw4GB0q",
+      "id": "ystISqKYPp61Pkjz7yPZ8",
       "type": "text",
       "x": 501.203125,
       "y": 462.5,
@@ -1344,12 +1344,12 @@
       "frameId": null,
       "index": "aW",
       "roundness": null,
-      "seed": 843983614,
+      "seed": 749078935,
       "version": 3,
-      "versionNonce": 587217826,
+      "versionNonce": 1910430265,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "23 nova-secrets-quarkus-extension\n1.2.0, runtime + deployment",
@@ -1363,7 +1363,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "WTFJcWHTehCnGOXro-M0F",
+      "id": "u7OnwAfEtWXpL-uE-KttA",
       "type": "text",
       "x": 927.919921875,
       "y": 462.5,
@@ -1381,12 +1381,12 @@
       "frameId": null,
       "index": "aX",
       "roundness": null,
-      "seed": 663493438,
+      "seed": 142524087,
       "version": 3,
-      "versionNonce": 955008894,
+      "versionNonce": 1136509399,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "11 keycloak-quarkus-extension\nsolo README",
@@ -1400,7 +1400,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "1sWZMDgqy3z3wSfPmNTxO",
+      "id": "5wJ9fUOUHsUAlKO8Q2aK6",
       "type": "text",
       "x": 82.642578125,
       "y": 631.25,
@@ -1418,12 +1418,12 @@
       "frameId": null,
       "index": "aY",
       "roundness": null,
-      "seed": 1478624126,
+      "seed": 230936535,
       "version": 3,
-      "versionNonce": 1350334306,
+      "versionNonce": 827927321,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "01 api-standard 1.0.2 en la extensión;\nla 1.1.0, con los errores por capas,\nya llega por el BOM",
@@ -1437,7 +1437,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "mqEsDClWnIzIl1cgde8m-",
+      "id": "AaxM7e3mDbk9tfiRT8VGw",
       "type": "text",
       "x": 579.64111328125,
       "y": 642.5,
@@ -1455,12 +1455,12 @@
       "frameId": null,
       "index": "aZ",
       "roundness": null,
-      "seed": 937266238,
+      "seed": 1008347959,
       "version": 3,
-      "versionNonce": 1563600830,
+      "versionNonce": 209022711,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "23 secrets 1.2.0\n+ vault + aws",
@@ -1474,7 +1474,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "Kwpp4SbXi5994pknUjzAG",
+      "id": "pV7eyVs9Ogu8lGEb9g0qu",
       "type": "text",
       "x": 996.25927734375,
       "y": 642.5,
@@ -1492,12 +1492,12 @@
       "frameId": null,
       "index": "aa",
       "roundness": null,
-      "seed": 257215742,
+      "seed": 1281475223,
       "version": 3,
-      "versionNonce": 1115372322,
+      "versionNonce": 857104377,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "06 keycloak\nsolo README",
@@ -1511,7 +1511,7 @@
       "lineHeight": 1.25
     },
     {
-      "id": "ITP__luxR1j1W-fwQuNAP",
+      "id": "tAC3BtCDmTU6-C_V_-b7m",
       "type": "text",
       "x": 261.01123046875,
       "y": 798.75,
@@ -1529,26 +1529,26 @@
       "frameId": null,
       "index": "ab",
       "roundness": null,
-      "seed": 1585628606,
+      "seed": 1792284151,
       "version": 3,
-      "versionNonce": 574816254,
+      "versionNonce": 2012903447,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
-      "text": "Propuesto en ADR-050: la extensión 10 pasa a la 3.0.0\n\nun módulo de deployment para la imagen nativa; los puertos de ADR-031 como @DefaultBean;\nlas excepciones del framework leídas por su status; la misma suite de contrato que Spring Boot.\nDespués, cada uno en su PR: el BOM 4.0.0, el parent 15 y los ejemplos 04 y 06.",
+      "text": "Decidido en ADR-050: la extensión 10 pasa a la 3.0.0\n\nun módulo de deployment para la imagen nativa; los puertos de ADR-031 como @DefaultBean;\nlas excepciones del framework leídas por su status; la misma suite de contrato que Spring Boot.\nDespués, cada uno en su PR: el BOM 4.0.0, el parent 15 y los ejemplos 04 y 06.",
       "fontSize": 18,
       "fontFamily": 5,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "adr",
-      "originalText": "Propuesto en ADR-050: la extensión 10 pasa a la 3.0.0\n\nun módulo de deployment para la imagen nativa; los puertos de ADR-031 como @DefaultBean;\nlas excepciones del framework leídas por su status; la misma suite de contrato que Spring Boot.\nDespués, cada uno en su PR: el BOM 4.0.0, el parent 15 y los ejemplos 04 y 06.",
+      "originalText": "Decidido en ADR-050: la extensión 10 pasa a la 3.0.0\n\nun módulo de deployment para la imagen nativa; los puertos de ADR-031 como @DefaultBean;\nlas excepciones del framework leídas por su status; la misma suite de contrato que Spring Boot.\nDespués, cada uno en su PR: el BOM 4.0.0, el parent 15 y los ejemplos 04 y 06.",
       "autoResize": true,
       "lineHeight": 1.25
     },
     {
-      "id": "taXpkcgAiiSDUfSDEiniE",
+      "id": "AmHS4b0L5efZJU-xTlS17",
       "type": "text",
       "x": 1364.63037109375,
       "y": 292.5,
@@ -1566,12 +1566,12 @@
       "frameId": null,
       "index": "ac",
       "roundness": null,
-      "seed": 2145345022,
+      "seed": 32259863,
       "version": 3,
-      "versionNonce": 1466664674,
+      "versionNonce": 1964636377,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
       "text": "Hecho\n\nsecretos: entorno,\nVault y AWS\nel sobre de éxito,\narmado a mano",
@@ -1585,12 +1585,12 @@
       "lineHeight": 1.25
     },
     {
-      "id": "_dIBfkLT0zmt70Cn4UGmx",
+      "id": "UI1wTHBI4bg_K9GfTuXba",
       "type": "text",
       "x": 1344.94287109375,
-      "y": 563.75,
+      "y": 546.25,
       "width": 180.1142578125,
-      "height": 292.5,
+      "height": 337.5,
       "angle": 0,
       "strokeColor": "#e03131",
       "backgroundColor": "transparent",
@@ -1603,21 +1603,21 @@
       "frameId": null,
       "index": "ad",
       "roundness": null,
-      "seed": 847179326,
+      "seed": 308429879,
       "version": 3,
-      "versionNonce": 1277055038,
+      "versionNonce": 2084658487,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1790893468413,
+      "updated": 1790897579060,
       "link": null,
       "locked": false,
-      "text": "Pendiente\n\nerrores por capas\n(ADR-050)\nobservabilidad\nidempotencia\nborde y correlación\n(ADR-037)\nKeycloak (11)\nplugin quarkus-service\ndel toolchain\nAWS en nativo,\npor probar",
+      "text": "Pendiente\n\nerrores por capas\n(ADR-050)\nmeta-extensión\n(ADR-052)\nobservabilidad\nidempotencia\nborde y correlación\n(ADR-037)\nKeycloak (11)\nplugin quarkus-service\ndel toolchain\nAWS en nativo,\npor probar",
       "fontSize": 18,
       "fontFamily": 5,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "r2",
-      "originalText": "Pendiente\n\nerrores por capas\n(ADR-050)\nobservabilidad\nidempotencia\nborde y correlación\n(ADR-037)\nKeycloak (11)\nplugin quarkus-service\ndel toolchain\nAWS en nativo,\npor probar",
+      "originalText": "Pendiente\n\nerrores por capas\n(ADR-050)\nmeta-extensión\n(ADR-052)\nobservabilidad\nidempotencia\nborde y correlación\n(ADR-037)\nKeycloak (11)\nplugin quarkus-service\ndel toolchain\nAWS en nativo,\npor probar",
       "autoResize": true,
       "lineHeight": 1.25
     }

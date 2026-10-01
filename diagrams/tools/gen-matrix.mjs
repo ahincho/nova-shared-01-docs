@@ -12,7 +12,7 @@ const status = {
 // [capacidad, Spring Boot, Quarkus, NestJS]; cada celda es [estado, texto].
 const rows = [
   ['Sobre de éxito', ['done', '08 starter 3.0.1'], ['partial', 'a mano con ApiResponse.ok'], ['done', 'núcleo 0.16.1']],
-  ['Errores por capas (ADR-031)', ['done', '08 starter 3.0.1'], ['proposed', 'extensión 3.0.0 (ADR-050)'], ['done', 'núcleo 0.16.1']],
+  ['Errores por capas (ADR-031)', ['done', '08 starter 3.0.1'], ['pending', 'decidido en ADR-050'], ['done', 'núcleo 0.16.1']],
   ['Secretos del entorno (ADR-042)', ['done', '23 secrets 1.2.0'], ['done', '23 extensión 1.2.0'], ['done', 'núcleo 0.16.1']],
   ['Vault y AWS Secrets Manager (ADR-049)', ['done', '23 secrets 1.2.0'], ['partial', '1.2.0; AWS en nativo por probar'], ['done', 'dos paquetes 0.16.1']],
   ['Idempotencia (ADR-047)', ['done', '25 idempotency 0.1.1'], ['pending', 'llega con plaza-catalog'], ['partial', 'deja pasar la clave']],
@@ -24,7 +24,7 @@ const rows = [
   ['Imagen nativa (ADR-045)', ['done', 'toolchain y starters 3.0.1'], ['partial', 'secretos sí; estándar con ADR-050'], ['na', 'no aplica']],
   ['Toolchain de build', ['done', '24 gradle-toolchain 2.0.0'], ['pending', 'sin plugin quarkus-service'], ['done', 'nova-nestjs-toolchain 0.16.1']],
   ['Generadores', ['partial', '17 archetype sin release'], ['partial', '18 y 19 por actualizar'], ['done', 'schematics 0.16.1']],
-  ['Plantillas de servicio (ADR-051)', ['proposed', 'nova-template-01'], ['proposed', 'nova-template-02, hoy el 19'], ['proposed', 'nova-template-03, hoy el ejemplo 08']],
+  ['Plantillas de servicio (ADR-051)', ['pending', 'nova-template-01 (ADR-051)'], ['pending', 'nova-template-02, hoy el 19'], ['pending', 'nova-template-03, hoy el 08']],
   ['Outbox transaccional (ADR-048)', ['proposed', 'propuesta, docs #14'], ['proposed', 'propuesta, docs #14'], ['proposed', 'propuesta, docs #14']],
 ];
 
