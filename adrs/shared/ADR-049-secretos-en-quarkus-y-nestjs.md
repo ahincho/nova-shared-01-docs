@@ -2,8 +2,10 @@
 
 ## Estado
 
-Propuesta (2026-10-01). Angel pidió que la capacidad de secretos también se desarrolle para Quarkus
-y NestJS.
+Aceptada (2026-10-01). Angel pidió que la capacidad de secretos también se desarrolle para Quarkus
+y NestJS, y la aprobó el mismo día con las recomendaciones de las preguntas abiertas. Sobre la
+tercera agregó que el prefijo `SECRET_` es solo de UTP y no debe afectar a ningún paquete ni
+librería de Nova: va en el perfil de UTP y en ningún otro lugar.
 **Scope:** `shared` (Java y NestJS).
 **Completa:** [ADR-042](ADR-042-secretos-detras-de-un-contrato.md). Responde sus preguntas abiertas
 4 (Vault y AWS Secrets Manager en NestJS), 5 (Quarkus en imagen nativa) y 6 (con qué se lee el JSON),
@@ -136,11 +138,13 @@ AWS.
 ```ts
 await bootstrap(AppModule, {
   secrets: {
-    prefix: 'SECRET_',              // la convención de la organización, desde su perfil
     imports: ['vault:plaza-bff'],   // se suma a NOVA_SECRETS_IMPORT
   },
 });
 ```
+
+Un prefijo de descubrimiento, si una organización lo usa, lo agrega su perfil (ADR-036). Nova no
+trae ninguno.
 
 **Cómo se encuentra un adaptador.** Node no tiene `ServiceLoader`. La referencia `vault:` hace que
 `core` importe `@ahincho/nova-nestjs-secrets-vault` con un `import()` dinámico, y si el paquete no
@@ -183,9 +187,11 @@ ADR-025, que juntó los paquetes a propósito.
 **Registrar los adaptadores de NestJS a mano en `main.ts`**, sin `import()` dinámico. Es más
 explícito, pero cambiar de almacén obliga a tocar código. Queda disponible con la opción `sources`.
 
-## Preguntas abiertas
+## Preguntas resueltas
 
-**1. El consumidor real de NestJS.** `plaza-bff` no tiene datos (ADR-020) y hoy no lee ninguna
+Angel aprobó las tres recomendaciones el 2026-10-01.
+
+**1. El consumidor real de NestJS: a.** `plaza-bff` no tiene datos (ADR-020) y hoy no lee ninguna
 credencial: valida el token con las claves públicas de Keycloak. La fuente del entorno sí la usa. Para
 los almacenes hay dos caminos:
 
@@ -198,10 +204,12 @@ los almacenes hay dos caminos:
 Recomendación: **a**, porque **b** es otra capacidad, la autenticación entre servicios, y merece su
 propio ADR. Es una excepción a la regla de no agregar superficie sin consumidor, y queda escrita.
 
-**2. AWS Secrets Manager en imagen nativa.** Se decide con la prueba, como se explica arriba.
+**2. AWS Secrets Manager en imagen nativa: se decide con la prueba**, como se explica arriba.
 
-**3. Si el perfil de UTP en NestJS** (`nova-nestjs-02-profile-utp`) pone el prefijo `SECRET_`, igual
-que lo hará el starter de la organización en Java.
+**3. El prefijo `SECRET_` es solo de UTP.** Lo pone el perfil de UTP en NestJS
+(`nova-nestjs-02-profile-utp`) y, en Java, el starter de UTP. Ningún paquete ni librería de Nova lo
+nombra, ni como valor por defecto ni en un ejemplo de configuración: la fuente del entorno sigue sin
+prefijo por defecto en los tres stacks, como ya decía ADR-042.
 
 ## Consecuencias
 
