@@ -139,7 +139,7 @@ traía resultaron no cumplirla, y el que se daba por faltante tampoco la cumplí
 | Starter | Sin configuración | Decisión |
 |---|---|---|
 | `nova-api-standard-spring-boot-starter` 3.0.1 | el sobre y los errores de ADR-031, que todo servicio responde | entra |
-| `nova-mask-spring-boot-starter` 3.0.1 | enmascara lo que se anota | entra |
+| `nova-mask-spring-boot-starter` 3.0.1 | enmascara lo que se anota, y también lo que infiere por el nombre del campo | entra **desde la 4.0.0** |
 | `nova-secrets-spring-boot-starter` 1.2.0 | sin `nova.secrets.import` no lee ningún almacén | entra |
 | `nova-observability-spring-boot-starter` 2.0.2 | exporta por OTLP a `http://localhost:4318` fijo, y su indicador de salud deja `/actuator/health` en DOWN sin collector | entra **desde la 3.0.0** |
 | `nova-idempotency-spring-boot-starter` 0.1.1 | se enciende sola y exige la tabla de su almacén JDBC; además es 0.x | queda fuera |
@@ -157,6 +157,13 @@ Golden Signals de ADR-014. Desde la 3.0.0:
 - El indicador de salud del collector se registra solo cuando hay un endpoint.
 
 La receta de migración va en su README: quien dependía del localhost implícito lo declara.
+
+**La máscara entra desde la 4.0.0, que enmascara solo lo anotado.** La 3.0.1 se dio por segura y no
+lo era: infería el tipo por el nombre del campo en todo JSON que escribía Spring, así que un `name`
+salía como `T***` en una respuesta de la API. Lo destapó `nova-template-01-spring-boot-service`, y
+Angel decidió el 2026-10-01 que se enmascare solo con `@Masked` o `@MaskedClass`. La inferencia queda
+detrás de `nova.mask.infer-by-field-name`, apagada por defecto. El meta-starter que la trae es la
+3.0.0.
 
 **La idempotencia queda fuera mientras sea 0.x y exija su almacén.** Entra cuando cumpla la
 condición, por ejemplo apagada hasta que un servicio la declare, y en una versión 1.x.
