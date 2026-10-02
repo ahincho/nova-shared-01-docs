@@ -85,8 +85,10 @@ siguen a `@nestjs/cqrs`, para que el mismo código se lea igual en los dos stack
 ### Las reglas que ningún comportamiento cambia
 
 - **Un tipo de mensaje tiene exactamente un handler.** Dos handlers para el mismo tipo impiden el
-  arranque. Un mensaje sin handler es un `PlatformError` con el código `HANDLER_NOT_FOUND`, un 500:
-  es un defecto del servicio, no del cliente.
+  arranque. Un mensaje sin handler lanza `HandlerNotFoundException` antes de entrar en la cadena, y
+  el estándar de API lo responde como un error de plataforma: un 500 con el código del catálogo, sin
+  el detalle, que va al log. Es un defecto del servicio, no del cliente, y por eso no lleva un código
+  propio: `PlatformError` no lo admite, para que un 500 nunca le cuente al cliente qué se rompió.
 - **Lo que lanza el handler sale tal cual.** Un `DomainError` llega al manejo de ADR-031 con su capa
   y su código; el bus no lo envuelve ni lo traduce.
 - **Ni el contenido de un comando ni el resultado de una consulta aparecen en un log.** Solo el tipo,
