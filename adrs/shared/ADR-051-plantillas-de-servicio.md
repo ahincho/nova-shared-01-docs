@@ -165,7 +165,9 @@ repositorio entero, y mezcla el CI de tres stacks.
 **Usar los ejemplos como plantillas.** Un ejemplo de referencia muestra muchas capacidades a la vez
 y crece con ellas; una plantilla lleva solo lo que todo servicio trae desde el primer día.
 
-## Preguntas abiertas
+## Preguntas resueltas
+
+Angel aprobó las recomendaciones el 2026-10-01.
 
 **1. Cómo se genera desde una plantilla Java.** El arquetipo de Maven no sirve para una plantilla
 Gradle, porque `archetype:create-from-project` solo lee proyectos Maven. Hay dos caminos:

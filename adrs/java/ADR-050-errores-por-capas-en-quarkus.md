@@ -187,7 +187,9 @@ posible como otro `ErrorSerializer`.
 capacidad nueva. Rompe las coordenadas de dos repositorios y su historia. ADR-041 rige para las
 capacidades que nacen desde ahí, y el estándar de API es anterior.
 
-## Preguntas abiertas
+## Preguntas resueltas
+
+Angel aprobó las recomendaciones el 2026-10-01.
 
 **1. El sobre de éxito, ¿en esta misma versión mayor?** ADR-034 deja pendiente un filtro de
 respuesta que envuelva el éxito en Quarkus, como `ApiResponseInterceptor` en Spring. Los ejemplos ya

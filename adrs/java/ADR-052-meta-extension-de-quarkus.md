@@ -2,7 +2,7 @@
 
 ## Estado
 
-Aceptada (2026-10-01), con las recomendaciones de sus preguntas abiertas. Angel preguntó por qué Quarkus no tenía un meta-starter, y pidió este ADR
+Aceptada (2026-10-01), con las recomendaciones de sus preguntas abiertas. Enmendada el mismo día con lo que entra en el meta-starter de Spring Boot. Angel preguntó por qué Quarkus no tenía un meta-starter, y pidió este ADR
 para agregarlo.
 **Scope:** `java`, Quarkus. Fija además una regla para el meta-starter de Spring Boot.
 **Completa:** el nivel 3 de [ADR-001](../shared/ADR-001-arquitectura-meta-framework-cinco-niveles.md),
@@ -131,6 +131,42 @@ Cada paso es su propio PR:
 4. `nova-template-02-quarkus-service` declara solo la meta-extensión.
 5. La enmienda a ADR-001, la tabla de ADR-039 y el panorama de `diagrams/`.
 
+### Enmienda (2026-10-01): qué entra en el meta-starter de Spring Boot
+
+Al aplicar la condición de «qué entra» a `nova-java-12`, dos de los starters que el meta-starter no
+traía resultaron no cumplirla, y el que se daba por faltante tampoco la cumplía todavía:
+
+| Starter | Sin configuración | Decisión |
+|---|---|---|
+| `nova-api-standard-spring-boot-starter` 3.0.1 | el sobre y los errores de ADR-031, que todo servicio responde | entra |
+| `nova-mask-spring-boot-starter` 3.0.1 | enmascara lo que se anota | entra |
+| `nova-secrets-spring-boot-starter` 1.2.0 | sin `nova.secrets.import` no lee ningún almacén | entra |
+| `nova-observability-spring-boot-starter` 2.0.2 | exporta por OTLP a `http://localhost:4318` fijo, y su indicador de salud deja `/actuator/health` en DOWN sin collector | entra **desde la 3.0.0** |
+| `nova-idempotency-spring-boot-starter` 0.1.1 | se enciende sola y exige la tabla de su almacén JDBC; además es 0.x | queda fuera |
+
+**La observabilidad sale en la 3.0.0 apagando la exportación sin endpoint.** Angel lo decidió el
+2026-10-01 en vez de dejarla fuera: un servicio que solo use el meta-starter tiene que tener los Four
+Golden Signals de ADR-014. Desde la 3.0.0:
+
+- `nova.observability.otlp.endpoint` no tiene valor por defecto. El localhost fijo era además un valor
+  de consumidor escrito en la plataforma.
+- Las métricas, las trazas y la correlación de logs siguen encendidas. Los `traceId` se siguen
+  generando, así que ADR-031 los encuentra.
+- La exportación OTLP arranca solo si hay un endpoint: el de Nova, o el estándar
+  `OTEL_EXPORTER_OTLP_ENDPOINT` si quien opera ya lo usa. Sin endpoint no se exporta nada.
+- El indicador de salud del collector se registra solo cuando hay un endpoint.
+
+La receta de migración va en su README: quien dependía del localhost implícito lo declara.
+
+**La idempotencia queda fuera mientras sea 0.x y exija su almacén.** Entra cuando cumpla la
+condición, por ejemplo apagada hasta que un servicio la declare, y en una versión 1.x.
+
+**El meta-starter pasa a la 2.0.0**, con la regla 1. Deja de importar `nova-spring-boot-bom` y
+declara la versión de cada starter. Spring Boot llega con su propio BOM, y el meta-starter lleva los
+mismos parches de seguridad que el BOM de Nova, como el de Tomcat. Es mayor porque cambia lo que
+recibe un servicio que lo usa sin el BOM: los starters 3.x en lugar de los 2.x, con los errores de
+ADR-031. La receta remite a la del starter de API.
+
 ## Alternativas descartadas
 
 **Dejar Quarkus sin nivel 3.** El BOM ya alinea las versiones, y un servicio puede declarar dos
@@ -150,7 +186,9 @@ código, y la extensión 10 es una capacidad con su propio ritmo de versiones.
 **Un *codestart* de Quarkus**, la plantilla de `code.quarkus.io`. Resuelve cómo nace un proyecto, que
 es el nivel 5 de ADR-051, no qué dependencia lo mantiene al día.
 
-## Preguntas abiertas
+## Preguntas resueltas
+
+Angel aprobó las recomendaciones el 2026-10-01.
 
 **1. Si entra la extensión de Keycloak cuando exista.** Depende de si arranca sin configuración.
 Resuelta: **diseñarla para que no haga nada sin `nova.auth.*`**, como el `auth` de NestJS, que
