@@ -53,7 +53,7 @@ Decisiones aplicables a Java y NestJS.
 | 049 | [Los Secretos en Quarkus y NestJS, con las Mismas Reglas que en Spring Boot](shared/ADR-049-secretos-en-quarkus-y-nestjs.md) | Aceptada | Arquitectura |
 | 051 | [Las Plantillas de Servicio, un Nivel entre el Build y los Generadores](shared/ADR-051-plantillas-de-servicio.md) | Aceptada | Arquitectura |
 | 053 | [CQRS en Nova: los Contratos, el Command Bus y el Query Bus](shared/ADR-053-cqrs-con-command-bus-y-query-bus.md) | Aceptada | Arquitectura |
-| 054 | [La Persistencia Reutilizable, con Paginación por Cursor](shared/ADR-054-persistencia-reutilizable-con-paginacion-por-cursor.md) | Propuesta | Arquitectura |
+| 054 | [La Persistencia Reutilizable, con Paginación por Cursor](shared/ADR-054-persistencia-reutilizable-con-paginacion-por-cursor.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 

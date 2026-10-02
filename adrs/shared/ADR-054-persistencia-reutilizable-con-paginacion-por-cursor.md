@@ -2,9 +2,10 @@
 
 ## Estado
 
-Propuesta (2026-10-02). Es el criterio 05 de la rúbrica del curso de Framework Engineering, que pide
+Aceptada (2026-10-02). Es el criterio 05 de la rúbrica del curso de Framework Engineering, que pide
 componentes reutilizables de persistencia con su consumo desde un servicio. Angel pidió que la
-paginación sea de scroll infinito, es decir, por cursor.
+paginación sea de scroll infinito, es decir, por cursor, y la aprobó el mismo día con las seis
+respuestas recomendadas, que quedan escritas en «Preguntas resueltas».
 **Scope:** `shared` (el contrato por HTTP vale para los tres stacks; la implementación es de Spring
 ahora).
 **Aplica:** [ADR-041](../java/ADR-041-un-repositorio-por-capacidad.md) para la forma del repositorio,
@@ -178,23 +179,22 @@ raíz y las colecciones se cargan por lotes, con `@BatchSize`.
 - **Escribir el keyset a mano.** Spring Data ya lo resuelve, con la clave primaria agregada al orden;
   Nova solo pone el contrato por HTTP encima.
 
-## Preguntas abiertas
+## Preguntas resueltas
 
-Cada una lleva la respuesta recomendada.
+Angel las resolvió el 2026-10-02, todas con la respuesta recomendada.
 
-1. **Dónde va la página.** Recomendado: **en `data`, como `items`, `nextCursor` y `hasNext`**, sin
+1. **Dónde va la página.** Resuelta: **en `data`, como `items`, `nextCursor` y `hasNext`**, sin
    tocar el sobre.
-2. **Si hay página anterior.** Recomendado: **no por ahora.** Un scroll infinito solo avanza; si un
+2. **Si hay página anterior.** Resuelta: **no por ahora.** Un scroll infinito solo avanza; si un
    cliente necesita volver, se suma un `previousCursor` sin romper nada.
-3. **Si la página trae el total.** Recomendado: **no.** Un `count` recorre la tabla entera en cada
+3. **Si la página trae el total.** Resuelta: **no.** Un `count` recorre la tabla entera en cada
    página, y el scroll infinito no lo muestra.
-4. **El límite.** Recomendado: **20 por defecto y 100 como máximo**, configurables por servicio bajo
+4. **El límite.** Resuelta: **20 por defecto y 100 como máximo**, configurables por servicio bajo
    `nova.persistence.pagination.*`.
-5. **El identificador de las entidades nuevas.** Recomendado: **un UUID ordenable por tiempo
-   (versión 7), generado por la aplicación.** Ordena las inserciones en el índice y sirve de
-   desempate natural para el cursor. `Order` conserva sus identificadores actuales.
-6. **El `pageInfo` por offset del sobre.** Recomendado: **dejarlo sin uso y marcarlo como deprecado**,
-   y retirarlo en la próxima mayor de `nova-api-standard`.
+5. **El identificador de las entidades nuevas.** Resuelta: **un UUID ordenable por tiempo
+   (versión 7), generado por la aplicación.** `Order` conserva sus identificadores actuales.
+6. **El `pageInfo` por offset del sobre.** Resuelta: **queda sin uso y se marca como deprecado**, y
+   se retira en la próxima mayor de `nova-api-standard`.
 
 ## Consecuencias
 
