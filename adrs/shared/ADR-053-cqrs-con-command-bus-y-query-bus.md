@@ -2,9 +2,11 @@
 
 ## Estado
 
-Propuesta (2026-10-02). Angel pidió empezar por CQRS al revisar la rúbrica del curso de Framework
+Aceptada (2026-10-02). Angel pidió empezar por CQRS al revisar la rúbrica del curso de Framework
 Engineering, que pide el núcleo del patrón y los dos buses con comportamientos transversales, y
-ningún repositorio de Nova los tiene.
+ningún repositorio de Nova los tiene. La aprobó el mismo día con dos cambios a las recomendaciones:
+los mensajes son tipados de punta a punta y las consultas también se auditan. Las respuestas quedan
+escritas en «Preguntas resueltas».
 **Scope:** `shared` (Java ahora; NestJS y Quarkus con su primer consumidor).
 **Aplica:** [ADR-041](../java/ADR-041-un-repositorio-por-capacidad.md) para la forma del repositorio,
 [ADR-015](../java/ADR-015-librerias-puras-sin-dependencias-framework.md) para el núcleo sin framework,
@@ -68,7 +70,11 @@ siguen a `@nestjs/cqrs`, para que el mismo código se lea igual en los dos stack
 | `QueryBus` | `<R> R execute(Query<R> query)` |
 | `CommandBehavior` y `QueryBehavior` | un paso de la cadena: recibe el mensaje y el siguiente paso, y lo llama o no |
 
-- **Los mensajes son records inmutables.** El tipo del mensaje es lo que encuentra al handler.
+- **Todo es tipado de punta a punta.** El resultado sale del tipo del mensaje: `execute(new
+  FindOrder(id))` devuelve un `OrderView` sin un cast, y un handler que declara otro resultado no
+  compila. Ningún contrato usa `Object`, y el bus no recibe una clase ni un nombre como argumento.
+- **Los mensajes son records inmutables.** El tipo del mensaje es lo que encuentra al handler: la
+  clase exacta, sin herencia, para que no haya dos handlers posibles para un mismo mensaje.
 - **Un comando puede devolver un valor**, y lo recomendado es el identificador de lo que creó. Es la
   forma pragmática: pedidos responde 201 con el `Location` del pedido, y sin el identificador tendría
   que inventarlo antes. Un comando nunca devuelve la vista de lectura.
@@ -95,7 +101,7 @@ El starter los trae en este orden, de afuera hacia adentro:
 | # | Comportamiento | Comandos | Consultas | Qué hace |
 |---|---|---|---|---|
 | 1 | Observación | sí | sí | una `Observation` de Micrometer por mensaje: timer `nova.cqrs.command` o `nova.cqrs.query` con el tipo y el resultado, y un span en la traza de ADR-031 |
-| 2 | Auditoría | sí | no, configurable | registra quién, qué tipo, cuándo y con qué resultado, incluido un rechazo |
+| 2 | Auditoría | sí | sí | registra quién, qué tipo, cuándo, cuánto tardó y con qué resultado, incluido un rechazo |
 | 3 | Autorización | sí | sí | pregunta al puerto si el actor puede ejecutar ese tipo; si no, 403 |
 | 4 | Validación | sí | sí | Bean Validation sobre el record; si falla, 400 con los errores por campo |
 | 5 | Transacción | sí | sí, de solo lectura | `TransactionTemplate` con propagación `REQUIRED` |
@@ -123,6 +129,26 @@ es un puerto, y Nova trae la implementación por defecto.
 
 Pedidos pone su propio `ActorResolver`, que toma el `X-Customer-Id` que manda el BFF de Plaza. Una
 organización manda la auditoría a Kafka o a MongoDB, como pedía el curso, con su propio `AuditSink`.
+
+### Los eventos de dominio
+
+**`nova-cqrs` no trae un `EventBus`.** Un bus de eventos en memoria pierde un evento si el proceso
+cae entre el commit y la entrega, y no dice nada. Los eventos se manejan así hasta que exista la
+capacidad de outbox:
+
+| Quién reacciona | Cómo |
+|---|---|
+| Algo dentro del mismo servicio | el agregado registra el evento con `AbstractAggregateRoot` de Spring Data, que lo publica al guardar, y quien reacciona usa `@TransactionalEventListener(phase = AFTER_COMMIT)` |
+| Otro servicio | la capacidad de outbox de ADR-048: el evento se guarda en la misma transacción que el cambio y se entrega después |
+
+- **Con `AFTER_COMMIT`, una reacción nunca ve un cambio que no se confirmó**, y un rollback descarta
+  el evento. Si la reacción cambia estado, lo hace ejecutando un comando por el bus, en su propia
+  transacción, así que también pasa por la auditoría y la autorización.
+- **Un evento es un record inmutable con nombre en pasado**, como `OrderPlaced`. Lleva
+  identificadores y no entidades, y no lleva datos personales que no necesite quien reacciona.
+- **Nova no define un contrato `DomainEvent` todavía.** Su primer consumidor es el outbox, que
+  necesita el identificador del evento, su instante y el `traceId` para serializarlo. El contrato
+  nace ahí, con ADR-048, y no antes, por la regla de no agregar superficie sin consumidor.
 
 ### Dónde vive
 
@@ -160,27 +186,32 @@ nuevos, sin tocar los existentes.
   método repite la transacción, la validación y el log, y no hay dónde enchufar la auditoría o la
   autorización sin tocarlos todos.
 - **Un solo bus para comandos y consultas.** Pierde la regla más útil del patrón: que una consulta
-  corra de solo lectura y no se audite por defecto.
+  corra de solo lectura, y que su auditoría la distinga de una escritura.
 - **AOP sobre anotaciones en los servicios**, como `@Audited`. Funciona solo con beans de Spring,
   depende de proxies y no es un contrato que un handler pueda probar sin el contenedor.
 
-## Preguntas abiertas
+## Preguntas resueltas
 
-Cada una lleva la respuesta recomendada.
+Angel las resolvió el 2026-10-02.
 
-1. **El nombre del método de los buses.** `execute`, como `@nestjs/cqrs`, o `send` y `ask`.
-   Recomendado: **`execute` en los dos**, para que el código se lea igual en Java y en NestJS.
-2. **Si un comando puede devolver un valor.** Recomendado: **sí, el identificador de lo que creó**,
-   nunca la vista de lectura.
-3. **Si las consultas se auditan.** Recomendado: **no por defecto**, con
-   `nova.cqrs.audit.queries=true` para un servicio que lo necesite.
-4. **El destino de la auditoría por defecto.** Recomendado: **el logger `nova.audit`**, que ya llega
-   a la pila de observabilidad, y un `AuditSink` propio para cualquier otro destino.
-5. **La autorización por defecto.** Recomendado: **permitir todo**, porque un starter que niega sin
-   configuración rompe al servicio que lo agrega. La seguridad con Keycloak en Spring pondrá su
-   propia `AccessPolicy`.
-6. **Los eventos de dominio.** Recomendado: **fuera de este ADR**. Un `EventBus` sin entrega
-   confiable pierde eventos; van con la capacidad de outbox de ADR-048.
+1. **El nombre del método de los buses.** Resuelta: **`execute` en los dos**, como `@nestjs/cqrs`, y
+   con los mensajes **tipados de punta a punta**: el resultado sale del tipo del mensaje, sin casts
+   ni `Object`.
+2. **Si un comando puede devolver un valor.** Resuelta: **sí, tipado por su `Command<R>`**, y lo
+   recomendado es el identificador de lo que creó, nunca la vista de lectura.
+3. **Si las consultas se auditan.** Resuelta: **sí, igual que los comandos**, porque la auditoría
+   importa también para saber quién leyó qué. El registro no lleva el contenido del mensaje ni el
+   resultado, así que su costo es una línea por consulta. Un servicio que no lo quiera para sus
+   consultas lo apaga con `nova.cqrs.audit.queries=false`.
+4. **El destino de la auditoría por defecto.** Se mantiene la recomendada: **el logger
+   `nova.audit`**, que ya llega a la pila de observabilidad, y un `AuditSink` propio para cualquier
+   otro destino.
+5. **La autorización.** Resuelta: **un mecanismo general, el puerto `AccessPolicy`**, que por defecto
+   permite todo para que el starter no rompa al servicio que lo agrega. Los roles y permisos de
+   Keycloak entran como una implementación de ese puerto, que lee los roles del token del actor,
+   cuando llegue la seguridad de Spring; no hace falta otro mecanismo para eso.
+6. **Los eventos de dominio.** Resuelta: **sin `EventBus` en esta capacidad**, con la forma que dice
+   «Los eventos de dominio», arriba.
 
 ## Consecuencias
 
