@@ -2,11 +2,11 @@
 
 ## Estado
 
-Propuesta (2026-10-02). Angel pidió cerrar la fase 1 de Plaza y que los pagos se hagan en NestJS, igual
-que el BFF. Enmienda [ADR-043](ADR-043-plaza-la-plataforma-de-compras.md), que los había puesto en
+Aceptada (2026-10-02). Angel pidió cerrar la fase 1 de Plaza y que los pagos se hagan en NestJS, igual
+que el BFF, y la aprobó el mismo día con las seis respuestas recomendadas, escritas en «Preguntas
+resueltas». Enmienda [ADR-043](ADR-043-plaza-la-plataforma-de-compras.md), que los había puesto en
 Spring Boot, y reabre [ADR-020](../nest/ADR-020-orm-persistencia.md), que se cerró sin elegir ORM hasta
-que un servicio NestJS fuera dueño de datos: pagos es ese servicio. Las preguntas abiertas llevan su
-respuesta recomendada.
+que un servicio NestJS fuera dueño de datos: pagos es ese servicio.
 **Scope:** `shared` (Quarkus y NestJS; pedidos, en Spring Boot, ya está).
 **Aplica:** [ADR-049](ADR-049-secretos-en-quarkus-y-nestjs.md) para los secretos,
 [ADR-054](ADR-054-persistencia-reutilizable-con-paginacion-por-cursor.md) para la paginación,
@@ -131,19 +131,19 @@ Es dueño de los pagos simulados: **no habla con ninguna pasarela.**
 - **La extensión de persistencia de Quarkus ahora.** El núcleo puro ya da el contrato; la extensión
   agrega la conexión con Panache, que con un consumidor se escribe en el servicio.
 
-## Preguntas abiertas
+## Preguntas resueltas
 
-Cada una lleva la respuesta recomendada.
+Angel las resolvió el 2026-10-02, todas con la respuesta recomendada.
 
-1. **El ORM de pagos.** Recomendado: **TypeORM**, por lo de arriba. La otra opción es Prisma.
-2. **El tope de un pago.** Recomendado: **1000**, en la moneda del pago, configurable con
+1. **El ORM de pagos.** Resuelta: **TypeORM**, por lo de arriba. La otra opción es Prisma.
+2. **El tope de un pago.** Resuelta: **1000**, en la moneda del pago, configurable con
    `PAYMENTS_MAX_AMOUNT`.
-3. **El puerto local de pagos.** Recomendado: **8083**, el siguiente libre.
-4. **El listado del catálogo por cursor ahora**, con el núcleo puro. Recomendado: **sí**: muestra que el
+3. **El puerto local de pagos.** Resuelta: **8083**, el siguiente libre.
+4. **El listado del catálogo por cursor ahora**, con el núcleo puro. Resuelta: **sí**: muestra que el
    contrato de ADR-054 es el mismo en Spring y en Quarkus.
-5. **Confirmar y cancelar un pedido.** Recomendado: **en la fase 2**, con la compra orquestada, que es
+5. **Confirmar y cancelar un pedido.** Resuelta: **en la fase 2**, con la compra orquestada, que es
    quien los usa.
-6. **El orden.** Recomendado: **primero el catálogo**, que es el primer paso de la compra, y después
+6. **El orden.** Resuelta: **primero el catálogo**, que es el primer paso de la compra, y después
    pagos.
 
 ## Consecuencias
