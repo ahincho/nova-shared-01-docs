@@ -52,6 +52,7 @@ Decisiones aplicables a Java y NestJS.
 | 047 | [La Idempotencia de las Operaciones, detrás de un Contrato](shared/ADR-047-idempotencia-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 | 049 | [Los Secretos en Quarkus y NestJS, con las Mismas Reglas que en Spring Boot](shared/ADR-049-secretos-en-quarkus-y-nestjs.md) | Aceptada | Arquitectura |
 | 051 | [Las Plantillas de Servicio, un Nivel entre el Build y los Generadores](shared/ADR-051-plantillas-de-servicio.md) | Aceptada | Arquitectura |
+| 053 | [CQRS en Nova: los Contratos, el Command Bus y el Query Bus](shared/ADR-053-cqrs-con-command-bus-y-query-bus.md) | Propuesta | Arquitectura |
 
 ## ADRs Java (`java/`)
 
