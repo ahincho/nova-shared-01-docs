@@ -210,6 +210,31 @@ cuerpo. Eso es de `nova-java-11-keycloak-quarkus-extension`. Resuelta: **medirlo
 extensión y decidirlo en su propio PR**. La 3.0.0 cubre las excepciones de seguridad que sí llegan
 a REST.
 
+## Implementación (2026-10-01)
+
+La 3.0.0 salió con las dos partes. Lo que el contexto dice del sobre de éxito describe la 2.x: desde la
+3.0.0 la extensión registra `ApiResponseFilter`, un `@ServerResponseFilter` que espeja
+`ApiResponseInterceptor` de Spring. Un recurso devuelve el objeto y sale en el sobre con su status
+real; una `ApiResponse` armada a mano pasa intacta, así que los ejemplos 04 y 06 no cambian en el
+cable.
+
+Difiere de Spring en seis puntos, todos a propósito y escritos en el README de la extensión:
+
+| Caso | Spring | Quarkus 3.0.0 | Por qué |
+|---|---|---|---|
+| Respuesta de un mapper del servicio | se envuelve | sale tal cual | no se distingue del mapper de la extensión sin marcar cada respuesta |
+| 206 y 3xx | se envuelven | salen tal cual | un 206 es un fragmento y el cuerpo de una redirección no lo lee nadie |
+| Método que devuelve `null` | 200 con `data: null` | 204 | es la regla de JAX-RS |
+| Número o booleano sin `@Produces(JSON)` | se envuelve | sale como texto | Quarkus REST lo escribe como texto |
+| Excluir un método | no hay anotación | no hay anotación | se sale del sobre con `String`, `byte[]` o un flujo |
+| `Accept` ilegible | — | la respuesta sale como está | el filtro no convierte en 500 lo que Quarkus REST contesta |
+
+SmallRye Health, las métricas, OpenAPI y la Dev UI no pasan por el filtro, porque son rutas de Vert.x.
+Un servicio que declara `quarkus.index-dependency` sobre la extensión no arranca con la 3.0.0:
+el índice completo encuentra a la vez los dos productores del contador y los mappers de las
+extensiones opcionales. Esas líneas no hacen falta desde que la extensión tiene módulo de deployment,
+y la receta de migración manda quitarlas.
+
 ## Consecuencias
 
 ### Positivas
