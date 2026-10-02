@@ -3,7 +3,10 @@
 ## Estado
 
 Aceptada (2026-09-22). Implementada en NestJS para el estándar de API, entrada y salida; Spring y
-Quarkus pendientes.
+Quarkus pendientes. Desde el 2026-10-01 la extensión de Quarkus 3.0.0 envuelve el éxito como
+Spring, con `ApiResponseFilter`
+([ADR-050](../java/ADR-050-errores-por-capas-en-quarkus.md)); el puerto `ApiStandard` sigue
+pendiente en los dos stacks de Java.
 **Scope:** `shared` (Java + NestJS)
 **Enmienda:** ADR-033, nivel 1. **Generaliza:** el punto de extensión de serialización de ADR-031.
 **Afecta:** ADR-030, que pasa a describir un contrato por estándar.
@@ -286,7 +289,8 @@ romper.
   reduce ese costo; lo deja a la vista.
 - **En Quarkus el puerto necesita un filtro de respuesta para el éxito**, que la extensión hoy no
   registra. Cuánto cambia el cable de un servicio existente depende de si sus recursos ya arman el
-  sobre a mano, y hay que medirlo antes de implementar.
+  sobre a mano, y hay que medirlo antes de implementar. Se midió en ADR-050: los ejemplos ya
+  armaban el sobre, y el filtro de la 3.0.0 no cambia su cable.
 - **La documentación OpenAPI deja de ser declarativa.** Se completa al construir el documento, y un
   servicio que lo arme sin `bootstrap({ openapi })` no se entera del estándar activo.
 - Retirar `wrapResponses` y `catchExceptions` después de deprecarlos es un cambio incompatible, y
