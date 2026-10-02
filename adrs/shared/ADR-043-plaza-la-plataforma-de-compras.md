@@ -9,6 +9,9 @@ cosas: el nombre, que quiso en inglés o en español, y que los repositorios lle
 plataforma en lugar de `example`. Con eso dio paso a crear los repositorios.
 **Enmienda (2026-09-29):** Angel sumó tres decisiones antes de empezar el desarrollo: un servicio
 de pagos simulado, Keycloak para el inicio de sesión y el patrón outbox para publicar eventos.
+**Enmienda (2026-10-02):** [ADR-056](ADR-056-plaza-fase-1-catalogo-y-pagos-en-nestjs.md) pasa los pagos a
+NestJS, en `nova-plaza-05-nestjs-payments`, y define los contratos de la fase 1. Donde este ADR dice
+que pagos es de Spring Boot, manda ADR-056.
 **Scope:** `shared` (Java + NestJS).
 **Aplica:** el estándar de API, [ADR-029](../nest/ADR-029-sin-reintentos-en-el-cliente-http.md),
 [ADR-032](ADR-032-observabilidad-como-puerto-conectable.md) y

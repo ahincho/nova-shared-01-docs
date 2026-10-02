@@ -54,6 +54,7 @@ Decisiones aplicables a Java y NestJS.
 | 051 | [Las Plantillas de Servicio, un Nivel entre el Build y los Generadores](shared/ADR-051-plantillas-de-servicio.md) | Aceptada | Arquitectura |
 | 053 | [CQRS en Nova: los Contratos, el Command Bus y el Query Bus](shared/ADR-053-cqrs-con-command-bus-y-query-bus.md) | Aceptada | Arquitectura |
 | 054 | [La Persistencia Reutilizable, con Paginación por Cursor](shared/ADR-054-persistencia-reutilizable-con-paginacion-por-cursor.md) | Aceptada | Arquitectura |
+| 056 | [La Fase 1 de Plaza: el Catálogo en Quarkus y los Pagos en NestJS](shared/ADR-056-plaza-fase-1-catalogo-y-pagos-en-nestjs.md) | Aceptada | Arquitectura |
 
 ## ADRs Java (`java/`)
 
