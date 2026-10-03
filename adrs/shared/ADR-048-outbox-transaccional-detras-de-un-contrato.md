@@ -96,7 +96,7 @@ tabla `outbox`, con el Event Router y su configuración versionada en el reposit
 | El tópico | `route.by.field=aggregate_type` y `route.topic.replacement=plaza.${routedByValue}`: los pedidos van a `plaza.orders` |
 | La clave del registro | `table.field.event.key=aggregate_id` |
 | El valor | `table.field.event.payload=payload`, como texto JSON con `StringConverter` |
-| Las cabeceras | `table.fields.additional.placement` con las columnas del cable, más `InsertHeader` para las constantes |
+| Las cabeceras | `table.fields.additional.placement` con las columnas del cable, más `InsertHeader` para `content-type` |
 | La credencial | `${env:...}` con el `EnvVarConfigProvider` de Kafka, nunca escrita en el JSON |
 
 **La fila se borra en la misma transacción en que se inserta**
@@ -117,7 +117,7 @@ Lo que ven los consumidores es el cable, y el cable no depende de quién publica
 
 | Atributo | De dónde sale | En Kafka |
 |---|---|---|
-| `specversion` | `1.0`, constante | `ce_specversion` |
+| `specversion` | la columna `specversion`, que la tabla llena con `1.0` | `ce_specversion` |
 | `id` | un UUID por evento, columna `id` | `ce_id` |
 | `source` | la identidad del servicio, como `/plaza/orders` | `ce_source` |
 | `type` | el tipo versionado, como `pe.edu.nova.plaza.order.confirmed.v1` | `ce_type` |
@@ -152,7 +152,8 @@ la auditoría. Kafka Connect no agrega un span propio: el salto por el log no se
 | `Inbox` | registrar, en la transacción del efecto, que un consumidor ya procesó un evento | PostgreSQL por JDBC; en memoria |
 
 **La tabla también es contrato.** `outbox` lleva `id` (`uuid`), `aggregate_type`, `aggregate_id`,
-`type`, `source`, `time` (`timestamptz`), `payload` (`jsonb`), `traceparent` y `tracestate`. La crea
+`type`, `source`, `time` (`timestamptz`), `payload` (`jsonb`), `traceparent`, `tracestate` y `specversion`, con
+`1.0` por defecto: `InsertHeader` convierte el texto `1.0` en un número, así que la constante vive en la tabla. La crea
 el servicio con su migración, copiando el DDL que documenta la biblioteca; nada se crea solo en
 producción. Sin columnas de reintento ni de arrendamiento: con Debezium no hacen falta.
 
