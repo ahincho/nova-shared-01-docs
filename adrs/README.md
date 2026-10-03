@@ -50,6 +50,7 @@ Decisiones aplicables a Java y NestJS.
 | 042 | [Secretos detrás de un Contrato](shared/ADR-042-secretos-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 | 043 | [Plaza, la Plataforma de Compras que Demuestra Nova](shared/ADR-043-plaza-la-plataforma-de-compras.md) | Aceptada | Producto |
 | 047 | [La Idempotencia de las Operaciones, detrás de un Contrato](shared/ADR-047-idempotencia-detras-de-un-contrato.md) | Aceptada | Arquitectura |
+| 048 | [La Salida de Eventos, con un Outbox Transaccional detrás de un Contrato](shared/ADR-048-outbox-transaccional-detras-de-un-contrato.md) | Aceptada | Arquitectura |
 | 049 | [Los Secretos en Quarkus y NestJS, con las Mismas Reglas que en Spring Boot](shared/ADR-049-secretos-en-quarkus-y-nestjs.md) | Aceptada | Arquitectura |
 | 051 | [Las Plantillas de Servicio, un Nivel entre el Build y los Generadores](shared/ADR-051-plantillas-de-servicio.md) | Aceptada | Arquitectura |
 | 053 | [CQRS en Nova: los Contratos, el Command Bus y el Query Bus](shared/ADR-053-cqrs-con-command-bus-y-query-bus.md) | Aceptada | Arquitectura |
