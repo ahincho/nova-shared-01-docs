@@ -5,6 +5,9 @@
 **No aplica.** Cerrada sin elegir.
 **Scope:** `nest`
 Se reabre si alguna vez un servicio NestJS es dueño de datos.
+**Reabierta (2026-10-02)** por [ADR-056](../shared/ADR-056-plaza-fase-1-catalogo-y-pagos-en-nestjs.md): los pagos de
+Plaza son el primer servicio NestJS dueño de datos, y usan TypeORM como dependencia propia. La
+plataforma sigue sin capa de persistencia hasta que haya un segundo.
 
 ## Fecha
 

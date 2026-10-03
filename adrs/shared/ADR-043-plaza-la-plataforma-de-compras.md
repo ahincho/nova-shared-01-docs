@@ -9,6 +9,9 @@ cosas: el nombre, que quiso en inglés o en español, y que los repositorios lle
 plataforma en lugar de `example`. Con eso dio paso a crear los repositorios.
 **Enmienda (2026-09-29):** Angel sumó tres decisiones antes de empezar el desarrollo: un servicio
 de pagos simulado, Keycloak para el inicio de sesión y el patrón outbox para publicar eventos.
+**Enmienda (2026-10-02):** [ADR-056](ADR-056-plaza-fase-1-catalogo-y-pagos-en-nestjs.md) pasa los pagos a
+NestJS, en `nova-plaza-05-nestjs-payments`, y define los contratos de la fase 1. Donde este ADR dice
+que pagos es de Spring Boot, manda ADR-056.
 **Scope:** `shared` (Java + NestJS).
 **Aplica:** el estándar de API, [ADR-029](../nest/ADR-029-sin-reintentos-en-el-cliente-http.md),
 [ADR-032](ADR-032-observabilidad-como-puerto-conectable.md) y
@@ -164,6 +167,7 @@ producto es un sistema con varios servicios que se entienden entre sí, y el nom
 | 03 | `nova-plaza-03-spring-boot-orders` | pedidos |
 | 04 | `nova-plaza-04-quarkus-catalog` | catálogo y stock |
 | 05 | `nova-plaza-05-spring-boot-payments` | pagos simulados |
+| 06 | `nova-plaza-06-spring-boot-audit` | la auditoría de los eventos de pedidos en MongoDB, agregada por ADR-048 |
 
 Un servicio por repositorio, como en un producto real: cada uno con su CI, su versión y su imagen.
 El 01 es la entrada al producto; con un solo comando levanta lo que los servicios necesitan:
@@ -189,7 +193,8 @@ aparte.
 
 ## Preguntas abiertas
 
-1. **La auditoría a MongoDB del curso.** El curso mandaba la auditoría por Kafka a MongoDB. Encaja
+1. **La auditoría a MongoDB del curso.** *Resuelta el 2026-10-02 en ADR-048: entra en la fase 3, en
+   `nova-plaza-06-spring-boot-audit`.* El curso mandaba la auditoría por Kafka a MongoDB. Encaja
    en la fase 3, pero agrega un consumidor y una base más.
 2. **La fecha de la presentación.** Decide si se llega a las cinco fases o se corta en la segunda.
 
