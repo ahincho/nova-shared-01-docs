@@ -15,11 +15,17 @@ adrs/
   java/        Java-specific
   nest/        NestJS-specific
   versioning/  versioning policy
-diagrams/      Excalidraw diagrams of the platform, each stack and Plaza
+diagrams/      Excalidraw diagrams: the platform, each stack, capabilities and Plaza
 java/          technical guides for the Java stack
 nest/          technical guides for the NestJS stack
 ops/           metadata automation scripts
 ```
+
+## See it first
+
+The [diagrams](diagrams/README.md) show the platform by stack and level, what each stack gives a
+service, the capability matrix, and Plaza: the application architecture, the purchase saga and the
+path of an order event. They are the quickest way in before reading any ADR.
 
 ## Start with these four
 

@@ -2,6 +2,9 @@
 
 Registro de decisiones arquitectonicas y tecnicas del meta-framework **Nova**.
 
+Para ver el estado de la plataforma de un vistazo -por stack, por capacidad y en Plaza, el aplicativo
+que la demuestra- están los [diagramas](../diagrams/README.md).
+
 ## Estructura
 
 ```
