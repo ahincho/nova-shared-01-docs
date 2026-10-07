@@ -12,6 +12,7 @@ docs/adrs/
   shared/      Decisiones cross-stack (Java + NestJS)
   java/        Decisiones especificas del stack Java
   nest/        Decisiones especificas del stack NestJS
+  python/      Decisiones especificas del stack Python (FastAPI)
   versioning/  Decisiones de politica de versionado (cross-stack)
 ```
 
@@ -79,6 +80,15 @@ Decisiones especificas del stack Java (Spring Boot, Quarkus, Micronaut).
 | 052 | [La Meta-Extensión de Quarkus, el Nivel 3 que le Faltaba](java/ADR-052-meta-extension-de-quarkus.md) | Aceptada | Arquitectura |
 
 *ADR-003 tiene un concern abierto sobre soportar Java 21 LTS como minimo.
+
+## ADRs Python (`python/`)
+
+Decisiones especificas del stack Python. **El stack entra en alcance el 2026-10-07**, con FastAPI como
+framework y un paquete, `nova-fastapi`, en `ahincho/nova-fastapi-01-platform`.
+
+| # | ADR | Estado | Tema |
+|---|---|---|---|
+| 057 | [FastAPI como Stack de Nova, con un Conector que Instala el Estándar de API](python/ADR-057-fastapi-como-stack-de-nova.md) | Propuesta | Arquitectura |
 
 ## ADRs de Versioning (`versioning/`)
 
